@@ -1,0 +1,26 @@
+.message {
+  min-height: 50px;
+  border: solid 1px #ffdd6d;
+  background-color: #f8f7ea;
+  position: relative;
+  padding: 15px 30px;
+  font-size: 18px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  letter-spacing: normal;
+  color: #233066;
+}
+
+@media only screen and (max-width: 600px) {
+  .message {
+    padding: 15px;
+    padding-right: 35px;
+  }
+}
+
+.message .close {
+  position: absolute;
+  right: 15px;
+  top: 11px;
+}

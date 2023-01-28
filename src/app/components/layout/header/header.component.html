@@ -1,0 +1,30 @@
+<div class="main-header">
+  <div class="flex">
+    <div>
+      <mat-toolbar>
+        <button type="button" mat-icon-button (click)="toggleSidenav()">
+          <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+        </button>
+      </mat-toolbar>
+    </div>
+    <div class="flex-1">
+      <div class="header-menu">
+        <div class="user-info">
+          <mat-list class="p-0">
+            <mat-list-item [matMenuTriggerFor]="menu" class="clickable">
+              <mat-icon mat-list-icon>account_circle</mat-icon>
+            </mat-list-item>
+          </mat-list>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item (click)="toMyAccount()">
+              {{ "screenName.myAccount" }}
+            </button>
+            <button mat-menu-item (click)="logout()">
+              {{ "button.logout" }}
+            </button>
+          </mat-menu>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

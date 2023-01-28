@@ -1,0 +1,253 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+
+button {
+  &:focus {
+    outline: 0;
+  }
+}
+
+a,
+.clickable {
+  outline: none;
+}
+
+.clickable {
+  cursor: pointer;
+}
+
+ul,
+li {
+  margin: 0;
+  padding: 0;
+}
+
+/* Display */
+.d-flex {
+  display: flex;
+}
+
+.d-block {
+  display: block;
+}
+
+.d-table {
+  display: table;
+}
+
+.d-table-row {
+  display: table-row;
+}
+
+.d-table-cell {
+  display: table-cell;
+}
+
+/* Width and Height */
+.w-full {
+  width: 100%;
+}
+
+.w-1\/12 {
+  width: 8.333333%;
+}
+
+.w-2\/12 {
+  width: 16.666667%;
+}
+
+.w-5\/12 {
+  width: 41.666667%;
+}
+
+.w-8 {
+  width: 2rem;
+}
+
+.h-full {
+  height: 100%;
+}
+
+.h-8 {
+  height: 2rem;
+}
+
+/* Other */
+.table-fixed {
+  table-layout: fixed;
+}
+
+.border-separate {
+  border-collapse: separate;
+}
+
+.align-middle {
+  vertical-align: middle;
+}
+
+.pos-0 {
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.invisible {
+  width: 0;
+  height: 0;
+  opacity: 0;
+}
+
+.font-m {
+  font-size: 12px;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.heavy {
+  font-weight: 500;
+}
+
+.no-border {
+  border: none !important;
+}
+
+.no-border-bottom {
+  border-bottom: none !important;
+}
+
+.border-right {
+  border-right: solid 1px rgba(0, 0, 0, 0.12);
+}
+
+.no-wrap {
+  white-space: nowrap;
+}
+
+.no-underline {
+  text-decoration: none;
+}
+
+.full-width {
+  width: 100% !important;
+}
+
+.full-height {
+  height: 100% !important;
+}
+
+.text-center {
+  text-align: center !important;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.flex-column {
+  flex-direction: column;
+}
+
+.content-center {
+  justify-content: center;
+}
+
+.align-items-center {
+  align-items: center;
+}
+
+.space-between {
+  justify-content: space-between;
+}
+
+.space-top-s {
+  margin-top: 30px !important;
+}
+
+.uppercase {
+  text-transform: uppercase;
+}
+
+.cap {
+  text-transform: capitalize;
+}
+
+.text-ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.relative {
+  position: relative;
+}
+
+.absolute {
+  position: absolute;
+}
+
+.rounded {
+  border-radius: 0.25rem;
+}
+
+.rounded-full {
+  border-radius: 9999px;
+}
+
+.overflow-hidden {
+  overflow: hidden;
+}
+
+.object-cover {
+  object-fit: cover;
+}
+
+.bg-sidenav-childitem {
+  background-color: $sidenav-background-lighten;
+}
+
+/* sidenav */
+.main-sidenav {
+  background: $sidenav-background;
+  width: 240px;
+  color: $text-light;
+
+  .mat-list-item {
+    color: $text-light;
+  }
+
+  &.minimize {
+    width: auto;
+
+    .logo-main-text,
+    .menu-title,
+    .menu-item-toggler {
+      display: none;
+    }
+  }
+
+  &:not(.minimize) {
+    .mat-list-item {
+      &.level-2 .mat-list-item-content {
+        padding-left: 40px;
+      }
+    }
+  }
+}
+
+.padding-flow-mat-input {
+  padding-bottom: 1.34375em;
+}
+
+// hide arrow tree
+button.datatable-tree-button.ng-star-inserted:disabled {
+  display: none;
+}

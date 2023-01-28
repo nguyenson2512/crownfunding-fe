@@ -1,0 +1,70 @@
+<a routerLink="/" class="logo">
+  <ng-container *ngIf="!isMinimized">
+    <div class="logo-icon">
+      <mat-icon>shopping_bag</mat-icon>
+    </div>
+    <div class="logo-text">
+      <span class="logo-main-text text-xl">CrownFunding</span>
+    </div>
+  </ng-container>
+  <ng-container *ngIf="isMinimized">
+    <div class="logo-icon">
+      <mat-icon>shopping_bag</mat-icon>
+    </div>
+  </ng-container>
+</a>
+<mat-nav-list class="p-0">
+  <ng-container *ngFor="let node of menuTree; let i = index" [ngTemplateOutlet]="menuNode" [ngTemplateOutletContext]="{
+      node: node,
+      nodeIndex: i
+    }"></ng-container>
+  <ng-template #menuNode let-node="node" let-nodeIndex="nodeIndex">
+    <!-- Menu Item Link -->
+    <!-- shouldShowMenuNode(node?.roleIds) && -->
+    <a mat-list-item *ngIf=" node?.href" [routerLink]="node?.href" routerLinkActive="active" [ngClass]="{
+        'level-2': node?.level > 1
+      }">
+      <ng-container [ngTemplateOutlet]="matListItemContent" [ngTemplateOutletContext]="{
+          node: node
+        }"></ng-container>
+    </a>
+    <!-- Menu Item Click -->
+    <!-- shouldShowMenuNode(node?.roleIds) && -->
+    <mat-list-item *ngIf=" !node?.href" (click)="toggleMenu(node?.level, nodeIndex)" [ngClass]="{
+        'level-2': node?.level > 1,
+        active: isParentNodeActive(node?.activeLinks)
+      }">
+      <ng-container [ngTemplateOutlet]="matListItemContent" [ngTemplateOutletContext]="{
+          node: node
+        }"></ng-container>
+    </mat-list-item>
+    <ng-container *ngIf="node?.opened">
+      <ng-container *ngFor="let childNode of node?.children; let i = index" [ngTemplateOutlet]="menuNode"
+        [ngTemplateOutletContext]="{
+          node: childNode,
+          nodeIndex: i
+        }"></ng-container>
+    </ng-container>
+  </ng-template>
+</mat-nav-list>
+
+<ng-template #matListItemContent let-node="node">
+  <div class="flex items-center w-full">
+    <mat-icon>{{ node?.icon }}</mat-icon>
+    <span class="flex-1 menu-title pl-2">
+      {{ node?.label | trans }}
+    </span>
+    <mat-icon *ngIf="node?.children && !isMinimized" class="justify-self-end menu-item-toggler">
+      {{ !node?.opened ? "keyboard_arrow_down" : "keyboard_arrow_up" }}
+    </mat-icon>
+  </div>
+</ng-template>
+
+<ng-template let-node="node" #menuItem>
+  <section class="flex items-center flex-1">
+    <mat-icon>{{ node?.icon }}</mat-icon>
+    <span class="menu-title pl-2">
+      {{ node?.label | trans }}
+    </span>
+  </section>
+</ng-template>

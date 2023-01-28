@@ -1,0 +1,9 @@
+@import "./theme.scss";
+
+$primary-color: mat-color($primary);
+$accent-color: mat-color($accent);
+$warn-color: mat-color($warn);
+
+$sidenav-background: #253b80;
+$sidenav-background-lighten: lighten($sidenav-background, 10%);
+$text-light: #fff;

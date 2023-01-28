@@ -1,0 +1,19 @@
+<mat-sidenav-container class="sidenav-container" autosize>
+  <mat-sidenav
+    #drawer
+    class="main-sidenav"
+    fixedInViewport
+    [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+    [mode]="(isHandset$ | async) ? 'over' : 'side'"
+    [opened]="true"
+    [class.minimize]="(isHandset$ | async) || isMinimized"
+  >
+    <app-main-nav [isMinimized]="isMinimized"></app-main-nav>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <app-header></app-header>
+    <main class="p-6">
+      <router-outlet></router-outlet>
+    </main>
+  </mat-sidenav-content>
+</mat-sidenav-container>

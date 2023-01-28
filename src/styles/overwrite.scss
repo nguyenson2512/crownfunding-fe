@@ -1,0 +1,121 @@
+/* Override material CSS */
+
+.mat-menu-item-right {
+  .mat-menu-trigger {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+}
+
+.mat-menu-flat {
+  box-shadow: none !important;
+  border-radius: 0 !important;
+
+  &.primary-theme {
+    background-color: #22144c;
+    color: #fff !important;
+
+    a {
+      color: inherit !important;
+    }
+  }
+
+  &.mat-menu-panel {
+    min-height: unset;
+  }
+
+  .mat-menu-content {
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+  }
+
+  .mat-menu-item {
+
+    &.active,
+    &:hover {
+      background-color: $sidenav-background-lighten;
+    }
+  }
+}
+
+.mat-nav-list .mat-list-item:hover {
+  background: rgba(0, 0, 0, 0.15);
+}
+
+.status-toggle {
+  .mat-button-toggle-label-content {
+    line-height: 35px !important;
+  }
+}
+
+.mat-optgroup {
+  &.label-none label {
+    display: none !important;
+  }
+}
+
+.horizontal-scroll-table {
+  .datatable-scroll {
+    width: unset !important;
+  }
+}
+
+.mat-form-field-required-marker {
+  color: $warn-color !important;
+}
+
+.mat-button-toggle-checked {
+  background-color: #95bcf2;
+}
+
+.ngx-datatable.material {
+  box-shadow: none !important;
+  border: 1px solid #e5e7eb !important;
+}
+
+.mat-raised-button {
+  box-shadow: none !important;
+}
+
+.ql-snow .ql-picker.ql-size .ql-picker-item[data-value="0.5rem"]::before,
+.ql-snow .ql-picker.ql-size .ql-picker-label.ql-active[data-value="0.5rem"]::before {
+  content: 'Small';
+}
+
+.ql-snow .ql-picker.ql-size .ql-picker-item[data-value="1.5rem"]::before,
+.ql-snow .ql-picker.ql-size .ql-picker-label.ql-active[data-value="1.5rem"]::before {
+  content: 'Large';
+}
+
+.ql-snow .ql-picker.ql-size .ql-picker-item[data-value="2rem"]::before,
+.ql-snow .ql-picker.ql-size .ql-picker-label.ql-active[data-value="2rem"]::before {
+  content: 'Huge';
+}
+
+.fix-padding-input {
+  .mat-form-field-wrapper {
+    .mat-form-field-flex {
+      padding-right: 5px !important;
+    }
+  }
+}
+
+mat-form-field.no-padding-input-field .mat-form-field-wrapper {
+  padding: 0;
+  margin: 1rem 0;
+}
+
+.ngx-datatable.bootstrap:not(.cell-selection) .datatable-body-row:hover,
+.ngx-datatable.material:not(.cell-selection) .datatable-body-row:hover .datatable-row-group {
+  background: #d9e2ff;
+}
+
+button.datatable-tree-button.ng-star-inserted {
+  font-size: 20px;
+  vertical-align: middle;
+
+  &:hover {
+    color: #727cf5;
+  }
+}

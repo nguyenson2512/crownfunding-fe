@@ -1,0 +1,98 @@
+::ng-deep app-dialog {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+
+  .action-buttons {
+    text-align: center;
+    overflow: hidden;
+    width: 100%;
+  }
+}
+
+.dialog-content-scrollable {
+  overflow-x: hidden;
+  overflow-y: auto;
+  flex: 1;
+}
+
+.mat-dialog-title,
+.mat-dialog-content,
+.dialog-footer {
+  color: black;
+}
+
+.mat-dialog-title,
+.dialog-footer {
+  text-transform: uppercase;
+}
+
+.dialog-header.no-title {
+  border: none;
+  height: 35px;
+}
+
+.dialog-header {
+  position: relative;
+  border-bottom: 1px solid #ff674e;
+  margin-bottom: 15px;
+}
+
+.dialog-header h3 {
+  font-size: 15px !important;
+  margin-bottom: 10px !important;
+}
+
+.dialog-header button {
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.mat-dialog-content {
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: initial !important;
+  max-height: unset !important;
+}
+
+.mat-dialog-content button {
+  margin-top: 1.5em;
+  text-transform: uppercase;
+  padding-left: 3em;
+  padding-right: 3em;
+}
+
+.dialog-footer {
+  text-align: center;
+}
+
+.dialog-footer button {
+  margin: 2em 0;
+  text-transform: uppercase;
+}
+
+.dialog-note {
+  margin: 1rem 0;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.5;
+  color: black;
+}
+
+@media only screen and (max-width: 600px) {
+  .dialog-note {
+    text-align: center;
+    color: black;
+    margin-top: 30px;
+    margin-bottom: 0;
+  }
+}
+
+.dialog-note:empty {
+  display: none;
+}
+
+.mat-dialog-actions {
+  min-height: auto;
+}
