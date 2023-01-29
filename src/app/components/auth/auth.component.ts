@@ -1,6 +1,8 @@
+import { AuthService } from '#services/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ComponentService } from 'src/app/services/component.service';
+import { notEmpty } from 'src/app/validators/not-empty.validator';
 import { BaseComponent } from '../core/base/base.component';
 
 @Component({
@@ -10,29 +12,28 @@ import { BaseComponent } from '../core/base/base.component';
 })
 export class AuthComponent extends BaseComponent implements OnInit {
   loginForm = this.fb.group({
-    // username: ['', [Validators.required, notEmpty]],
-    username: ['', [Validators.required]],
-    password: ['', [Validators.required]],
+    email: ['', [Validators.required, Validators.email, notEmpty]],
+    password: ['', [Validators.required, notEmpty]],
   });
   constructor(
     protected componentService: ComponentService,
-    private fb: FormBuilder
-  ) // private authService: AuthService
-  {
+    private fb: FormBuilder,
+    private authService: AuthService
+  ) {
     super(componentService);
-    // const { extras } = this.router.getCurrentNavigation();
-    // if (extras && extras.state && extras.state.expired) {
-    //   this.authService.endSession();
-    // } else {
-    //   this.verifyToken();
-    // }
+    const { extras } = this.router.getCurrentNavigation();
+    if (extras && extras.state && extras.state.expired) {
+      this.authService.endSession();
+    } else {
+      this.verifyToken();
+    }
   }
 
   async verifyToken() {
-    // const isLoggedIn = await this.authService.isAuthenticated();
-    // if (isLoggedIn) {
-    //   this.authService.loggedIn();
-    // }
+    const isLoggedIn = await this.authService.isAuthenticated();
+    if (isLoggedIn) {
+      this.authService.loggedIn();
+    }
   }
 
   async signIn() {
@@ -40,9 +41,9 @@ export class AuthComponent extends BaseComponent implements OnInit {
       return;
     }
 
-    // this.subscribeOnce(
-    //   this.authService.signIn(this.loginForm?.value),
-    //   () => { }
-    // );
+    this.subscribeOnce(
+      this.authService.signIn(this.loginForm?.value),
+      () => {}
+    );
   }
 }

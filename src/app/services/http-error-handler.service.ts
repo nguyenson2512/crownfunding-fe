@@ -9,7 +9,9 @@ export class UnauthenticatedException implements HttpException {
   message = 'Unauthenticated';
 }
 
-@Injectable()
+@Injectable({
+  providedIn: 'root',
+})
 export class HttpErrorHandler {
   constructor(private dialogService: DialogService) {}
 
@@ -26,16 +28,16 @@ export class HttpErrorHandler {
 
     if (body) {
       let message: any = body.message;
-      if (!(message instanceof String)) {
-        let messages = '';
-        for (const error in message) {
-          if (message.hasOwnProperty(error)) {
-            messages += message[error][0] + '\n';
-          }
-        }
-        message = messages;
-      }
 
+      // if (!(message instanceof String)) {
+      //   let messages = '';
+      //   for (const error in message) {
+      //     if (message.hasOwnProperty(error)) {
+      //       messages += message[error][0] + '\n';
+      //     }
+      //   }
+      //   message = messages;
+      // }
       this.dialogService.warning(message || 'Unknown error');
     }
 

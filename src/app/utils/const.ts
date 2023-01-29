@@ -1,5 +1,12 @@
 import { MenuNode } from '../interfaces/nav.interface';
 
+export enum HttpMethod {
+  GET = 'GET',
+  POST = 'POST',
+  PUT = 'PUT',
+  DELETE = 'DELETE',
+}
+
 export const MENU_TREE: MenuNode[] = [
   {
     icon: 'dashboard',

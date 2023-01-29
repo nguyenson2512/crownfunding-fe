@@ -11,7 +11,27 @@ import { catchError } from 'rxjs/operators';
 import { LocalStorageService } from './storage.service';
 import { environment } from '../../environments/environment';
 
-@Injectable()
+type JsonType = string | number | boolean | object | Array<any> | null;
+
+export interface DataSet {
+  [key: string]: JsonType;
+}
+
+export interface ResponseResult {
+  data: DataSet | DataSet[];
+  pagination?: ResponsePagination;
+}
+
+export interface ResponsePagination {
+  page: number;
+  perPage: number;
+  total: number;
+  lastPage: number;
+}
+
+@Injectable({
+  providedIn: 'root',
+})
 export class AppHttpClient {
   static prefix = environment.apiUrl;
 

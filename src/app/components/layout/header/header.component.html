@@ -17,10 +17,10 @@
           </mat-list>
           <mat-menu #menu="matMenu">
             <button mat-menu-item (click)="toMyAccount()">
-              {{ "screenName.myAccount" }}
+              {{ "screenName.myAccount" | trans }}
             </button>
             <button mat-menu-item (click)="logout()">
-              {{ "button.logout" }}
+              {{ "button.logout" | trans }}
             </button>
           </mat-menu>
         </div>

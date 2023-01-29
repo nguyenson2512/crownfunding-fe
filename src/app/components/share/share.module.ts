@@ -16,6 +16,7 @@ import { ConfirmDialogComponent } from './dialog/confirm-dialog/confirm-dialog.c
 import { WarningDialogComponent } from './dialog/warning-dialog/warning-dialog.component';
 import { ValidationErrorComponent } from '../core/validation-error/validation-error.component';
 import { RouterModule } from '@angular/router';
+import { TranslatePipe } from '#pipes/translate.pipe';
 
 const MATERIAL_MODULES = [
   MatButtonModule,
@@ -43,6 +44,7 @@ const COMPONENTS = [
   ConfirmDialogComponent,
   WarningDialogComponent,
   ValidationErrorComponent,
+  TranslatePipe,
 ];
 
 @NgModule({

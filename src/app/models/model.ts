@@ -1,5 +1,5 @@
 export class Model {
-  id: string;
+  _id: string;
   fillable: string[];
 
   fill(input: any): this {

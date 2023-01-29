@@ -22,7 +22,6 @@ import { HeaderComponent } from './components/layout/header/header.component';
 import { MainNavComponent } from './components/layout/main-nav/main-nav.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { TranslatePipe } from './pipes/translate.pipe';
 import { TranslocoRootModule } from './transloco/transloco-root.module';
 import { HttpClientModule } from '@angular/common/http';
 
@@ -36,7 +35,6 @@ import { HttpClientModule } from '@angular/common/http';
     MainLayoutComponent,
     HeaderComponent,
     MainNavComponent,
-    TranslatePipe,
   ],
   imports: [
     BrowserModule,
