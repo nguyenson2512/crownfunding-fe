@@ -24,6 +24,9 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { TranslocoRootModule } from './transloco/transloco-root.module';
 import { HttpClientModule } from '@angular/common/http';
+import { ClientLayoutComponent } from './components/layout/client-layout/client-layout.component';
+import { SearchBoxComponent } from './components/layout/client-layout/search-box/search-box.component';
+import { ClientHeaderComponent } from '#components/layout/client-layout/header/header.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +38,9 @@ import { HttpClientModule } from '@angular/common/http';
     MainLayoutComponent,
     HeaderComponent,
     MainNavComponent,
+    ClientLayoutComponent,
+    SearchBoxComponent,
+    ClientHeaderComponent,
   ],
   imports: [
     BrowserModule,

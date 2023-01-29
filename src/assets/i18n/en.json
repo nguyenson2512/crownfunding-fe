@@ -170,7 +170,7 @@
     "endDate": "This end date must be greater than start date"
   },
   "screenName": {
-    "login": "WELCOME TO VTI-RESOURCEPLACE",
+    "login": "WELCOME TO CROWNFUNDING",
     "dashboard": "Dashboard",
     "detailProduct": "Details of product",
     "updateProduct": "Update product",
@@ -192,7 +192,7 @@
     "cartManagement": "Cart Management",
     "listRequest": "Request List Management",
     "myAccount": "My Account",
-    "homeFeature": "VTI.ResourcePlace",
+    "homeFeature": "CrownFunding",
     "myOrderManagement": "My Order Management",
     "sellerOrderManagement": "Seller Order Management",
     "orderDetail": "Order Details",

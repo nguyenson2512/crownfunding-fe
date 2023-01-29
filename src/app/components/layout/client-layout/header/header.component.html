@@ -1,0 +1,115 @@
+<div class="main_header">
+  <div class="header-wrapper lg:w-full 2xl:w-10/12">
+    <div class="flex-1 lg:text-center 2xl:text-left text-lg lg:text-lg xl:text-xl 2xl:text-2xl">
+      <button class="font-bold" (click)="navigateToHome()">
+        {{ "screenName.homeFeature" | trans }}
+      </button>
+    </div>
+    <app-search-box></app-search-box>
+    <!-- <div class="navbar flex-1 lg:text-md xl:text-lg" *ngIf="userStore.isLoggedIn()">
+      <div class="navbar__item">
+        <button [matMenuTriggerFor]="notifications" class="flex items-center">
+          <mat-icon class="mr-2" [matBadge]="notificationStore.amountUnreadNotification$ | async" matBadgeColor="warn"
+            [matBadgeHidden]="!(notificationStore.notificationStatus$ | async)">
+            notifications
+          </mat-icon>
+          <span>{{ "button.notification" | trans }}</span>
+        </button>
+        <mat-menu #notifications="matMenu" xPosition="before">
+          <ng-container *ngIf="(notificationList$ | async).length > 0; else noData">
+            <div class="notification-header">
+              <span>{{ "homeFeature.notification" | trans }}</span>
+            </div>
+
+            <div class="notification-body">
+              <div class="notification-item" *ngFor="let notification of notificationList$ | async"
+                (click)="handleSeen(notification)">
+                <div class="notification-content" *ngIf="{
+                  title: NOTIFICATION_INFO_MAP[notification?.object]?.title,
+                  content: NOTIFICATION_INFO_MAP[notification?.object]?.content
+                } as info">
+                  <span class="font-medium text-black">
+                    {{ info.title ? (info.title | trans) : notification.title }}
+                  </span>
+                  <span class="text-gray-800">
+                    {{ info.content ? (info.content | trans) : notification.content }}
+                  </span>
+                  <span class="notification-date" [ngClass]="notification.is_read ? '' : 'not-read'">
+                    {{ notification.createdAt | date: dateTime }}
+                  </span>
+                </div>
+                <div *ngIf="!notification.is_read">
+                  <div class="dot"></div>
+                </div>
+              </div>
+            </div>
+          </ng-container>
+          <ng-template #noData>
+            <div class="text-center text-lg pt-1 notification-container">
+              <p>{{ "homeFeature.noNotification" | trans }}</p>
+            </div>
+          </ng-template>
+        </mat-menu>
+      </div>
+
+      <div class="navbar__item">
+        <button [matMenuTriggerFor]="menu">
+          <mat-icon class="account-icon">account_circle</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu" xPosition="before">
+          <button mat-menu-item [routerLink]="['my-account']">
+            {{ "screenName.myAccount" | trans }}
+          </button>
+          <button *ngIf="this.userStore.isBuyer()" mat-menu-item [matMenuTriggerFor]="order">
+            {{ "button.orders" | trans }}
+          </button>
+          <button *ngIf="this.userStore.isBuyer()" mat-menu-item [routerLink]="['wishlist']">
+            {{ "button.wishList" | trans }}
+          </button>
+          <button *ngIf="this.userStore.isBuyer()" mat-menu-item [routerLink]="['my-activity']">
+            {{ "button.myActivity" | trans }}
+          </button>
+          <button *ngIf="this.userStore.isAdmin() || this.userStore.isBuyer()" mat-menu-item [routerLink]="['admin']">
+            {{ "button.adminPage" | trans }}
+          </button>
+          <button mat-menu-item [routerLink]="['my-setting']">
+            {{ "screenName.mySetting" | trans }}
+          </button>
+          <button mat-menu-item [matMenuTriggerFor]="help">
+            {{ "button.help" | trans }}
+          </button>
+          <button mat-menu-item (click)="logout()">
+            {{ "button.logout" | trans }}
+          </button>
+        </mat-menu>
+        <mat-menu #order="matMenu">
+          <button mat-menu-item [routerLink]="['cart-management']">
+            {{ "button.cart" | trans }}
+          </button>
+          <button mat-menu-item [routerLink]="['my-order-management']">
+            {{ "button.myOrder" | trans }}
+          </button>
+        </mat-menu>
+        <mat-menu #help="matMenu">
+          <button mat-menu-item [routerLink]="['help-desk']">
+            {{ "screenName.helpDesk" | trans }}
+          </button>
+          <button mat-menu-item [routerLink]="['faqs']">
+            {{ "button.faqs" | trans }}
+          </button>
+          <button mat-menu-item [routerLink]="['tickets']">
+            {{ "button.ticket" | trans }}
+          </button>
+        </mat-menu>
+      </div>
+    </div> -->
+    <div class="navbar flex-1 lg:text-md xl:text-lg">
+      <div class="navbar__item">
+        <button class="flex items-center" [routerLink]="['login']">
+          <mat-icon>account_circle</mat-icon>
+          <span>{{ "button.login" | trans }}</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

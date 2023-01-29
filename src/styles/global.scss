@@ -251,3 +251,170 @@ li {
 button.datatable-tree-button.ng-star-inserted:disabled {
   display: none;
 }
+
+.form-search {
+  display: flex;
+
+  .mat-form-field {
+    margin-right: 10px;
+  }
+}
+
+.form-search-homepage {
+  display: flex;
+
+  .mat-form-field {
+    margin-right: 10px;
+    width: 44em;
+  }
+
+  .mat-form-field-appearance-outline .mat-form-field-outline {
+    color: white;
+  }
+
+  input.mat-input-element {
+    color: white;
+  }
+
+  .mat-form-field-empty.mat-form-field-label {
+    color: white;
+  }
+
+  .mat-form-field-placeholder {
+    color: white;
+  }
+
+  .mat-focused .mat-form-field-placeholder {
+    color: white;
+  }
+
+  .mat-focused .placeholder {
+    color: white;
+  }
+
+  mat-label {
+    color: white;
+  }
+
+  input {
+    background-color: #0c86c7 !important;
+    color: white;
+    caret-color: white !important;
+  }
+
+  .cdk-text-field-autofilled {
+    background-color: red !important;
+  }
+
+  .mat-form-field-infix {
+    input {
+      background-color: #0c86c7 !important;
+    }
+  }
+}
+
+@media only screen and (max-width: 1280px) {
+  .search_wrapper {
+    margin: 0 10px;
+
+    .form-search-homepage {
+      display: flex;
+
+      .mat-form-field {
+        width: 28em;
+      }
+    }
+  }
+}
+
+.table-header {
+  font-size: 14px !important;
+  color: black !important;
+  font-weight: 500 !important;
+}
+
+.blackBorder {
+  border: 1px solid black !important;
+  box-sizing: border-box !important;
+  background-color: white !important;
+  color: black !important;
+}
+
+.primaryBorder {
+  border: 2px solid $primary-color !important;
+}
+
+button[disabled] {
+  cursor: not-allowed;
+}
+
+.material-icons.color_yellow {
+  color: #ffd700;
+}
+
+.material-icons.color_gray {
+  color: #d2d2d2;
+}
+
+.main_layout {
+  background-color: #f5f5f5;
+  min-height: 100vh;
+  padding-top: 1rem;
+}
+
+.main_header {
+  background-color: #0c86c7;
+  color: white !important;
+}
+
+.product-description {
+  ol {
+    list-style: decimal;
+    padding-left: 15px;
+  }
+
+  ul {
+    list-style: disc;
+    padding-left: 15px;
+  }
+}
+
+.mat-raised-button.mat-primary-color {
+  color: #f0fff3;
+  background-color: #007bff;
+}
+
+.mat-raised-button.mat-success-color {
+  color: #f0fff3;
+  background-color: #28a745;
+}
+
+.mat-icon-button.mat-danger-color {
+  color: #dc3545;
+}
+
+.custom-snackbar {
+  margin: 0 !important;
+  position: absolute;
+  right: 25px;
+  top: 80px;
+}
+
+.link {
+  color: revert;
+  text-decoration: revert;
+}
+
+/* Margin variant */
+@include applyMargin(1, 0.25rem);
+@include applyMargin(2, 0.5rem);
+@include applyMargin(3, 0.75rem);
+@include applyMargin(4, 1rem);
+@include applyMargin(16, 4rem);
+
+/* Padding variant */
+@include applyPadding(1, 0.25rem);
+@include applyPadding(2, 0.5rem);
+@include applyPadding(3, 0.75rem);
+@include applyPadding(4, 1rem);
+@include applyPadding(9\/16, 56.25%);

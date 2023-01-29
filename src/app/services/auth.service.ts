@@ -64,8 +64,7 @@ export class AuthService {
     const redirectUrl =
       this.redirectUrl && this.redirectUrl != '/login'
         ? this.router.parseUrl(this.redirectUrl)
-        : '/admin';
-    //TODO: : '/'
+        : '/';
     this.router.navigateByUrl(redirectUrl);
   }
 

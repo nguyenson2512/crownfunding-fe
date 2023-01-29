@@ -9,17 +9,18 @@ export enum HttpMethod {
 
 export const MENU_TREE: MenuNode[] = [
   {
-    icon: 'dashboard',
-    label: 'navigation.dashboard',
+    icon: 'supervisor_account',
+    label: 'navigation.userManagement',
     level: 1,
-    children: [
-      {
-        label: 'navigation.adminDashboard',
-        href: 'home',
-        icon: 'bar_chart',
-        level: 2,
-      },
-    ],
+    href: 'home',
+    // children: [
+    //   {
+    //     label: 'navigation.adminDashboard',
+    //     href: 'home',
+    //     icon: 'bar_chart',
+    //     level: 2,
+    //   },
+    // ],
   },
   // {
   //   icon: 'person',
