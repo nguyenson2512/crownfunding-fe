@@ -1,0 +1,50 @@
+<app-page-header [title]="'screenName.listUser' | trans"></app-page-header>
+<form class="form-search flex" [formGroup]="formSearch">
+  <mat-form-field appearance="outline">
+    <mat-label>{{ "input.search" | trans }}</mat-label>
+    <input matInput [placeholder]="'userManagement.searchPlaceholder' | trans" formControlName="username" />
+    <mat-icon matPrefix>search</mat-icon>
+  </mat-form-field>
+
+  <div class="flex items-center padding-flow-mat-input">
+    <button mat-raised-button color="primary" (click)="handleSearch()" class="mr-3">
+      {{ "button.search" | trans }}
+    </button>
+    <button mat-raised-button (click)="handleReset()" class="blackBorder">
+      {{ "button.clear" | trans }}
+    </button>
+  </div>
+</form>
+
+<ngx-datatable appNgxDatatableEmptyRow class="material striped fullscreen horizontal-scroll-table"
+  [rowClass]="getRowClass" [columnMode]="ColumnMode.force" [rows]="dataSourceObs | async" [externalPaging]="true"
+  [count]="(paginationObs | async)?.total" [offset]="(paginationObs | async)?.offset"
+  [limit]="(paginationObs | async)?.limit" (page)="onPageChange($event)" [headerHeight]="50" [footerHeight]="50"
+  rowHeight="auto" [scrollbarH]="true">
+  <ngx-datatable-column prop="email" [name]="'userManagement.table.email' | trans" [resizeable]="false"
+    [sortable]="false" headerClass="table-header 2xl:ml-20" cellClass="2xl:ml-20 ">
+  </ngx-datatable-column>
+
+  <ngx-datatable-column prop="name" [name]="'userManagement.table.username' | trans" [resizeable]="false"
+    [sortable]="false" headerClass="table-header">
+  </ngx-datatable-column>
+
+  <ngx-datatable-column prop="roles" [name]="'userManagement.table.role' | trans" [resizeable]="false"
+    [sortable]="false" headerClass="table-header">
+    <ng-template let-row="row" ngx-datatable-cell-template>
+      <p *ngFor="let role of row?.roles">
+        {{ role.name }}
+      </p>
+    </ng-template>
+  </ngx-datatable-column>
+
+  <ngx-datatable-column [name]="'button.action' | trans" [resizeable]="false" [sortable]="false"
+    headerClass="table-header">
+    <ng-template let-row="row" ngx-datatable-cell-template>
+      <button mat-icon-button [matTooltip]="'button.detail' | trans" matTooltipPosition="above" color="primary"
+        aria-label="Edit" stopPropagation>
+        <mat-icon>open_in_new</mat-icon>
+      </button>
+    </ng-template>
+  </ngx-datatable-column>
+</ngx-datatable>

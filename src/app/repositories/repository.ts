@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { AppHttpClient } from '../services/http-client.service';
+import { DataClientService } from '../services/http-client.service';
 
 @Injectable()
 export class Repository {
-  constructor(protected httpClient: AppHttpClient) {}
+  constructor(protected httpClient: DataClientService) {}
 
   protected parseResponse(data: any) {}
 

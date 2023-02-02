@@ -43,6 +43,16 @@ export class BaseComponent implements OnInit {
     this.router.navigate(commands, { queryParams, replaceUrl });
   }
 
+  protected reCreateSession(): Subject<void> {
+    if (this.session$ && !this.session$.closed) {
+      this.session$.next();
+      this.session$.complete();
+    }
+
+    this.session$ = new Subject<void>();
+    return this.session$;
+  }
+
   ngOnDestroy() {
     this.preDestroy();
     this.doDestroy();

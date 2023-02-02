@@ -24,11 +24,18 @@ const routes: Routes = [
     component: MainLayoutComponent,
     children: [
       {
-        path: 'home',
+        path: 'user',
         loadChildren: () =>
-          import('./components/pages/home/home.module').then(
-            (m) => m.HomeModule
-          ),
+          import(
+            './components/pages/management/user-management/user-management.module'
+          ).then((m) => m.UserManagementModule),
+      },
+      {
+        path: 'category',
+        loadChildren: () =>
+          import(
+            './components/pages/management/category-management/category-management.module'
+          ).then((m) => m.CategoryManagementModule),
       },
     ],
   },

@@ -10,6 +10,8 @@ import { HttpErrorHandler } from './http-error-handler.service';
 import { catchError } from 'rxjs/operators';
 import { LocalStorageService } from './storage.service';
 import { environment } from '../../environments/environment';
+import { URLEncoder } from '#utils/url-encoder';
+import { isNullOrUndefined, isStrEmpty } from '#utils/helpers';
 
 type JsonType = string | number | boolean | object | Array<any> | null;
 
@@ -24,15 +26,15 @@ export interface ResponseResult {
 
 export interface ResponsePagination {
   page: number;
-  perPage: number;
+  limit: number;
   total: number;
-  lastPage: number;
+  // lastPage?: number;
 }
 
 @Injectable({
   providedIn: 'root',
 })
-export class AppHttpClient {
+export class DataClientService {
   static prefix = environment.apiUrl;
 
   constructor(
@@ -97,18 +99,28 @@ export class AppHttpClient {
     if (uri.includes('http')) {
       return uri;
     }
-    return AppHttpClient.prefix + uri;
+    return DataClientService.prefix + uri;
   }
 
   private generateHttpParams(params: object) {
-    let httpParams = new HttpParams();
-
-    for (const key in params) {
-      if (params.hasOwnProperty(key)) {
-        httpParams = httpParams.append(key, params[key]);
+    let httpParams = new HttpParams({ encoder: new URLEncoder() });
+    const objectToQueryString = (obj: object, prefix?: any) => {
+      for (const key in obj) {
+        if (obj.hasOwnProperty(key)) {
+          const k = prefix ? prefix + '[' + key + ']' : key;
+          const v = obj[key];
+          if (v !== null && typeof v === 'object') {
+            objectToQueryString(v, k);
+          } else {
+            if (!isNullOrUndefined(v) && !isStrEmpty(v.toString())) {
+              httpParams = httpParams.append(k, v);
+            }
+          }
+        }
       }
-    }
+    };
 
+    objectToQueryString(params);
     return httpParams;
   }
 

@@ -1,0 +1,44 @@
+<app-page-header [title]="'screenName.listCategories' | trans">
+  <button mat-stroked-button color="primary">
+    <mat-icon>add</mat-icon>{{ "button.add" | trans }}
+  </button></app-page-header>
+<div class="mx-auto">
+  <ngx-datatable appNgxDatatableEmptyRow class="material striped horizontal-scroll-table" [rowClass]="getRowClass"
+    [columnMode]="ColumnMode.force" [headerHeight]="50" rowHeight="auto" [footerHeight]="50" [rows]="rows"
+    treeFromRelation="parentId" treeToRelation="_id" (treeAction)="onTreeAction($event)">
+    <ngx-datatable-column [name]="'categoryManagement.name' | trans" [isTreeColumn]="true" [treeLevelIndent]="20"
+      [resizeable]="false" [sortable]="false" headerClass="table-header xl:ml-20" cellClass="xl:ml-20">
+      <ng-template ngx-datatable-tree-toggle let-tree="cellContext">
+        <button [disabled]="disabledButton(tree)" (click)="tree.onTreeAction()">
+          <span>{{ getTreeStatus(tree.treeStatus) }}</span>
+        </button>
+
+      </ng-template>
+    </ngx-datatable-column>
+    <ngx-datatable-column [resizeable]="false" [sortable]="false" [name]="'status.status' | trans"
+      headerClass="table-header">
+      <ng-template let-row="row" ngx-datatable-cell-template>
+        {{ (row?.isActive ? "status.display" : "status.unDisplay") | trans }}
+      </ng-template>
+    </ngx-datatable-column>
+    <ngx-datatable-column [resizeable]="false" [sortable]="false" [name]="'button.action' | trans"
+      headerClass="table-header">
+      <ng-template let-row="row" ngx-datatable-cell-template>
+        <div class="flex justify-start gap-3 items-center -mt-1.5">
+          <button aria-label="Edit" matTooltipPosition="above" mat-icon-button [matTooltip]="'button.edit' | trans"
+            color="primary" [routerLink]="['update', row.id]" [disabled]="row?.isDefault">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button aria-label="Delete" matTooltipPosition="above" mat-icon-button [matTooltip]="'button.delete' | trans"
+            color="warn" (click)="handleDelete(row.id)" [disabled]="row?.isDefault">
+            <mat-icon>delete</mat-icon>
+          </button>
+          <button aria-label="Detail" matTooltipPosition="above" mat-icon-button [matTooltip]="'button.detail' | trans"
+            color="primary" [routerLink]="[row.id]">
+            <mat-icon>open_in_new</mat-icon>
+          </button>
+        </div>
+      </ng-template>
+    </ngx-datatable-column>
+  </ngx-datatable>
+</div>

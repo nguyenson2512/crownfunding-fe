@@ -17,6 +17,9 @@ import { WarningDialogComponent } from './dialog/warning-dialog/warning-dialog.c
 import { ValidationErrorComponent } from '../core/validation-error/validation-error.component';
 import { RouterModule } from '@angular/router';
 import { TranslatePipe } from '#pipes/translate.pipe';
+import { PageHeaderComponent } from './page-header/page-header.component';
+import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+import { NgxDatatableEmptyRowDirective } from 'src/app/directives/ngx-datatable-empty-row.directive';
 
 const MATERIAL_MODULES = [
   MatButtonModule,
@@ -37,6 +40,7 @@ const SHARE_MODULES = [
   FormsModule,
   ReactiveFormsModule,
   RouterModule,
+  NgxDatatableModule,
   ...MATERIAL_MODULES,
 ];
 
@@ -44,7 +48,9 @@ const COMPONENTS = [
   ConfirmDialogComponent,
   WarningDialogComponent,
   ValidationErrorComponent,
+  PageHeaderComponent,
   TranslatePipe,
+  NgxDatatableEmptyRowDirective,
 ];
 
 @NgModule({

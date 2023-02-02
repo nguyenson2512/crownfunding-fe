@@ -15,6 +15,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 
 import { ShareModule } from './components/share/share.module';
+import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MainLayoutComponent } from './components/layout/main-layout/main-layout.component';
@@ -27,6 +28,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ClientLayoutComponent } from './components/layout/client-layout/client-layout.component';
 import { SearchBoxComponent } from './components/layout/client-layout/search-box/search-box.component';
 import { ClientHeaderComponent } from '#components/layout/client-layout/header/header.component';
+import { FragmentComponent } from '#components/core/fragment/fragment.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +43,7 @@ import { ClientHeaderComponent } from '#components/layout/client-layout/header/h
     ClientLayoutComponent,
     SearchBoxComponent,
     ClientHeaderComponent,
+    FragmentComponent,
   ],
   imports: [
     BrowserModule,
@@ -56,6 +59,7 @@ import { ClientHeaderComponent } from '#components/layout/client-layout/header/h
     MatToolbarModule,
     TranslocoRootModule,
     HttpClientModule,
+    NgxDatatableModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

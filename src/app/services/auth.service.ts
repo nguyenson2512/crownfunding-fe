@@ -2,7 +2,11 @@ import { LoginUserData, User } from '#models/user.model';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { map, tap } from 'rxjs/operators';
-import { AppHttpClient, DataSet, ResponseResult } from './http-client.service';
+import {
+  DataClientService,
+  DataSet,
+  ResponseResult,
+} from './http-client.service';
 import { LocalStorageService } from './storage.service';
 import { UserProfileService } from './user-profile.service';
 
@@ -20,7 +24,7 @@ export class AuthService {
     private storageService: LocalStorageService,
     private router: Router,
     private userProfileService: UserProfileService,
-    private dataClientService: AppHttpClient
+    private dataClientService: DataClientService
   ) {}
 
   signIn(body: any) {

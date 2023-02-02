@@ -2,7 +2,7 @@ import { Observable } from 'rxjs';
 import { User } from '#models/user.model';
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
-import { AppHttpClient, ResponseResult } from './http-client.service';
+import { DataClientService, ResponseResult } from './http-client.service';
 
 @Injectable({
   providedIn: 'root',
@@ -10,7 +10,7 @@ import { AppHttpClient, ResponseResult } from './http-client.service';
 export class UserProfileService {
   public current: User;
 
-  constructor(private dataClientService: AppHttpClient) {}
+  constructor(private dataClientService: DataClientService) {}
 
   //TODO: FIX
   getMyInfo(): Observable<User> {

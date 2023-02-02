@@ -12,7 +12,7 @@ export const MENU_TREE: MenuNode[] = [
     icon: 'supervisor_account',
     label: 'navigation.userManagement',
     level: 1,
-    href: 'home',
+    href: 'user',
     // children: [
     //   {
     //     label: 'navigation.adminDashboard',
@@ -21,6 +21,13 @@ export const MENU_TREE: MenuNode[] = [
     //     level: 2,
     //   },
     // ],
+  },
+
+  {
+    label: 'navigation.categoryManagement',
+    href: 'category',
+    icon: 'category',
+    level: 1,
   },
   // {
   //   icon: 'person',
@@ -42,3 +49,6 @@ export const MENU_TREE: MenuNode[] = [
   //   ],
   // },
 ];
+
+export const DEFAULT_START_PAGE = 1;
+export const DEFAULT_PAGE_SIZE = 10;

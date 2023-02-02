@@ -11,32 +11,16 @@
       }
     }
   },
+  "categoryManagement": {
+    "name": "Name"
+  },
   "userManagement": {
-    "searchPlaceholder": "Search with account name",
+    "searchPlaceholder": "Search with username",
     "none": "None",
-    "filter": {
-      "jobPosition": "Filter with job position",
-      "department": "Filter with Department",
-      "selectJobPostion": "-- Select Job Postion --",
-      "selectDepartment": "-- Select Department --"
-    },
     "table": {
-      "account": "Account",
-      "jobPosition": "Job Position",
-      "department": "Department",
+      "email": "Email",
       "role": "Role",
-      "rank": {
-        "title": "Rank",
-        "reviewer": "Rank reviewer",
-        "seller": "Rank seller",
-        "buyer": "Rank buyer"
-      },
-      "point": {
-        "title": "Point",
-        "reviewer": "Point reviewer",
-        "seller": "Point seller",
-        "buyer": "Point buyer"
-      }
+      "username": "Username"
     },
     "edit": {
       "title": "Update user",
@@ -250,7 +234,7 @@
     "myProductManagement": "My Product Management",
     "myOrderManagement": "Order Management",
     "productManagement": "Product Management",
-    "productCategoryManagement": "Product Category Management",
+    "categoryManagement": "Category Management",
     "myProductpoint": "My product Point",
     "permissionManagement": "Permission Management",
     "requestManagement": "Request Management",
