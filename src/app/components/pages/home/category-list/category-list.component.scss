@@ -1,0 +1,27 @@
+.mat-list-base {
+  display: flex !important;
+  width: 100%;
+  justify-content: center;
+}
+
+.category {
+  &:hover {
+      color: #409386;
+      text-decoration: underline;
+    }
+}
+
+.mat-list-item {
+  width: auto !important;
+  cursor: pointer;
+  color: #656969 !important;
+  min-width: 100px;
+}
+
+.container {
+  width: 100%;
+}
+
+.mat-toolbar {
+  color: #fff !important;
+}

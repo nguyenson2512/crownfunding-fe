@@ -37,6 +37,13 @@ const routes: Routes = [
             './components/pages/management/category-management/category-management.module'
           ).then((m) => m.CategoryManagementModule),
       },
+      {
+        path: 'campaign',
+        loadChildren: () =>
+          import(
+            './components/pages/management/campaign-management/campaign-management.module'
+          ).then((m) => m.CampaignManagementModule),
+      },
     ],
   },
   {

@@ -1,0 +1,21 @@
+.campaign-list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  margin-top: 10px !important;
+  width: 80%;
+  margin: 0 auto;
+}
+
+.campaign-box {
+  max-width: 360px;
+  margin-bottom: 25px;
+}
+
+.campaign-image {
+  max-width: 360px;
+  height: 220px;
+  object-fit: fill;
+}
+

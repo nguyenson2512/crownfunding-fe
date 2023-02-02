@@ -29,6 +29,12 @@ export const MENU_TREE: MenuNode[] = [
     icon: 'category',
     level: 1,
   },
+  {
+    label: 'navigation.campaigns',
+    href: 'campaign',
+    icon: 'inventory_2',
+    level: 1,
+  },
   // {
   //   icon: 'person',
   //   label: 'users',
@@ -52,3 +58,16 @@ export const MENU_TREE: MenuNode[] = [
 
 export const DEFAULT_START_PAGE = 1;
 export const DEFAULT_PAGE_SIZE = 10;
+
+export enum CampaignStatus {
+  APPROVED = 'APPROVED',
+  REJECTED = 'REJECTED',
+  REVIEWING = 'REVIEWING',
+}
+
+export const COMMENT_TYPE_PUBLIC = 'PUBLIC';
+export const COMMENT_TYPE_EVALUATE = 'EVALUATE';
+export enum CommentType {
+  PUBLIC = 'PUBLIC',
+  EVALUATE = 'EVALUATE',
+}
