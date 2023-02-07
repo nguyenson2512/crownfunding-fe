@@ -4,6 +4,7 @@ import { ComponentService } from '#services/component.service';
 import { CategoryService } from '#services/http/category.service';
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { ColumnMode } from '@swimlane/ngx-datatable';
+import { CategoryAddEditComponent } from './category-add-edit/category-add-edit.component';
 
 class CategoryTree extends Category {
   treeStatus: 'expanded' | 'collapsed' | 'loading' | 'disabled';
@@ -92,19 +93,51 @@ export class CategoryManagementComponent
     return this.fillToTree(parentCategory.subCategories, 'disabled');
   }
 
-  async handleDelete(id: number) {
-    // const accept = await this.componentService.dialog.confirm(
-    //   this.trans('warningMessage.ADM-005_006')
-    // );
-    // if (accept) {
-    //   this.subscribeOnce(this.productCategoryService.delete(id), (res) => {
-    //     if (res?.data) {
-    //       this.loadDatasource();
-    //       this.componentService.message.showMessage(
-    //         this.trans('successMessage.ERRMSG_008')
-    //       );
-    //     }
-    //   });
-    // }
+  async handleEdit(category: CategoryTree) {
+    this.componentService.dialog
+      .showDialog(CategoryAddEditComponent, {
+        data: { ...category },
+        width: '30%',
+        maxHeight: '90vh',
+        autoFocus: false,
+      })
+      .afterClosed()
+      .subscribe((res) => {
+        if (!res) return;
+
+        this.loadDataSource();
+      });
+  }
+
+  async handleAdd() {
+    this.componentService.dialog
+      .showDialog(CategoryAddEditComponent, {
+        data: {},
+        width: '30%',
+        maxHeight: '90vh',
+        autoFocus: false,
+      })
+      .afterClosed()
+      .subscribe((res) => {
+        if (!res) return;
+
+        this.loadDataSource();
+      });
+  }
+
+  async handleDelete(id: string) {
+    const accept = await this.componentService.dialog.confirm(
+      this.trans('warningMessage.delete')
+    );
+    if (accept) {
+      this.subscribeOnce(this.categoryService.delete(id), (res: any) => {
+        if (res?.data) {
+          this.loadDataSource();
+          this.componentService.message.showMessage(
+            this.trans('successMessage.ERRMSG_008')
+          );
+        }
+      });
+    }
   }
 }

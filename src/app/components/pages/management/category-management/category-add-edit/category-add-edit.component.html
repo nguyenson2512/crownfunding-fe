@@ -1,0 +1,9 @@
+<app-dialog [dialogTitle]="
+    (categoryDetail?._id
+      ? 'categoryManagement.edit'
+      : 'categoryManagement.add'
+    ) | trans" [displayButton]="false">
+  <div dialog-body>
+    <app-category-form [categoryDetail]="categoryDetail" (formComplete)="onSubmit($event)"></app-category-form>
+  </div>
+</app-dialog>

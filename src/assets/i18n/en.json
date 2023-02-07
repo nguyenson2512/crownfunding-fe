@@ -12,7 +12,12 @@
     }
   },
   "categoryManagement": {
-    "name": "Name"
+    "name": "Name",
+    "add": "Add Category",
+    "edit": "Edit Category",
+    "active": "Active Category",
+    "subCategory": "Sub Category",
+    "parentCategory": "Parent Category"
   },
   "campaignManagement": {
     "title": "Title",
@@ -113,7 +118,8 @@
     "no_permission": "Access Denied",
     "ERRMSG_027": "The formula will be applied immediately after activation. Are you sure you want to active this formula?",
     "ERRMSG_028": "Are you sure you want to approve?",
-    "ERRMSG_029": "Are you sure you want to cancel?"
+    "ERRMSG_029": "Are you sure you want to cancel?",
+    "delete": "Are you sure you want to delete ?"
   },
   "errorMessage": {
     "email": "Oops that doesn’t look like a valid email. Please try again",
@@ -248,7 +254,7 @@
     "ADM-005_002": "Update category success",
     "ADM-005_001": "Add category success",
     "USR-001-002": "Purchase success",
-    "ERRMSG_011": "Add  success",
+    "ERRMSG_011": "Add success",
     "ERRMSG_013": "Update success",
     "ERRMSG_023": "Upload resource file success"
   }

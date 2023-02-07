@@ -1,5 +1,5 @@
 <app-page-header [title]="'screenName.listCategories' | trans">
-  <button mat-stroked-button color="primary">
+  <button mat-stroked-button color="primary" (click)="handleAdd()">
     <mat-icon>add</mat-icon>{{ "button.add" | trans }}
   </button></app-page-header>
 <div class="mx-auto">
@@ -26,16 +26,12 @@
       <ng-template let-row="row" ngx-datatable-cell-template>
         <div class="flex justify-start gap-3 items-center -mt-1.5">
           <button aria-label="Edit" matTooltipPosition="above" mat-icon-button [matTooltip]="'button.edit' | trans"
-            color="primary" [routerLink]="['update', row.id]" [disabled]="row?.isDefault">
+            color="primary" (click)="handleEdit(row)">
             <mat-icon>edit</mat-icon>
           </button>
           <button aria-label="Delete" matTooltipPosition="above" mat-icon-button [matTooltip]="'button.delete' | trans"
-            color="warn" (click)="handleDelete(row.id)" [disabled]="row?.isDefault">
+            color="warn" (click)="handleDelete(row._id)">
             <mat-icon>delete</mat-icon>
-          </button>
-          <button aria-label="Detail" matTooltipPosition="above" mat-icon-button [matTooltip]="'button.detail' | trans"
-            color="primary" [routerLink]="[row.id]">
-            <mat-icon>open_in_new</mat-icon>
           </button>
         </div>
       </ng-template>

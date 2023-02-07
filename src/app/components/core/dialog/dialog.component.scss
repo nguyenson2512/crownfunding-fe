@@ -1,3 +1,71 @@
+$breakpoint_tablet_smartphone: 1024px;
+
+.dialog_content {
+  display: flex;
+  flex-flow: column;
+  height: 100%;
+}
+
+.mat-dialog-content {
+  flex-grow: 100;
+  flex-shrink: 100;
+  max-height: 65vh;
+  flex-direction: column;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  @media screen and (max-width: $breakpoint_tablet_smartphone - 1) {
+    max-height: initial !important;
+    max-height: auto !important;
+    margin-top: 20px !important;
+    align-items: flex-start;
+  }
+}
+
+::ng-deep .mat-dialog-actions {
+  flex-direction: row;
+  margin-bottom: 0;
+  margin-top: 20px;
+
+  .mat-raised-button {
+    width: 9rem;
+    padding: 0 0.5rem;
+  }
+}
+
+:host ::ng-deep {
+  @media screen and (max-width: $breakpoint_tablet_smartphone - 1) {
+    .mat-dialog-actions {
+      min-height: 0;
+      flex-wrap: nowrap;
+      flex-grow: 1;
+      flex-shrink: 0;
+
+      .mat-raised-button {
+        &.large {
+          width: 15rem;
+        }
+      }
+    }
+
+    .align-button-vertical {
+      flex-direction: column;
+      justify-content: center;
+
+      .mat-raised-button {
+        margin: 0.5rem 0;
+      }
+    }
+  }
+}
+
+@media only screen and (min-width: $breakpoint_tablet_smartphone) {
+  ::ng-deep .mat-dialog-container {
+    height: auto;
+  }
+}
+
 ::ng-deep app-dialog {
   display: flex;
   flex-direction: column;
@@ -95,4 +163,8 @@
 
 .mat-dialog-actions {
   min-height: auto;
+}
+
+.dialog_title {
+  font-size: 18px !important;
 }

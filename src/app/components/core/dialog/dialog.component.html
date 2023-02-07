@@ -1,14 +1,19 @@
-<div class="dialog-header" [ngClass]="{ 'no-title': !dialogTitle }">
-  <h3 mat-dialog-title>{{ dialogTitle }}</h3>
-</div>
-<div class="dialog-content-scrollable" #dialogContent>
-  <div class="dialog-note mb-30">
-    <ng-content select="[dialog-note]"></ng-content>
+<div class="dialog_content">
+  <div class="dialog-header" [ngClass]="{ 'no-title': !dialogTitle }">
+    <h3 mat-dialog-title><span class="font-bold dialog_title">{{ dialogTitle }}</span></h3>
   </div>
-  <div mat-dialog-content>
-    <ng-content select="[dialog-body]"></ng-content>
-  </div>
-  <div mat-dialog-actions class="full-width">
-    <ng-content select="[dialog-action]"></ng-content>
+  <div class="dialog-content-scrollable" #dialogContent>
+    <div class="dialog-note mb-30">
+      <ng-content select="[dialog-note]"></ng-content>
+    </div>
+    <div mat-dialog-content>
+      <ng-content select="[dialog-body]"></ng-content>
+    </div>
+    <div mat-dialog-actions class="full-width mat-dialog-actions" [align]="actionAlign">
+      <ng-content select="[dialog-action]"></ng-content>
+      <button mat-stroked-button (click)="onDismiss()" type="button" class="ml-2" *ngIf="displayButton">
+        {{ backButton | trans }}
+      </button>
+    </div>
   </div>
 </div>

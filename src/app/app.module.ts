@@ -6,7 +6,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
 import { BaseComponent } from './components/core/base/base.component';
-import { DialogComponent } from './components/core/dialog/dialog.component';
 import { MessageComponent } from './components/core/message/message.component';
 import { AuthComponent } from './components/layout/auth/auth.component';
 
@@ -33,7 +32,6 @@ import { FragmentComponent } from '#components/core/fragment/fragment.component'
 @NgModule({
   declarations: [
     AppComponent,
-    DialogComponent,
     BaseComponent,
     MessageComponent,
     AuthComponent,

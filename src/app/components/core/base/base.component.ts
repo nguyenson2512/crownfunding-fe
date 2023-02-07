@@ -14,6 +14,10 @@ export class BaseComponent implements OnInit {
 
   ngOnInit(): void {}
 
+  trans(message: string): string {
+    return this.service.translate.translate(message);
+  }
+
   protected get router() {
     return this.service.router;
   }

@@ -1,0 +1,32 @@
+<form [formGroup]="categoryForm" (ngSubmit)="onSubmit()">
+  <mat-form-field class="full-width" appearance="outline">
+    <mat-label>{{ "categoryManagement.name" | trans}}</mat-label>
+    <input matInput formControlName="name" type="text" required>
+    <mat-error>
+      <app-validation-error [control]="categoryForm.controls.name"></app-validation-error>
+    </mat-error>
+  </mat-form-field>
+
+  <mat-checkbox formControlName="isActive" color="primary">{{ "categoryManagement.active" | trans}}</mat-checkbox>
+  <div class=" flex flex-col" *ngIf="!isEdit">
+    <mat-checkbox color="primary" [checked]="isSubCategory" (change)="changeSubCategory()">{{
+      "categoryManagement.subCategory" | trans}}</mat-checkbox>
+    <mat-form-field appearance="outline">
+      <mat-label>{{ "categoryManagement.parentCategory" | trans }}</mat-label>
+      <mat-select formControlName="parentId">
+        <mat-option *ngFor="let item of parentCategories$ | async" [value]="item?._id">
+          {{ item?.name }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <div class="space-x-2 flex justify-center mt-4">
+    <button mat-raised-button color="primary" type="submit" [disabled]="categoryForm.invalid">
+      {{ (isEdit ? "button.save" : "button.add") | trans }}
+    </button>
+    <button mat-stroked-button color="primary" type="button" (click)="handleClose()">
+      {{ "button.cancel" | trans }}
+    </button>
+  </div>
+</form>

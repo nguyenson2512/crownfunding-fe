@@ -7,6 +7,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatInputModule } from '@angular/material/input';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
@@ -22,6 +23,8 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { NgxDatatableEmptyRowDirective } from 'src/app/directives/ngx-datatable-empty-row.directive';
 import { MatListModule } from '@angular/material/list';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { CategoryFormComponent } from './category-form/category-form.component';
+import { DialogComponent } from '#components/core/dialog/dialog.component';
 
 const MATERIAL_MODULES = [
   MatButtonModule,
@@ -37,6 +40,7 @@ const MATERIAL_MODULES = [
   MatInputModule,
   MatListModule,
   MatToolbarModule,
+  MatCheckboxModule,
 ];
 
 const SHARE_MODULES = [
@@ -52,6 +56,8 @@ const COMPONENTS = [
   ConfirmDialogComponent,
   WarningDialogComponent,
   ValidationErrorComponent,
+  DialogComponent,
+  CategoryFormComponent,
   PageHeaderComponent,
   TranslatePipe,
   NgxDatatableEmptyRowDirective,

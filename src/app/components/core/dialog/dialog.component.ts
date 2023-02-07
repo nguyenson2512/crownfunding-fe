@@ -8,6 +8,9 @@ import { MatDialogRef } from '@angular/material/dialog';
 })
 export class DialogComponent implements OnInit {
   @Input() dialogTitle: string;
+  @Input() actionAlign: 'start' | 'center' | 'end';
+  @Input() backButton = 'button.ok';
+  @Input() displayButton = true;
   @ViewChild('dialogElement', { read: ElementRef, static: true })
   dialogContent: ElementRef;
 
@@ -17,5 +20,9 @@ export class DialogComponent implements OnInit {
 
   onDismiss(): void {
     this.dialogRef.close(false);
+  }
+
+  scrollTop() {
+    this.dialogContent.nativeElement.children[1].scrollTo({ top: 0 });
   }
 }
