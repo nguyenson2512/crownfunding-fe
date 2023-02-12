@@ -1,5 +1,6 @@
 import { BaseComponent } from '#components/core/base/base.component';
 import { ComponentService } from '#services/component.service';
+import { HomeService } from '#services/home.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 
@@ -12,7 +13,8 @@ export class SearchBoxComponent extends BaseComponent implements OnInit {
   searchItems: string[];
   constructor(
     private componentService: ComponentService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private homeService: HomeService
   ) {
     super(componentService);
   }
@@ -24,7 +26,9 @@ export class SearchBoxComponent extends BaseComponent implements OnInit {
   ngOnInit(): void {}
 
   handleSearch() {
-    // const { searchInput } = this.form.value;
+    const { searchInput } = this.form.value;
+    this.homeService.setSearchText(searchInput);
+
     // const search = {
     //   perPage: 12,
     //   like: {

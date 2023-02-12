@@ -25,3 +25,9 @@ export const paginationMapper = <T extends Model>(
     data: (result.data as DataSet[]).map((item) => new model(item)),
   }));
 };
+
+export function checkPermission(userRoles = [], accessRoles = []) {
+  return accessRoles.find((ro) => userRoles.find((r) => r == ro.name))
+    ? true
+    : false;
+}

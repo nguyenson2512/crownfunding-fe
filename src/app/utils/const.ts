@@ -7,12 +7,18 @@ export enum HttpMethod {
   DELETE = 'DELETE',
 }
 
+export enum ROLE_OPTIONS {
+  ADMIN = 'admin',
+  CREATOR = 'creator',
+}
+
 export const MENU_TREE: MenuNode[] = [
   {
     icon: 'supervisor_account',
     label: 'navigation.userManagement',
     level: 1,
     href: 'user',
+    roles: [ROLE_OPTIONS.ADMIN],
     // children: [
     //   {
     //     label: 'navigation.adminDashboard',
@@ -22,18 +28,26 @@ export const MENU_TREE: MenuNode[] = [
     //   },
     // ],
   },
-
   {
     label: 'navigation.categoryManagement',
     href: 'category',
     icon: 'category',
     level: 1,
+    roles: [ROLE_OPTIONS.ADMIN],
   },
   {
     label: 'navigation.campaigns',
     href: 'campaign',
     icon: 'inventory_2',
     level: 1,
+    roles: [ROLE_OPTIONS.ADMIN],
+  },
+  {
+    label: 'navigation.myCampaign',
+    href: 'my-campaign',
+    icon: 'pending_actions',
+    level: 1,
+    roles: [ROLE_OPTIONS.CREATOR],
   },
   // {
   //   icon: 'person',
@@ -71,3 +85,5 @@ export enum CommentType {
   PUBLIC = 'PUBLIC',
   EVALUATE = 'EVALUATE',
 }
+
+export const DATETIME_FORMAT = 'yyyy/MM/dd H:mm';

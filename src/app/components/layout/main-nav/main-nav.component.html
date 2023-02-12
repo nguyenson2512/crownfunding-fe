@@ -4,7 +4,7 @@
       <mat-icon>shopping_bag</mat-icon>
     </div>
     <div class="logo-text">
-      <span class="logo-main-text text-xl">CrownFunding</span>
+      <span class="logo-main-text text-xl">CrowdFunding</span>
     </div>
   </ng-container>
   <ng-container *ngIf="isMinimized">
@@ -20,8 +20,8 @@
     }"></ng-container>
   <ng-template #menuNode let-node="node" let-nodeIndex="nodeIndex">
     <!-- Menu Item Link -->
-    <!-- shouldShowMenuNode(node?.roleIds) && -->
-    <a mat-list-item *ngIf=" node?.href" [routerLink]="node?.href" routerLinkActive="active" [ngClass]="{
+    <a mat-list-item *ngIf=" node?.href && shouldShowMenuNode(node?.roles)" [routerLink]="node?.href"
+      routerLinkActive="active" [ngClass]="{
         'level-2': node?.level > 1
       }">
       <ng-container [ngTemplateOutlet]="matListItemContent" [ngTemplateOutletContext]="{
@@ -29,8 +29,8 @@
         }"></ng-container>
     </a>
     <!-- Menu Item Click -->
-    <!-- shouldShowMenuNode(node?.roleIds) && -->
-    <mat-list-item *ngIf=" !node?.href" (click)="toggleMenu(node?.level, nodeIndex)" [ngClass]="{
+    <mat-list-item *ngIf="shouldShowMenuNode(node?.roles) && !node?.href" (click)="toggleMenu(node?.level, nodeIndex)"
+      [ngClass]="{
         'level-2': node?.level > 1,
         active: isParentNodeActive(node?.activeLinks)
       }">

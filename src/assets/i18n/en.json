@@ -21,7 +21,17 @@
   },
   "campaignManagement": {
     "title": "Title",
-    "searchPlaceholder": "Search with title"
+    "searchPlaceholder": "Search with title",
+    "category": "Category",
+    "createdTime": "Created Time",
+    "creator": "Creator",
+    "fundingGoal": "Funding Goal",
+    "status": "Status",
+    "overview": "Overview",
+    "risks": "Risks",
+    "story": "Story",
+    "comment": "Comment",
+    "noComment": "No comments for this campaign"
   },
   "userManagement": {
     "searchPlaceholder": "Search with username",
@@ -55,6 +65,8 @@
     "update": "Update",
     "back": "Back",
     "add": "Add",
+    "saveCampaign": "Save this campaign",
+    "backCampaign": "Back this campaign",
     "addExpression": "Add Expression",
     "addFeatureProduct": "Add To List Feature Product",
     "addCategory": "Add Category",
@@ -82,6 +94,7 @@
     "ok": "OK",
     "viewReplies": "View replies",
     "adminPage": "Admin Page",
+    "managementPage": "Management Page",
     "notification": "Notification",
     "wishList": "Wishlist",
     "addFeature": "Add to Feature List",
@@ -138,10 +151,10 @@
     "endDate": "This end date must be greater than start date"
   },
   "screenName": {
-    "login": "WELCOME TO CROWNFUNDING",
+    "login": "WELCOME TO CROWDFUNDING",
     "dashboard": "Dashboard",
     "listCampaign": "List of campaigns",
-    "detailProduct": "Details of product",
+    "detailCampaign": "Details of campaign",
     "updateProduct": "Update product",
     "createProduct": "Create product",
     "listProduct": "List of products",
@@ -154,7 +167,7 @@
     "detailCategory": "Details of category",
     "cropImage": "Crop the image",
     "myAccount": "My Account",
-    "homeFeature": "CrownFunding",
+    "homeFeature": "CrowdFunding",
     "myOrderManagement": "My Order Management",
     "sellerOrderManagement": "Seller Order Management",
     "orderDetail": "Order Details",
@@ -185,8 +198,6 @@
     "campaigns": "Campaign Management",
     "productCommentsRates": "Product Comments/Rates",
     "productOrders": "Product Orders",
-    "jobsAndTasks": "Jobs and Tasks",
-    "rankings": "Rankings",
     "qnas": "Q&As",
     "userManagement": "User Management",
     "myProductManagement": "My Product Management",
@@ -200,10 +211,12 @@
     "sellerDashboard": "Seller Dashboard",
     "faq": "FAQs List",
     "systemSetting": "System Setting",
-    "transactionManagement": "Transaction Management"
+    "transactionManagement": "Transaction Management",
+    "myCampaign": "My Campaign"
   },
   "input": {
     "search": "Search",
+    "searchCampaign": "Search campaign",
     "all": "All",
     "comment": "Input comment",
     "answer": "Input the answer",
@@ -256,6 +269,7 @@
     "USR-001-002": "Purchase success",
     "ERRMSG_011": "Add success",
     "ERRMSG_013": "Update success",
-    "ERRMSG_023": "Upload resource file success"
+    "ERRMSG_023": "Upload resource file success",
+    "addComment": "Add comment success"
   }
 }

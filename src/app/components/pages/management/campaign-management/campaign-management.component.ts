@@ -3,6 +3,7 @@ import { DatatablePagination } from '#interfaces/pagination.interface';
 import { Campaign } from '#models/campaign.model';
 import { ComponentService } from '#services/component.service';
 import { CampaignService } from '#services/http/campaign.service';
+import { DATETIME_FORMAT } from '#utils/const';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { ColumnMode } from '@swimlane/ngx-datatable';
@@ -18,6 +19,7 @@ export class CampaignManagementComponent
   implements OnInit
 {
   ColumnMode = ColumnMode;
+  dateTime: string = DATETIME_FORMAT;
 
   formSearch = this.fb.group({
     title: '',
@@ -35,20 +37,24 @@ export class CampaignManagementComponent
   }
 
   handleSearch(): void {
-    const { username } = this.formSearch.value;
+    const { title } = this.formSearch.value;
 
-    const searchUser = {
+    const search = {
       like: {
-        name: username,
+        title,
       },
     };
-    this.onSearch(searchUser);
+    this.onSearch(search);
   }
 
   handleReset() {
     this.formSearch.setValue({
-      username: '',
+      title: '',
     });
     this.resetSearch();
+  }
+
+  redirectDetail(row: Campaign): void {
+    this.redirect(`/admin/campaign/${row?._id}/detail`);
   }
 }

@@ -1,0 +1,86 @@
+<app-page-header [title]="'screenName.detailCampaign' | trans">
+</app-page-header>
+<div class="flex flex-col" *ngIf="campaignInfo$ | async as campaignInfo">
+  <div class="title-container my-2 text-center mb-3">
+    <p class="text-2xl font-semibold text-slate-900">{{campaignInfo?.title}}</p>
+    <p class="text-base font-medium text-slate-700 mt-1">{{campaignInfo?.subTitle}}</p>
+  </div>
+
+  <div class="flex w-full justify-between mt-4">
+    <div class="flex flex-col grow">
+      <img class="image object-fill" mat-card-image [src]="campaignInfo?.image">
+      <div class="flex gap-x-1">
+        <div class="flex items-center mr-4">
+          <button mat-icon-button><mat-icon>bookmark_border</mat-icon></button> {{ "button.saveCampaign" | trans }}
+        </div>
+        <div class="flex items-center mr-3">
+          <mat-icon>category</mat-icon>{{ campaignInfo?.category?.name }}
+        </div>
+        <div class="flex items-center">
+          <mat-icon>location_on</mat-icon>{{ campaignInfo?.location }}
+        </div>
+      </div>
+    </div>
+    <div class="w-1/3 flex flex-col ml-6">
+      <div class="my-4">
+        <p class="text-2xl font-semibold text-blue-700">
+          {{ campaignInfo?.fundingGoal}} {{ campaignInfo?.currency}}
+        </p>
+        <p class="text-base">funding goal</p>
+      </div>
+      <div class="mb-4">
+        <p class="text-2xl font-semibold text-indigo-700">22</p>
+        <p class="text-base">days to go</p>
+      </div>
+      <div class="mb-4 flex items-center">
+        <img [src]="campaignInfo?.createdBy?.avatar" alt="" class="avatar rounded-full mr-4">
+        <div>
+          <div class="text-slate-900 font-semibold">{{campaignInfo?.createdBy?.name}}</div>
+          <div class="mt-0.5 text-sm leading-6">{{campaignInfo?.createdBy?.email}}</div>
+        </div>
+      </div>
+
+      <div class="mb-2 font-m">
+        Target lunch date: {{campaignInfo?.targetLunchDate | date: 'mediumDate'}}
+      </div>
+
+      <div>
+        <p class="font-m">
+          This project will only be funded if it reaches its goal by {{ campaignInfo?.duration | date:'full'}}
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="mx-4">
+    <mat-tab-group animationDuration="0ms">
+      <mat-tab>
+        <ng-template mat-tab-label>{{ "campaignManagement.overview" | trans }}</ng-template>
+        <div>
+          <h3 class="mt-3">{{ "campaignManagement.story" | trans }}</h3>
+          <div [innerHTML]="campaignInfo?.story"></div>
+          <!-- <div [innerHTML]="(product?.approvedVersion?.description ? product?.approvedVersion?.description : '') | keepHtml" class="product-description"></div> -->
+          <h3 class="mt-3">{{ "campaignManagement.risks" | trans }}</h3>
+          <div [innerHTML]="campaignInfo?.risk"></div>
+        </div>
+      </mat-tab>
+      <mat-tab>
+        <ng-template mat-tab-label>{{ "campaignManagement.comment" | trans }}</ng-template>
+        <!-- TODO: FIX ASYNC TWICE -->
+        <div>
+          <div *ngIf="(comments$| async)?.length > 0; else noComment">
+            <div *ngFor="let item of (comments$ | async)">
+              <app-comment-item [commentItem]="item"></app-comment-item>
+            </div>
+          </div>
+          <ng-template #noComment>
+            <div class="p-8">{{ 'campaignManagement.noComment' | trans }}</div>
+          </ng-template>
+        </div>
+
+
+      </mat-tab>
+    </mat-tab-group>
+  </div>
+
+</div>

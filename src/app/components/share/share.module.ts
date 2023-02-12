@@ -8,6 +8,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatInputModule } from '@angular/material/input';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatChipsModule } from '@angular/material/chips';
 
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
@@ -25,6 +26,9 @@ import { MatListModule } from '@angular/material/list';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { CategoryFormComponent } from './category-form/category-form.component';
 import { DialogComponent } from '#components/core/dialog/dialog.component';
+import { CommentItemComponent } from './comment-item/comment-item.component';
+import { ReplyItemComponent } from './reply-item/reply-item.component';
+import { CommentFormComponent } from './comment-form/comment-form.component';
 
 const MATERIAL_MODULES = [
   MatButtonModule,
@@ -40,6 +44,7 @@ const MATERIAL_MODULES = [
   MatInputModule,
   MatListModule,
   MatToolbarModule,
+  MatChipsModule,
   MatCheckboxModule,
 ];
 
@@ -61,6 +66,9 @@ const COMPONENTS = [
   PageHeaderComponent,
   TranslatePipe,
   NgxDatatableEmptyRowDirective,
+  CommentItemComponent,
+  ReplyItemComponent,
+  CommentFormComponent,
 ];
 
 @NgModule({

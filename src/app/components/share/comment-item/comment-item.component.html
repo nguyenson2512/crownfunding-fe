@@ -1,0 +1,32 @@
+<div class="flex pl-8 items-center">
+  <div class="w-8/12">
+    <div>
+      <p><span class="font-medium pr-4 py-1">{{commentItem?.createdBy?.name}}</span></p>
+      <p class="pl-3 mt-3 whitespace-pre-line">{{commentItem?.content}}</p>
+      <hr class="my-2" />
+    </div>
+  </div>
+  <div class="flex h-8 w-40 justify-between">
+    <button matTooltipPosition="above" mat-icon-button color="warn" [matTooltip]="'button.reply' | trans"
+      (click)="toggleInput(commentItem?._id)">
+      <mat-icon aria-hidden="false">reply</mat-icon>
+    </button>
+  </div>
+</div>
+<div class="flex flex-col pl-10" *ngIf="checkReply(commentItem?._id)">
+  <form [formGroup]="replyForm">
+    <mat-form-field appearance="outline" class="w-8/12 pr-4">
+      <mat-label>{{"input.reply" | trans}}</mat-label>
+      <textarea matInput formControlName="reply" (ngModelChange)="textIsEmpty($event)" [matTextareaAutosize]="true"
+        class="resize-y" rows="5"></textarea>
+    </mat-form-field>
+    <button [disabled]="textValue === ''" matTooltipPosition="above" mat-icon-button color="primary"
+      [matTooltip]="'button.save' | trans" (click)="onReply(commentItem?._id)">
+      <mat-icon aria-hidden="false">send</mat-icon>
+    </button>
+  </form>
+
+</div>
+<div *ngFor="let reply of commentItem?.replies">
+  <app-reply-item [replyItem]="reply"></app-reply-item>
+</div>

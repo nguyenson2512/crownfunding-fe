@@ -7,6 +7,13 @@ const routes: Routes = [
     path: '',
     component: HomeComponent,
   },
+  {
+    path: 'campaign/:id',
+    loadChildren: () =>
+      import('./campaign-detail/campaign-detail.module').then(
+        (m) => m.CampaignDetailModule
+      ),
+  },
 ];
 
 @NgModule({

@@ -14,14 +14,12 @@ export class ClientHeaderComponent extends BaseComponent implements OnInit {
 
   constructor(
     private componentService: ComponentService,
-    private authService: AuthService
+    public authService: AuthService
   ) {
     super(componentService);
   }
 
-  ngOnInit(): void {
-    // this.userStore.isLoggedIn();
-  }
+  ngOnInit(): void {}
 
   logout() {
     this.authService.endSession(false);

@@ -6,8 +6,8 @@
       </button>
     </div>
     <app-search-box></app-search-box>
-    <!-- <div class="navbar flex-1 lg:text-md xl:text-lg" *ngIf="userStore.isLoggedIn()">
-      <div class="navbar__item">
+    <div class="navbar flex-1 lg:text-md xl:text-lg" *ngIf="authService.isLogInUser()">
+      <!-- <div class="navbar__item">
         <button [matMenuTriggerFor]="notifications" class="flex items-center">
           <mat-icon class="mr-2" [matBadge]="notificationStore.amountUnreadNotification$ | async" matBadgeColor="warn"
             [matBadgeHidden]="!(notificationStore.notificationStatus$ | async)">
@@ -50,60 +50,23 @@
             </div>
           </ng-template>
         </mat-menu>
-      </div>
+      </div> -->
 
       <div class="navbar__item">
         <button [matMenuTriggerFor]="menu">
           <mat-icon class="account-icon">account_circle</mat-icon>
         </button>
         <mat-menu #menu="matMenu" xPosition="before">
-          <button mat-menu-item [routerLink]="['my-account']">
-            {{ "screenName.myAccount" | trans }}
-          </button>
-          <button *ngIf="this.userStore.isBuyer()" mat-menu-item [matMenuTriggerFor]="order">
-            {{ "button.orders" | trans }}
-          </button>
-          <button *ngIf="this.userStore.isBuyer()" mat-menu-item [routerLink]="['wishlist']">
-            {{ "button.wishList" | trans }}
-          </button>
-          <button *ngIf="this.userStore.isBuyer()" mat-menu-item [routerLink]="['my-activity']">
-            {{ "button.myActivity" | trans }}
-          </button>
-          <button *ngIf="this.userStore.isAdmin() || this.userStore.isBuyer()" mat-menu-item [routerLink]="['admin']">
-            {{ "button.adminPage" | trans }}
-          </button>
-          <button mat-menu-item [routerLink]="['my-setting']">
-            {{ "screenName.mySetting" | trans }}
-          </button>
-          <button mat-menu-item [matMenuTriggerFor]="help">
-            {{ "button.help" | trans }}
+          <button *ngIf="authService.isAdmin()" mat-menu-item [routerLink]="['admin']">
+            {{ "button.managementPage" | trans }}
           </button>
           <button mat-menu-item (click)="logout()">
             {{ "button.logout" | trans }}
           </button>
         </mat-menu>
-        <mat-menu #order="matMenu">
-          <button mat-menu-item [routerLink]="['cart-management']">
-            {{ "button.cart" | trans }}
-          </button>
-          <button mat-menu-item [routerLink]="['my-order-management']">
-            {{ "button.myOrder" | trans }}
-          </button>
-        </mat-menu>
-        <mat-menu #help="matMenu">
-          <button mat-menu-item [routerLink]="['help-desk']">
-            {{ "screenName.helpDesk" | trans }}
-          </button>
-          <button mat-menu-item [routerLink]="['faqs']">
-            {{ "button.faqs" | trans }}
-          </button>
-          <button mat-menu-item [routerLink]="['tickets']">
-            {{ "button.ticket" | trans }}
-          </button>
-        </mat-menu>
       </div>
-    </div> -->
-    <div class="navbar flex-1 lg:text-md xl:text-lg">
+    </div>
+    <div class="navbar flex-1 lg:text-md xl:text-lg" *ngIf="!authService.isLogInUser()">
       <div class="navbar__item">
         <button class="flex items-center" [routerLink]="['login']">
           <mat-icon>account_circle</mat-icon>

@@ -1,6 +1,9 @@
 import { LoginUserData, User } from '#models/user.model';
+import { ROLE_OPTIONS } from '#utils/const';
+import { checkPermission } from '#utils/helpers';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { BehaviorSubject } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 import {
   DataClientService,
@@ -16,6 +19,7 @@ import { UserProfileService } from './user-profile.service';
 export class AuthService {
   isLoggedIn = false;
   accessToken = '';
+  public currentUser$: BehaviorSubject<User> = new BehaviorSubject<User>(null);
 
   // store the URL so we can redirect after logging in
   redirectUrl: string;
@@ -49,6 +53,7 @@ export class AuthService {
     this.storageService.unset('access_token');
     this.storageService.unset('cart');
     this.storageService.unset('user_profile');
+    this.currentUser$.next(null);
     mustAuth ? this.router.navigate(['/login']) : null;
   }
 
@@ -81,5 +86,21 @@ export class AuthService {
     const data = this.storageService.get('user_profile');
     const roles = JSON.parse(data).roles;
     return roles;
+  }
+
+  isLogInUser() {
+    const data = this.storageService.get('user_profile');
+    if (data) {
+      this.currentUser$.next(JSON.parse(data));
+    }
+    return this.currentUser$.getValue() !== null;
+  }
+
+  isAdmin() {
+    const user = this.currentUser$.getValue();
+    return (
+      user &&
+      checkPermission([ROLE_OPTIONS.ADMIN, ROLE_OPTIONS.CREATOR], user.roles)
+    );
   }
 }

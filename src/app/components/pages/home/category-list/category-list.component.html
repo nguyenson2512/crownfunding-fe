@@ -1,16 +1,22 @@
 <mat-toolbar>
   <div class="container">
     <mat-list role="list">
-      <mat-list-item role="listitem" [matMenuTriggerFor]="link3" matRipple>
-        <span class="category">Link 3</span>
-        <mat-icon aria-hidden="false" aria-label="Example home icon">arrow_drop_down</mat-icon>
-        <mat-menu #link3="matMenu">
-          <button mat-menu-item>Sub Link 3.1</button>
-          <button mat-menu-item>Sub Link 3.2</button>
-        </mat-menu>
-      </mat-list-item>
-      <mat-list-item role="listitem">Link 4</mat-list-item>
-      <mat-list-item role="listitem">Link 5</mat-list-item>
+      <ng-container *ngFor="let item of categories">
+        <mat-list-item *ngIf="item?.subCategories?.length > 0; else buttonItem" role="listitem"
+          [matMenuTriggerFor]="children" matRipple>
+          <span class="category" (click)="handleClick(item?._id)">{{item?.name}}</span>
+          <mat-icon aria-hidden="false" aria-label="Example home icon">arrow_drop_down</mat-icon>
+          <mat-menu #children="matMenu">
+            <button mat-menu-item *ngFor="let child of item?.subCategories"
+              (click)="handleClick(child?._id)">{{child?.name}}</button>
+          </mat-menu>
+        </mat-list-item>
+        <ng-template #buttonItem>
+          <mat-list-item role="listitem" matRipple>
+            <span class="category" (click)="handleClick(item?._id)">{{item?.name}}</span>
+          </mat-list-item>
+        </ng-template>
+      </ng-container>
     </mat-list>
   </div>
 </mat-toolbar>

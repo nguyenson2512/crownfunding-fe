@@ -1,0 +1,61 @@
+.campaign-box {
+  width: 360px;
+  margin-bottom: 25px;
+
+  -webkit-box-shadow: 5px 5px 5px 0px rgba(173, 173, 173, 1);
+  -moz-box-shadow: 5px 5px 5px 0px rgba(173, 173, 173, 1);
+  box-shadow: 5px 5px 5px 0px rgba(173, 173, 173, 1);
+
+  &:hover {
+    cursor: pointer;
+
+    .title {
+      color: #515989;
+      text-decoration: underline
+    }
+
+    .campaign-image {
+      cursor: pointer;
+    }
+  }
+}
+
+.campaign-image {
+  max-width: 360px;
+  height: 220px;
+  object-fit: fill;
+}
+
+.mat-card-content {
+  margin-bottom: 0 !important;
+}
+
+.title {
+  margin-bottom: 0.5rem;
+  font-size: 1.3rem;
+  font-weight: 700;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  text-overflow: ellipsis !important;
+  line-height: 25px !important;
+  height: 25px !important;
+  -webkit-line-clamp: 1 !important;
+  display: -webkit-box !important;
+  -webkit-box-orient: vertical !important;
+}
+
+.subTitle {
+  font-size: 1rem;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  line-height: 25px !important;
+  height: 75px !important;
+  -webkit-line-clamp: 3 !important;
+  display: -webkit-box !important;
+  -webkit-box-orient: vertical !important;
+
+  &:hover {
+    text-decoration-color: #515989 !important;
+    text-decoration: underline;
+  }
+}

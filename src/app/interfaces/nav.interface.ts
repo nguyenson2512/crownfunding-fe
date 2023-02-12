@@ -20,5 +20,5 @@ export interface MenuNode {
   activeLinks?: string[];
   level: number;
   label: string;
-  roleIds?: number[];
+  roles?: string[];
 }

@@ -47,7 +47,7 @@ li {
 
 /* Width and Height */
 .w-full {
-  width: 100%;
+  width: 100% !important;
 }
 
 .w-1\/12 {
@@ -409,6 +409,7 @@ button[disabled] {
 @include applyMargin(2, 0.5rem);
 @include applyMargin(3, 0.75rem);
 @include applyMargin(4, 1rem);
+@include applyMargin(8, 2rem);
 @include applyMargin(16, 4rem);
 
 /* Padding variant */
@@ -416,4 +417,18 @@ button[disabled] {
 @include applyPadding(2, 0.5rem);
 @include applyPadding(3, 0.75rem);
 @include applyPadding(4, 1rem);
+@include applyPadding(8, 2rem);
+@include applyPadding(16, 4rem);
 @include applyPadding(9\/16, 56.25%);
+
+.campaign-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.campaign-image-container {
+  width: 850px;
+  height: 400px;
+}

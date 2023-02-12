@@ -26,9 +26,8 @@ export class MainNavComponent extends BaseComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    //TODO: update role
     const data = this.localStorageService.get('user_profile');
-    // this.roles = JSON.parse(data).roles;
+    this.roles = JSON.parse(data).roles;
     this.menuTree = MENU_TREE.map((treeNode) =>
       this.insertActiveLinks(treeNode)
     );
@@ -57,11 +56,11 @@ export class MainNavComponent extends BaseComponent implements OnInit {
     this.menuTree = menuTreeTemp;
   }
 
-  shouldShowMenuNode(roleIds: number[] = []): boolean {
-    if (!roleIds.length) {
+  shouldShowMenuNode(roles: string[] = []): boolean {
+    if (!roles.length) {
       return true;
     }
-    return this.roles.some((role) => roleIds?.includes(role?.id));
+    return this.roles.some((role) => roles?.includes(role?.name));
   }
 
   isParentNodeActive(parentActiveLinks?: string[]): boolean {

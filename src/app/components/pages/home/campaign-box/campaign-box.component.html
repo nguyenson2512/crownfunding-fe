@@ -1,0 +1,13 @@
+<mat-card class="campaign-box" (click)="navigateDetail($event)">
+  <img class="campaign-image object-fill" mat-card-image [src]="campaign?.image">
+  <mat-card-content>
+    <p class="title">{{campaign?.title}}</p>
+    <p class="subTitle">
+      {{campaign?.subTitle}}
+    </p>
+  </mat-card-content>
+  <mat-card-actions align="end">
+    <button mat-icon-button><mat-icon>bookmark_border</mat-icon></button>
+    <button mat-icon-button><mat-icon><mat-icon>thumb_up_off_alt</mat-icon></mat-icon></button>
+  </mat-card-actions>
+</mat-card>

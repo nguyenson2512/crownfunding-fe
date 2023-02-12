@@ -8,6 +8,7 @@ export class Comment extends Model {
   createdBy: User;
   type: CommentType;
   parentId: string;
+  replies: Comment[];
   constructor(data) {
     super();
     this.fill(data);

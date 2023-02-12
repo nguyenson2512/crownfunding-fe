@@ -18,6 +18,15 @@ export class CategoryService {
       .pipe(pluck('result'), paginationMapper(Category));
   }
 
+  getPublicCategoryList(): Observable<Category[]> {
+    return this.dataClientService.get('/public-categories').pipe(
+      pluck('result', 'data'),
+      map((data: DataSet[]) => {
+        return data.map((item) => new Category(item));
+      })
+    );
+  }
+
   getParentCategories(): Observable<Category[]> {
     return this.dataClientService.get('/categories/parents').pipe(
       pluck('result', 'data'),
