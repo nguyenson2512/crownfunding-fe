@@ -1,3 +1,4 @@
+import { SignupComponent } from '#components/auth/signup/signup.component';
 import { ClientLayoutComponent } from '#components/layout/client-layout/client-layout.component';
 import { AuthGuard } from '#guards/auth.guard';
 import { NgModule } from '@angular/core';
@@ -57,6 +58,10 @@ const routes: Routes = [
     path: 'login',
     loadChildren: () =>
       import('./components/auth/auth.module').then((m) => m.AuthModule),
+  },
+  {
+    path: 'signup',
+    component: SignupComponent,
   },
   {
     path: '**',

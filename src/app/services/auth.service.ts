@@ -47,6 +47,19 @@ export class AuthService {
     );
   }
 
+  signUp(body: any) {
+    return this.dataClientService
+      .post('/register', body, {
+        headers: {
+          'Content-Type': undefined,
+        },
+      })
+      .pipe(
+        map((res: any) => res?.result),
+        map((res: ResponseResult) => res.data)
+      );
+  }
+
   endSession(mustAuth: boolean = true): void {
     this.isLoggedIn = false;
     this.userProfileService.current = null;

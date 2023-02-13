@@ -46,4 +46,8 @@ export class AuthComponent extends BaseComponent implements OnInit {
       () => {}
     );
   }
+
+  navigateSignup() {
+    this.redirect(['/signup']);
+  }
 }
