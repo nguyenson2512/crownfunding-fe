@@ -2,7 +2,13 @@ import { BaseComponent } from '#components/core/base/base.component';
 import { CampaignDetailService } from '#services/campaign-detail.service';
 import { ComponentService } from '#services/component.service';
 import { CampaignService } from '#services/http/campaign.service';
-import { CommentType } from '#utils/const';
+import {
+  CommentType,
+  STATUS_CAMPAIGN_APPROVED,
+  STATUS_CAMPAIGN_REJECTED,
+  STATUS_CAMPAIGN_REVIEWING,
+} from '#utils/const';
+import { getDaysRemaining } from '#utils/helpers';
 import { Component, OnInit } from '@angular/core';
 import { forkJoin } from 'rxjs';
 
@@ -22,6 +28,18 @@ export class CampaignDetailComponent extends BaseComponent implements OnInit {
     super(componentService);
   }
 
+  get daysRemaining(): number {
+    return getDaysRemaining(
+      this.campaignDetailService.campaignInfoValue.duration
+    );
+  }
+
+  get isShowEvaluateBtn(): boolean {
+    return (
+      this.campaignDetailService.campaignInfoValue?.status ===
+      STATUS_CAMPAIGN_REVIEWING
+    );
+  }
   ngOnInit(): void {
     this.campaignId = this.routeParams?.id;
 
@@ -29,10 +47,33 @@ export class CampaignDetailComponent extends BaseComponent implements OnInit {
       this.campaignService.getDetail(this.campaignId),
       this.campaignService.getEvaluationComment(this.campaignId),
     ]).subscribe(([campaign, comments]) => {
-      console.log({ campaign });
       this.campaignDetailService.campaignInfo$.next(campaign);
       this.campaignDetailService.comments$.next(comments);
     });
+  }
+
+  approve() {
+    this.subscribeOnce(
+      this.campaignService.evaluate(this.campaignId, STATUS_CAMPAIGN_APPROVED),
+      (res) => {
+        if (res) {
+          this.service.message.showMessage('Approve campaign success.');
+          this.redirect(['/admin/campaign']);
+        }
+      }
+    );
+  }
+
+  reject() {
+    this.subscribeOnce(
+      this.campaignService.evaluate(this.campaignId, STATUS_CAMPAIGN_REJECTED),
+      (res) => {
+        if (res) {
+          this.service.message.showMessage('Rejected campaign.');
+          this.redirect(['/admin/campaign']);
+        }
+      }
+    );
   }
 
   handleComment(newComment) {

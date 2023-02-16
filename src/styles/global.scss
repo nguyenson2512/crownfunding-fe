@@ -203,6 +203,10 @@ li {
   flex-direction: column;
 }
 
+.flex-row-reverse{
+  flex-direction: row-reverse;
+}
+
 .content-center {
   justify-content: center;
 }
@@ -486,4 +490,27 @@ button[disabled] {
 
 .align-center {
   margin: 0 auto;
+}
+
+.image {
+  height: 400px;
+  object-fit: fill;
+  border-radius: 4px;
+}
+
+.avatar {
+  height: 60px;
+  width: 60px;
+}
+
+.avatar-sm {
+  width: 30px;
+  height: 30px;
+  margin-right: 10px;
+  border-radius: 50%;
+}
+
+.resolved-comment {
+  font-style: italic;
+  color: grey
 }

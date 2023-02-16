@@ -39,3 +39,11 @@ export const onlyNumberInput = (event) => {
   }
   return true;
 };
+
+export const getDaysRemaining = (duration: Date) => {
+  const currentDate = new Date();
+  const endOfDay = new Date(duration);
+  const timeDiff = endOfDay.getTime() - currentDate.getTime();
+  const daysRemaining = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
+  return daysRemaining;
+};

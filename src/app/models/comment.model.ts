@@ -9,6 +9,7 @@ export class Comment extends Model {
   type: CommentType;
   parentId: string;
   replies: Comment[];
+  isResolved: boolean;
   constructor(data) {
     super();
     this.fill(data);

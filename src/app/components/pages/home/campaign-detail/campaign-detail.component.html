@@ -53,10 +53,9 @@
         <ng-template mat-tab-label>{{ "campaignManagement.overview" | trans }}</ng-template>
         <div>
           <h3 class="mt-3">{{ "campaignManagement.story" | trans }}</h3>
-          <div [innerHTML]="campaignInfo?.story"></div>
-          <!-- <div [innerHTML]="(product?.approvedVersion?.description ? product?.approvedVersion?.description : '') | keepHtml" class="product-description"></div> -->
+          <div [innerHTML]="campaignInfo?.story | keepHtml"></div>
           <h3 class="mt-3">{{ "campaignManagement.risks" | trans }}</h3>
-          <div [innerHTML]="campaignInfo?.risk"></div>
+          <div [innerHTML]="campaignInfo?.risk | keepHtml"></div>
         </div>
       </mat-tab>
       <mat-tab>

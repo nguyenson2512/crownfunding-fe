@@ -1,7 +1,30 @@
 <div class="flex pl-8 items-center">
   <div class="w-8/12">
     <div>
-      <p><span class="font-medium pr-4 py-1">{{commentItem?.createdBy?.name}}</span></p>
+      <div class="flex items-center justify-between">
+        <div class="flex items-center">
+          <img class="avatar-sm" [src]="commentItem?.createdBy?.avatar" alt="">
+          <p><span class="font-medium pr-4 py-1">{{commentItem?.createdBy?.name}}</span></p>
+        </div>
+        <div *ngIf="authService.isAdminRole(); else creator">
+          <button mat-raised-button color="primary" (click)="resolveComment(commentItem?._id)"
+            *ngIf="(!commentItem?.isResolved); else resolved">
+            Resolve
+          </button>
+        </div>
+        <ng-container #creator>
+          <div *ngIf="commentItem?.isResolved">
+            <p class="resolved-comment">
+              This comment is resolved
+            </p>
+          </div>
+        </ng-container>
+        <ng-template #resolved>
+          <p class="resolved-comment">
+            This comment is resolved
+          </p>
+        </ng-template>
+      </div>
       <p class="pl-3 mt-3 whitespace-pre-line">{{commentItem?.content}}</p>
       <hr class="my-2" />
     </div>

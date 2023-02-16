@@ -1,7 +1,10 @@
 <div class="flex pl-8 items-center">
   <div class="w-8/12">
     <div class="pl-6">
-      <p><span class="font-medium pr-4 py-1">{{replyItem?.createdBy?.name}}</span></p>
+      <div class="flex items-center">
+        <img class="avatar-sm" [src]="replyItem?.createdBy?.avatar" alt="">
+        <p><span class="font-medium pr-4 py-1">{{replyItem?.createdBy?.name}}</span></p>
+      </div>
       <p class="pl-3 mt-3 whitespace-pre-line">{{replyItem?.content}}</p>
       <hr class="my-2" />
     </div>

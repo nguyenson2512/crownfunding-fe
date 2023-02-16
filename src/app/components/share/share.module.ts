@@ -33,6 +33,7 @@ import { ReplyItemComponent } from './reply-item/reply-item.component';
 import { CommentFormComponent } from './comment-form/comment-form.component';
 import { CopyPasteBlockDirective } from 'src/app/directives/copy-paste-block.directive';
 import { QuillModule } from 'ngx-quill';
+import { EscapeHtmlPipe } from '#pipes/keep-html.pipe';
 
 const MATERIAL_MODULES = [
   MatButtonModule,
@@ -72,6 +73,7 @@ const COMPONENTS = [
   CategoryFormComponent,
   PageHeaderComponent,
   TranslatePipe,
+  EscapeHtmlPipe,
   NgxDatatableEmptyRowDirective,
   CommentItemComponent,
   ReplyItemComponent,

@@ -6,6 +6,7 @@ import { ComponentService } from '#services/component.service';
 import { CampaignDetailService } from '#services/campaign-detail.service';
 import { CampaignService } from '#services/http/campaign.service';
 import { CommentType } from '#utils/const';
+import { AuthService } from '#services/auth.service';
 
 @Component({
   selector: 'app-comment-item',
@@ -24,7 +25,8 @@ export class CommentItemComponent extends BaseComponent implements OnInit {
     private componentService: ComponentService,
     private campaignDetailService: CampaignDetailService,
     private campaignService: CampaignService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    public authService: AuthService
   ) {
     super(componentService);
   }
@@ -90,5 +92,20 @@ export class CommentItemComponent extends BaseComponent implements OnInit {
 
     this.replyForm.patchValue({ reply: null });
     this.mainCommentId = null;
+  }
+
+  resolveComment(commentId: string) {
+    this.subscribeOnce(
+      this.campaignService.resolveComment(commentId),
+      (res) => {
+        if (res) {
+          this.service.message.showMessage('Resolve comment success');
+          this.commentItem = new Comment({
+            ...this.commentItem,
+            isResolved: true,
+          });
+        }
+      }
+    );
   }
 }

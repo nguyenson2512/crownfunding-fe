@@ -57,7 +57,7 @@
           <mat-icon class="account-icon">account_circle</mat-icon>
         </button>
         <mat-menu #menu="matMenu" xPosition="before">
-          <button *ngIf="authService.isAdmin()" mat-menu-item [routerLink]="['admin']">
+          <button *ngIf="authService.isForAdmin()" mat-menu-item [routerLink]="['admin']">
             {{ "button.managementPage" | trans }}
           </button>
           <button mat-menu-item (click)="logout()">

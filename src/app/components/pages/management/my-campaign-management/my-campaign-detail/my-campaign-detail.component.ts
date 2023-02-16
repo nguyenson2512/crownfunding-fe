@@ -1,10 +1,11 @@
 import { BaseComponent } from '#components/core/base/base.component';
 import { Campaign } from '#models/campaign.model';
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, forkJoin } from 'rxjs';
 import { Comment } from '#models/comment.model';
 import { ComponentService } from '#services/component.service';
 import { CampaignService } from '#services/http/campaign.service';
+import { getDaysRemaining } from '#utils/helpers';
 
 @Component({
   selector: 'app-my-campaign-detail',
@@ -13,8 +14,18 @@ import { CampaignService } from '#services/http/campaign.service';
 })
 export class MyCampaignDetailComponent extends BaseComponent implements OnInit {
   campaignId: string;
-  campaignInfo$: Observable<Campaign>;
-  comments$: Observable<Comment[]>;
+  campaignInfo$: BehaviorSubject<Campaign> = new BehaviorSubject<Campaign>(
+    null
+  );
+  comments$: BehaviorSubject<Comment[]> = new BehaviorSubject<Comment[]>([]);
+
+  get campaignInfoValue(): Campaign {
+    return this.campaignInfo$.getValue();
+  }
+
+  get daysRemaining(): number {
+    return getDaysRemaining(this.campaignInfoValue.duration);
+  }
 
   constructor(
     componentService: ComponentService,
@@ -25,7 +36,12 @@ export class MyCampaignDetailComponent extends BaseComponent implements OnInit {
 
   ngOnInit(): void {
     this.campaignId = this.routeParams?.id;
-    this.campaignInfo$ = this.campaignService.getDetail(this.campaignId);
-    this.comments$ = this.campaignService.getEvaluationComment(this.campaignId);
+    forkJoin([
+      this.campaignService.getDetail(this.campaignId),
+      this.campaignService.getEvaluationComment(this.campaignId),
+    ]).subscribe(([campaignInfo, comments]) => {
+      this.campaignInfo$.next(campaignInfo);
+      this.comments$.next(comments);
+    });
   }
 }

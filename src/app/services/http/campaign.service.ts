@@ -9,7 +9,11 @@ import { map, pluck } from 'rxjs/operators';
 import { DataClientService } from '#services/http-client.service';
 import { Campaign } from '#models/campaign.model';
 import { Comment } from '#models/comment.model';
-import { CommentType } from '#utils/const';
+import {
+  CommentType,
+  STATUS_CAMPAIGN_APPROVED,
+  STATUS_CAMPAIGN_REJECTED,
+} from '#utils/const';
 
 @Injectable({
   providedIn: 'root',
@@ -95,5 +99,24 @@ export class CampaignService {
         pluck('result'),
         map((res: any) => new Campaign(res?.data))
       );
+  }
+
+  evaluate(
+    campaignId: string,
+    status: typeof STATUS_CAMPAIGN_REJECTED | typeof STATUS_CAMPAIGN_APPROVED
+  ) {
+    return this.dataClientService
+      .put(`/campaigns/${campaignId}/evaluate`, {
+        status,
+      })
+      .pipe(pluck('result', 'data'));
+  }
+
+  resolveComment(commentId: string) {
+    return this.dataClientService
+      .put(`/comments/${commentId}/resolve`, {
+        isResolved: true,
+      })
+      .pipe(pluck('result', 'data'));
   }
 }

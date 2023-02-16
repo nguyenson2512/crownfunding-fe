@@ -109,11 +109,17 @@ export class AuthService {
     return this.currentUser$.getValue() !== null;
   }
 
-  isAdmin() {
+  isForAdmin() {
     const user = this.currentUser$.getValue();
     return (
       user &&
       checkPermission([ROLE_OPTIONS.ADMIN, ROLE_OPTIONS.CREATOR], user.roles)
     );
+  }
+
+  isAdminRole() {
+    const data = this.storageService.get('user_profile');
+    const user = JSON.parse(data);
+    return user?.roles.some((role) => role.name === ROLE_OPTIONS.ADMIN);
   }
 }

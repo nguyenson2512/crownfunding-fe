@@ -31,7 +31,7 @@
         <p class="text-base">funding goal</p>
       </div>
       <div class="mb-4">
-        <p class="text-2xl font-semibold text-indigo-700">22</p>
+        <p class="text-2xl font-semibold text-indigo-700">{{ daysRemaining }}</p>
         <p class="text-base">days to go</p>
       </div>
       <div class="mb-4 flex items-center">
@@ -60,14 +60,31 @@
         <ng-template mat-tab-label>{{ "campaignManagement.overview" | trans }}</ng-template>
         <div>
           <h3 class="mt-3">{{ "campaignManagement.story" | trans }}</h3>
-          <div [innerHTML]="campaignInfo?.story"></div>
-          <!-- <div [innerHTML]="(product?.approvedVersion?.description ? product?.approvedVersion?.description : '') | keepHtml" class="product-description"></div> -->
+          <div [innerHTML]="campaignInfo?.story | keepHtml"></div>
           <h3 class="mt-3">{{ "campaignManagement.risks" | trans }}</h3>
-          <div [innerHTML]="campaignInfo?.risk"></div>
+          <div [innerHTML]="campaignInfo?.risk | keepHtml"></div>
         </div>
       </mat-tab>
       <mat-tab>
         <ng-template mat-tab-label>{{ "campaignManagement.comment" | trans }}</ng-template>
+        <div class="flex flex-row-reverse mt-2" *ngIf="isShowEvaluateBtn; else campaignStatus">
+          <button mat-raised-button color="warn" (click)="reject()" class="ml-4">
+            Reject
+          </button>
+          <button mat-raised-button color="primary" (click)="approve()">
+            Approve
+          </button>
+        </div>
+        <ng-template #campaignStatus>
+          <div class="flex flex-row-reverse mt-2">
+            <mat-chip-list>
+              <mat-chip color="primary">
+                {{campaignInfo?.status}}
+              </mat-chip>
+            </mat-chip-list>
+          </div>
+
+        </ng-template>
         <div>
           <app-comment-form (comment)="handleComment($event)"></app-comment-form>
           <div *ngIf="(campaignDetailService.comments$| async)?.length > 0; else noComment">

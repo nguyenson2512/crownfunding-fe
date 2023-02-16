@@ -12,6 +12,9 @@ export class CampaignDetailService {
   );
   comments$: BehaviorSubject<Comment[]> = new BehaviorSubject<Comment[]>([]);
 
+  get campaignInfoValue() {
+    return this.campaignInfo$.getValue();
+  }
   get commentsValue() {
     return this.comments$.getValue();
   }

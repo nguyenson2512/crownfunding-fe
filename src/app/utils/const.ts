@@ -88,3 +88,7 @@ export enum CommentType {
 
 export const DATETIME_FORMAT = 'yyyy/MM/dd H:mm';
 export const DATE_CAMPAIGN_FORMAT = 'MM/DD/YYYY HH:mm';
+
+export const STATUS_CAMPAIGN_APPROVED = 'APPROVED';
+export const STATUS_CAMPAIGN_REJECTED = 'REJECTED';
+export const STATUS_CAMPAIGN_REVIEWING = 'REVIEWING';
