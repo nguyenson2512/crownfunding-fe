@@ -28,6 +28,7 @@ import { ClientLayoutComponent } from './components/layout/client-layout/client-
 import { SearchBoxComponent } from './components/layout/client-layout/search-box/search-box.component';
 import { ClientHeaderComponent } from '#components/layout/client-layout/header/header.component';
 import { FragmentComponent } from '#components/core/fragment/fragment.component';
+import { QuillModule } from 'ngx-quill';
 
 @NgModule({
   declarations: [
@@ -58,6 +59,7 @@ import { FragmentComponent } from '#components/core/fragment/fragment.component'
     TranslocoRootModule,
     HttpClientModule,
     NgxDatatableModule,
+    QuillModule.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent],

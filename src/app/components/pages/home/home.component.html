@@ -1,4 +1,6 @@
+<p class="col-10 mt-1 align-center"><span class="font-normal cursor-pointer underline text-blue-500 hover:text-blue-700"
+    (click)="navigateCreateCampaign()">Create your campaign</span></p>
 <app-category-list [categories]="categories$ | async"></app-category-list>
-<div class="campaign-list">
-  <app-campaign-box *ngFor="let campaign of (campaigns$ | async)?.data" [campaign]="campaign"></app-campaign-box>
+<div class="campaign-list col-10">
+  <app-campaign-box *ngFor="let campaign of (campaigns$ | async)" [campaign]="campaign"></app-campaign-box>
 </div>

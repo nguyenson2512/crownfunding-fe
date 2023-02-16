@@ -6,7 +6,7 @@ import { HomeService } from '#services/home.service';
 import { CampaignService } from '#services/http/campaign.service';
 import { CategoryService } from '#services/http/category.service';
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -22,27 +22,53 @@ export class HomeComponent extends BaseComponent implements OnInit {
   ) {
     super(componentService);
   }
-  categories$: Observable<Category[]>;
-  campaigns$;
+  categories$: BehaviorSubject<Category[]> = new BehaviorSubject<Category[]>(
+    []
+  );
+  campaigns$: BehaviorSubject<Campaign[]> = new BehaviorSubject<Campaign[]>([]);
 
   ngOnInit(): void {
-    this.categories$ = this.categoryService.getPublicCategoryList();
-    this.campaigns$ = this.campaignService.getPublicCampaignList();
+    forkJoin([
+      this.categoryService.getPublicCategoryList(),
+      this.campaignService.getPublicCampaignList(),
+    ]).subscribe(([categories, campaigns]) => {
+      this.categories$.next(categories);
+      this.campaigns$.next(campaigns?.data);
+    });
+
     this.subscribeUntilDestroy(this.homeService.selectedCategoryId$, (id) => {
       if (id) {
-        this.campaigns$ = this.campaignService.getPublicCampaignList({
-          equal: {
-            categoryId: id,
-          },
-        });
+        this.subscribeOnce(
+          this.campaignService.getPublicCampaignList({
+            equal: {
+              categoryId: id,
+            },
+          }),
+          (res) => {
+            if (res) {
+              this.campaigns$.next(res?.data);
+            }
+          }
+        );
       }
     });
     this.subscribeUntilDestroy(this.homeService.searchText$, (text) => {
-      this.campaigns$ = this.campaignService.getPublicCampaignList({
-        like: {
-          title: text,
-        },
-      });
+      this.subscribeOnce(
+        this.campaignService.getPublicCampaignList({
+          like: {
+            title: text,
+          },
+        }),
+        (res) => {
+          if (res) {
+            this.campaigns$.next(res?.data);
+          }
+        }
+      );
     });
+  }
+
+  navigateCreateCampaign() {
+    this.redirect(['/campaigns/create']);
   }
 }

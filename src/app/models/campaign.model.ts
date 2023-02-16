@@ -19,7 +19,7 @@ export class Campaign extends Model {
   risk: string;
   fundingGoal: number;
   currency: string;
-  targetLunchDate: Date;
+  targetLaunchDate: Date;
   duration: Date;
   image: string;
   createdBy: User;

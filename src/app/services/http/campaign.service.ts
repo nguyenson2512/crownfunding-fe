@@ -56,6 +56,16 @@ export class CampaignService {
       );
   }
 
+  uploadImage(body: any) {
+    return this.dataClientService
+      .post(`/upload-image`, body, {
+        headers: {
+          'Content-Type': undefined,
+        },
+      })
+      .pipe(pluck('result', 'data'));
+  }
+
   createComment(
     campaignId: string,
     content: string,
@@ -71,6 +81,19 @@ export class CampaignService {
       .pipe(
         pluck('result'),
         map((res: any) => new Comment(res?.data))
+      );
+  }
+
+  create(body: any) {
+    return this.dataClientService
+      .post(`/campaigns`, body, {
+        headers: {
+          'Content-Type': undefined,
+        },
+      })
+      .pipe(
+        pluck('result'),
+        map((res: any) => new Campaign(res?.data))
       );
   }
 }

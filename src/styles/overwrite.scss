@@ -119,3 +119,20 @@ button.datatable-tree-button.ng-star-inserted {
     color: #727cf5;
   }
 }
+
+.quill-container {
+  .ql-snow .ql-picker.ql-size .ql-picker-item[data-value="0.5rem"]::before,
+  .ql-snow .ql-picker.ql-size .ql-picker-label.ql-active[data-value="0.5rem"]::before {
+    content: "Small";
+  }
+
+  .ql-snow .ql-picker.ql-size .ql-picker-item[data-value="1.5rem"]::before,
+  .ql-snow .ql-picker.ql-size .ql-picker-label.ql-active[data-value="1.5rem"]::before {
+    content: "Large";
+  }
+
+  .ql-snow .ql-picker.ql-size .ql-picker-item[data-value="2rem"]::before,
+  .ql-snow .ql-picker.ql-size .ql-picker-label.ql-active[data-value="2rem"]::before {
+    content: "Huge";
+  }
+}

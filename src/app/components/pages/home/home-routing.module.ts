@@ -8,6 +8,13 @@ const routes: Routes = [
     component: HomeComponent,
   },
   {
+    path: 'campaigns/create',
+    loadChildren: () =>
+      import('./campaign-create/campaign-create.module').then(
+        (m) => m.CampaignCreateModule
+      ),
+  },
+  {
     path: 'campaign/:id',
     loadChildren: () =>
       import('./campaign-detail/campaign-detail.module').then(
@@ -15,7 +22,6 @@ const routes: Routes = [
       ),
   },
 ];
-
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],

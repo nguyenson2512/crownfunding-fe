@@ -87,3 +87,4 @@ export enum CommentType {
 }
 
 export const DATETIME_FORMAT = 'yyyy/MM/dd H:mm';
+export const DATE_CAMPAIGN_FORMAT = 'MM/DD/YYYY HH:mm';

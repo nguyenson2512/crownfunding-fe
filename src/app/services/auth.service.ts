@@ -22,7 +22,7 @@ export class AuthService {
   public currentUser$: BehaviorSubject<User> = new BehaviorSubject<User>(null);
 
   // store the URL so we can redirect after logging in
-  redirectUrl: string;
+  redirectUrl: string = '/';
 
   constructor(
     private storageService: LocalStorageService,

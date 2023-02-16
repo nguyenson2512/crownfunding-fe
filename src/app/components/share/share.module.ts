@@ -9,6 +9,8 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatInputModule } from '@angular/material/input';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatChipsModule } from '@angular/material/chips';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
@@ -29,6 +31,8 @@ import { DialogComponent } from '#components/core/dialog/dialog.component';
 import { CommentItemComponent } from './comment-item/comment-item.component';
 import { ReplyItemComponent } from './reply-item/reply-item.component';
 import { CommentFormComponent } from './comment-form/comment-form.component';
+import { CopyPasteBlockDirective } from 'src/app/directives/copy-paste-block.directive';
+import { QuillModule } from 'ngx-quill';
 
 const MATERIAL_MODULES = [
   MatButtonModule,
@@ -46,6 +50,8 @@ const MATERIAL_MODULES = [
   MatToolbarModule,
   MatChipsModule,
   MatCheckboxModule,
+  MatDatepickerModule,
+  MatNativeDateModule,
 ];
 
 const SHARE_MODULES = [
@@ -54,6 +60,7 @@ const SHARE_MODULES = [
   ReactiveFormsModule,
   RouterModule,
   NgxDatatableModule,
+  QuillModule,
   ...MATERIAL_MODULES,
 ];
 
@@ -69,6 +76,7 @@ const COMPONENTS = [
   CommentItemComponent,
   ReplyItemComponent,
   CommentFormComponent,
+  CopyPasteBlockDirective,
 ];
 
 @NgModule({

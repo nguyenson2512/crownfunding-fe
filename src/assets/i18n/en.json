@@ -21,6 +21,7 @@
   },
   "campaignManagement": {
     "title": "Title",
+    "subTitle": "Sub Title",
     "searchPlaceholder": "Search with title",
     "category": "Category",
     "createdTime": "Created Time",
@@ -31,7 +32,14 @@
     "risks": "Risks",
     "story": "Story",
     "comment": "Comment",
-    "noComment": "No comments for this campaign"
+    "noComment": "No comments for this campaign",
+    "location": "Location",
+    "currency": "Currency",
+    "targetLaunchDate": "Target Launch Date",
+    "mainCategory": "Main Category",
+    "subCategory": "Sub Category",
+    "duration": "Duration",
+    "campaignImage": "Campaign's Image"
   },
   "userManagement": {
     "searchPlaceholder": "Search with username",
@@ -152,6 +160,7 @@
   },
   "screenName": {
     "login": "WELCOME TO CROWDFUNDING",
+    "createCampaign": "Create Your Campaign",
     "dashboard": "Dashboard",
     "listCampaign": "List of campaigns",
     "detailCampaign": "Details of campaign",
