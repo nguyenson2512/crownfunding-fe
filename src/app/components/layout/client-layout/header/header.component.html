@@ -7,10 +7,10 @@
     </div>
     <app-search-box></app-search-box>
     <div class="navbar flex-1 lg:text-md xl:text-lg" *ngIf="authService.isLogInUser()">
-      <!-- <div class="navbar__item">
+      <div class="navbar__item">
         <button [matMenuTriggerFor]="notifications" class="flex items-center">
-          <mat-icon class="mr-2" [matBadge]="notificationStore.amountUnreadNotification$ | async" matBadgeColor="warn"
-            [matBadgeHidden]="!(notificationStore.notificationStatus$ | async)">
+          <mat-icon class="mr-2" [matBadge]="homeService.amountUnreadNotification$ | async" matBadgeColor="warn"
+            [matBadgeHidden]="!(homeService.notificationStatus$ | async)">
             notifications
           </mat-icon>
           <span>{{ "button.notification" | trans }}</span>
@@ -18,7 +18,7 @@
         <mat-menu #notifications="matMenu" xPosition="before">
           <ng-container *ngIf="(notificationList$ | async).length > 0; else noData">
             <div class="notification-header">
-              <span>{{ "homeFeature.notification" | trans }}</span>
+              <span>{{ "common.notification" | trans }}</span>
             </div>
 
             <div class="notification-body">
@@ -34,11 +34,11 @@
                   <span class="text-gray-800">
                     {{ info.content ? (info.content | trans) : notification.content }}
                   </span>
-                  <span class="notification-date" [ngClass]="notification.is_read ? '' : 'not-read'">
+                  <span class="notification-date" [ngClass]="notification.isRead ? '' : 'not-read'">
                     {{ notification.createdAt | date: dateTime }}
                   </span>
                 </div>
-                <div *ngIf="!notification.is_read">
+                <div *ngIf="!notification.isRead">
                   <div class="dot"></div>
                 </div>
               </div>
@@ -46,14 +46,14 @@
           </ng-container>
           <ng-template #noData>
             <div class="text-center text-lg pt-1 notification-container">
-              <p>{{ "homeFeature.noNotification" | trans }}</p>
+              <p>{{ "common.noNotification" | trans }}</p>
             </div>
           </ng-template>
         </mat-menu>
-      </div> -->
+      </div>
 
       <div class="navbar__item">
-        <button [matMenuTriggerFor]="menu">
+        <button [matMenuTriggerFor]="menu" class="pt-2">
           <mat-icon class="account-icon">account_circle</mat-icon>
         </button>
         <mat-menu #menu="matMenu" xPosition="before">

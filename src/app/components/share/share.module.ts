@@ -11,6 +11,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { MatBadgeModule } from '@angular/material/badge';
 
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
@@ -53,6 +54,7 @@ const MATERIAL_MODULES = [
   MatCheckboxModule,
   MatDatepickerModule,
   MatNativeDateModule,
+  MatBadgeModule,
 ];
 
 const SHARE_MODULES = [

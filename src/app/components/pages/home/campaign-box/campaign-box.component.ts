@@ -25,4 +25,6 @@ export class CampaignBoxComponent extends BaseComponent implements OnInit {
     event.stopPropagation();
     this.redirect([`/campaign/${this.campaign?._id}`]);
   }
+
+  addToWishlist() {}
 }

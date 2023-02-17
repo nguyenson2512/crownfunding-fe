@@ -92,3 +92,21 @@ export const DATE_CAMPAIGN_FORMAT = 'MM/DD/YYYY HH:mm';
 export const STATUS_CAMPAIGN_APPROVED = 'APPROVED';
 export const STATUS_CAMPAIGN_REJECTED = 'REJECTED';
 export const STATUS_CAMPAIGN_REVIEWING = 'REVIEWING';
+
+export const NOTIFICATION_TITLE = {
+  REJECTED_CAMPAIGN: 'Rejected Campaign',
+  APPROVED_CAMPAIGN: 'Approved Campaign',
+};
+
+export const NOTIFICATION_NAVIGATOR = {
+  [NOTIFICATION_TITLE.REJECTED_CAMPAIGN]: '/admin/my-campaign',
+  [NOTIFICATION_TITLE.APPROVED_CAMPAIGN]: '/admin/my-campaign',
+};
+
+export const NOTIFICATION_INFO_MAP = {
+  TaskCreatorApply: {
+    redirect: (taskId: number) => `/admin/job-creator/${taskId}/detail`,
+    title: 'notification.taskCreatorApplyTitle',
+    content: 'notification.taskCreatorApplyContent',
+  },
+};

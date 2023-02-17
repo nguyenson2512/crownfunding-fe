@@ -12,13 +12,13 @@
             Resolve
           </button>
         </div>
-        <ng-container #creator>
+        <ng-template #creator>
           <div *ngIf="commentItem?.isResolved">
             <p class="resolved-comment">
               This comment is resolved
             </p>
           </div>
-        </ng-container>
+        </ng-template>
         <ng-template #resolved>
           <p class="resolved-comment">
             This comment is resolved

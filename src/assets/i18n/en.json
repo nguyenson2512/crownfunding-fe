@@ -280,5 +280,9 @@
     "ERRMSG_013": "Update success",
     "ERRMSG_023": "Upload resource file success",
     "addComment": "Add comment success"
+  },
+  "common": {
+    "noNotification": "No notification to display",
+    "notification": "Notification"
   }
 }

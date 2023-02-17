@@ -29,6 +29,7 @@ import { SearchBoxComponent } from './components/layout/client-layout/search-box
 import { ClientHeaderComponent } from '#components/layout/client-layout/header/header.component';
 import { FragmentComponent } from '#components/core/fragment/fragment.component';
 import { QuillModule } from 'ngx-quill';
+import { MatBadgeModule } from '@angular/material/badge';
 
 @NgModule({
   declarations: [
@@ -59,6 +60,7 @@ import { QuillModule } from 'ngx-quill';
     TranslocoRootModule,
     HttpClientModule,
     NgxDatatableModule,
+    MatBadgeModule,
     QuillModule.forRoot(),
   ],
   providers: [],
