@@ -5,6 +5,7 @@ import { NgModule } from '@angular/core';
 import { Route, RouterModule, Routes } from '@angular/router';
 import { AuthComponent } from './components/auth/auth.component';
 import { MainLayoutComponent } from './components/layout/main-layout/main-layout.component';
+import { WishlistResolver } from './resolve/wishlist.resolver';
 
 const routes: Routes = [
   {
@@ -17,6 +18,7 @@ const routes: Routes = [
           import('#components/pages/home/home.module').then(
             (m) => m.HomeModule
           ),
+        resolve: { wishlist: WishlistResolver },
       },
     ],
   },

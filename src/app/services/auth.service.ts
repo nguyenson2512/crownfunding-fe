@@ -122,4 +122,9 @@ export class AuthService {
     const user = JSON.parse(data);
     return user?.roles.some((role) => role.name === ROLE_OPTIONS.ADMIN);
   }
+
+  isBanker() {
+    const user = this.currentUser$.getValue();
+    return user && user?.roles.length === 0;
+  }
 }

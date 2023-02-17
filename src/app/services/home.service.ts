@@ -4,6 +4,10 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { NotificationService } from './http/notification.service';
 import { LocalStorageService } from './storage.service';
 import { Notification } from '#models/notification.model';
+import { CampaignService } from './http/campaign.service';
+import { DatatablePagination } from '#interfaces/pagination.interface';
+import { Campaign } from '#models/campaign.model';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -21,6 +25,8 @@ export class HomeService {
 
   public _notificationStatus: BehaviorSubject<boolean> =
     new BehaviorSubject<boolean>(true);
+  public wishlist$: BehaviorSubject<DatatablePagination<Campaign>> =
+    new BehaviorSubject<DatatablePagination<Campaign>>(null);
 
   public readonly notificationList$: Observable<Notification[]> =
     this._notificationList.asObservable();
@@ -45,6 +51,10 @@ export class HomeService {
     return this._amountUnreadNotification.getValue();
   }
 
+  get wishlist(): DatatablePagination<Campaign> {
+    return this.wishlist$.getValue();
+  }
+
   setSelectedCategoryId(id: string) {
     this._selectedCategoryId.next(id);
   }
@@ -53,7 +63,10 @@ export class HomeService {
     this._searchText.next(text);
   }
 
-  constructor(private notificationService: NotificationService) {}
+  constructor(
+    private notificationService: NotificationService,
+    private campaignService: CampaignService
+  ) {}
 
   getNotificationList(): Observable<Notification[]> {
     this.notificationService.getList().subscribe((data) => {
@@ -87,5 +100,14 @@ export class HomeService {
         );
       }
     });
+  }
+
+  getWishlist() {
+    return this.campaignService.getWishlist().pipe(
+      map((data) => {
+        this.wishlist$.next(data);
+        return data;
+      })
+    );
   }
 }

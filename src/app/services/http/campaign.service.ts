@@ -119,4 +119,30 @@ export class CampaignService {
       })
       .pipe(pluck('result', 'data'));
   }
+
+  getWishlist(): Observable<DatatablePagination<Campaign>> {
+    return this.dataClientService.get('/wishlist').pipe(
+      pluck('result', 'data'),
+      map((res: any) => {
+        return {
+          data: res?.campaigns,
+        };
+      }),
+      paginationMapper(Campaign)
+    );
+  }
+
+  addWishlist(campaignId: string) {
+    return this.dataClientService
+      .post(`/wishlist`, {
+        campaignId,
+      })
+      .pipe(pluck('result', 'data'));
+  }
+
+  removeWishlist(campaignId: string) {
+    return this.dataClientService
+      .delete(`/wishlist/${campaignId}`)
+      .pipe(pluck('result', 'data'));
+  }
 }
