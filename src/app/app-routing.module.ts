@@ -20,6 +20,13 @@ const routes: Routes = [
           ),
         resolve: { wishlist: WishlistResolver },
       },
+      {
+        path: 'wishlist',
+        loadChildren: () =>
+          import('#components/pages/home/wishlist/wishlist.module').then(
+            (m) => m.WishlistModule
+          ),
+      },
     ],
   },
   {

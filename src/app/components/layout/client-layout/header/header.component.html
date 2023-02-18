@@ -60,6 +60,9 @@
           <button *ngIf="authService.isForAdmin()" mat-menu-item [routerLink]="['admin']">
             {{ "button.managementPage" | trans }}
           </button>
+          <button mat-menu-item [routerLink]="['wishlist']">
+            {{ "button.wishList" | trans }}
+          </button>
           <button mat-menu-item (click)="logout()">
             {{ "button.logout" | trans }}
           </button>

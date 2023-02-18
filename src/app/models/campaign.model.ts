@@ -27,6 +27,7 @@ export class Campaign extends Model {
   updatedAt: Date;
   rewards: IReward[];
   status: CampaignStatus;
+  category: any;
   constructor(data) {
     super();
     this.fill(data);

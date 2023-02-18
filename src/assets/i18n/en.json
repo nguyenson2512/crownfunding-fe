@@ -161,6 +161,7 @@
   "screenName": {
     "login": "WELCOME TO CROWDFUNDING",
     "createCampaign": "Create Your Campaign",
+    "editCampaign": "Edit Your Campaign",
     "dashboard": "Dashboard",
     "listCampaign": "List of campaigns",
     "detailCampaign": "Details of campaign",

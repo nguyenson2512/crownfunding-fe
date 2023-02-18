@@ -35,6 +35,9 @@ import { CommentFormComponent } from './comment-form/comment-form.component';
 import { CopyPasteBlockDirective } from 'src/app/directives/copy-paste-block.directive';
 import { QuillModule } from 'ngx-quill';
 import { EscapeHtmlPipe } from '#pipes/keep-html.pipe';
+import { CampaignFormComponent } from './campaign-form/campaign-form.component';
+import { TruncateTextPipe } from '#pipes/truncate-text.pipe';
+import { ImageViewComponent } from './image-view/image-view.component';
 
 const MATERIAL_MODULES = [
   MatButtonModule,
@@ -76,15 +79,17 @@ const COMPONENTS = [
   PageHeaderComponent,
   TranslatePipe,
   EscapeHtmlPipe,
+  TruncateTextPipe,
   NgxDatatableEmptyRowDirective,
   CommentItemComponent,
   ReplyItemComponent,
   CommentFormComponent,
   CopyPasteBlockDirective,
+  CampaignFormComponent,
 ];
 
 @NgModule({
-  declarations: [...COMPONENTS],
+  declarations: [...COMPONENTS, ImageViewComponent],
   imports: [...SHARE_MODULES],
   exports: [...SHARE_MODULES, ...COMPONENTS],
 })

@@ -3,7 +3,7 @@ import { DatatablePagination } from '#interfaces/pagination.interface';
 import { Campaign } from '#models/campaign.model';
 import { ComponentService } from '#services/component.service';
 import { CampaignService } from '#services/http/campaign.service';
-import { DATETIME_FORMAT } from '#utils/const';
+import { DATETIME_FORMAT, STATUS_CAMPAIGN_REVIEWING } from '#utils/const';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { ColumnMode } from '@swimlane/ngx-datatable';
@@ -56,5 +56,13 @@ export class MyCampaignManagementComponent
 
   redirectDetail(row: Campaign): void {
     this.redirect(`/admin/my-campaign/${row?._id}/detail`);
+  }
+
+  disableEditBtn(campaign: Campaign) {
+    return campaign.status !== STATUS_CAMPAIGN_REVIEWING;
+  }
+
+  navigateEditCampaign(id: string) {
+    this.redirect(`/admin/my-campaign/${id}/edit`);
   }
 }

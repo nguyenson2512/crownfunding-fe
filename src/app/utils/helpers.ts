@@ -9,7 +9,7 @@ export function isNullOrUndefined(value) {
 }
 
 export function isStrEmpty(value: string): boolean {
-  return isNullOrUndefined(value) || value.trim() === '';
+  return isNullOrUndefined(value) || value?.trim() === '';
 }
 
 export function isAllSpaceCharacter(value: string): boolean {

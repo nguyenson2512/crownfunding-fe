@@ -59,6 +59,7 @@
         <div>
           <h3 class="mt-3">{{ "campaignManagement.story" | trans }}</h3>
           <div [innerHTML]="campaignInfo?.story | keepHtml"></div>
+          <br />
           <h3 class="mt-3">{{ "campaignManagement.risks" | trans }}</h3>
           <div [innerHTML]="campaignInfo?.risk | keepHtml"></div>
         </div>
@@ -75,8 +76,6 @@
             <div class="p-8">{{ 'campaignManagement.noComment' | trans }}</div>
           </ng-template>
         </div>
-
-
       </mat-tab>
     </mat-tab-group>
   </div>

@@ -101,6 +101,12 @@ export class CampaignService {
       );
   }
 
+  update(id: string, body: any) {
+    return this.dataClientService
+      .put(`/campaigns/${id}`, body)
+      .pipe(pluck('result', 'data'));
+  }
+
   evaluate(
     campaignId: string,
     status: typeof STATUS_CAMPAIGN_REJECTED | typeof STATUS_CAMPAIGN_APPROVED

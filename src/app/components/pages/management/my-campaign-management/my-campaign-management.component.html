@@ -68,6 +68,10 @@
           aria-label="Edit" (click)="redirectDetail(row)">
           <mat-icon>open_in_new</mat-icon>
         </button>
+        <button aria-label="Edit" matTooltipPosition="above" mat-icon-button [matTooltip]="'button.edit' | trans"
+          color="primary" [disabled]="disableEditBtn(row)" (click)="navigateEditCampaign(row?._id)" stopPropagation>
+          <mat-icon>edit</mat-icon>
+        </button>
       </ng-template>
     </ngx-datatable-column>
   </ngx-datatable>

@@ -11,6 +11,13 @@ const routes: Routes = [
         (m) => m.MyCampaignDetailModule
       ),
   },
+  {
+    path: ':id/edit',
+    loadChildren: () =>
+      import('./my-campaign-edit/my-campaign-edit.module').then(
+        (m) => m.MyCampaignEditModule
+      ),
+  },
 ];
 
 @NgModule({
