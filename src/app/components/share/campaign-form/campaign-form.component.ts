@@ -22,6 +22,7 @@ export class CampaignFormComponent extends BaseComponent implements OnInit {
   selectedFiles;
   quillConfig: any;
   quillStyles = { height: '250px' };
+  selectedMainCategory: string;
 
   form = this.fb.group({
     title: ['', [Validators.required, notEmpty]],
@@ -72,7 +73,8 @@ export class CampaignFormComponent extends BaseComponent implements OnInit {
     });
   }
 
-  handleChangeMainCategory(value) {
+  handleChangeMainCategory(value: Category) {
+    this.selectedMainCategory = value?._id;
     this.form.patchValue({
       categoryId: null,
     });
@@ -105,6 +107,7 @@ export class CampaignFormComponent extends BaseComponent implements OnInit {
       selectedFileName: this.selectedFileName,
       selectedFiles: this.selectedFiles,
       id: this.campaignId,
+      categoryId: this.form.value.categoryId || this.selectedMainCategory,
     });
   }
 
@@ -113,14 +116,25 @@ export class CampaignFormComponent extends BaseComponent implements OnInit {
       this.campaignService.getDetail(this.campaignId),
       (data) => {
         if (data) {
-          this.form.patchValue({
-            mainCategory: this.mainCategories$
-              .getValue()
-              .find((item) => item._id === data?.category?.parentId),
-          });
+          if (!data?.category?.parentId) {
+            this.form.patchValue({
+              mainCategory: this.mainCategories$
+                .getValue()
+                .find((item) => item._id === data?.category?._id),
+            });
+            this.selectedMainCategory = data?.category?._id;
+          } else {
+            this.form.patchValue({
+              mainCategory: this.mainCategories$
+                .getValue()
+                .find((item) => item._id === data?.category?.parentId),
+            });
+            this.form.patchValue({
+              categoryId: data?.category?._id,
+            });
+          }
           this.form.patchValue({
             title: data?.title,
-            categoryId: data?.category?._id,
             subTitle: data?.subTitle,
             location: data?.location,
             fundingGoal: data?.fundingGoal.toString(),

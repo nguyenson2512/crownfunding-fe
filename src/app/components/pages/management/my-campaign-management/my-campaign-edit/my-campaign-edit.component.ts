@@ -20,11 +20,17 @@ export class MyCampaignEditComponent extends BaseComponent implements OnInit {
   ngOnInit(): void {}
 
   handleEdit(data: any) {
-    this.subscribeOnce(this.campaignService.update(data?.id, data), (res) => {
-      if (res) {
-        this.componentService.message.showMessage('Update Campaign Success');
-        this.redirect(['/admin/my-campaign']);
+    this.subscribeOnce(
+      this.campaignService.update(data?.id, {
+        ...data,
+        category: data?.categoryId,
+      }),
+      (res) => {
+        if (res) {
+          this.componentService.message.showMessage('Update Campaign Success');
+          this.redirect(['/admin/my-campaign']);
+        }
       }
-    });
+    );
   }
 }
