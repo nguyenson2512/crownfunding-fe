@@ -1,1 +1,49 @@
-<p>wishlist works!</p>
+<div class="col-10 mt-3 align-center">
+  <app-page-header [title]="'screenName.myWishList' | trans">
+  </app-page-header>
+  <div class="">
+    <ngx-datatable appNgxDatatableEmptyRow class="material striped fullscreen horizontal-scroll-table"
+      [rowClass]="getRowClass" [columnMode]="ColumnMode.force" [rows]="dataSourceObs | async" [headerHeight]="50"
+      [footerHeight]="50" rowHeight="auto" [scrollbarH]="true">
+      <ngx-datatable-column prop="title" [name]="'campaignManagement.title' | trans" [resizeable]="false"
+        [sortable]="false" headerClass="table-header 2xl:ml-20" cellClass="2xl:ml-20 ">
+      </ngx-datatable-column>
+
+      <ngx-datatable-column prop="category" headerClass="table-header" [resizeable]="false" [sortable]="false"
+        [name]="'campaignManagement.category' | trans">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          <p>{{row?.category?.name}}</p>
+        </ng-template>
+      </ngx-datatable-column>
+
+      <ngx-datatable-column prop="fundingGoal" [name]="'campaignManagement.fundingGoal' | trans" [resizeable]="false"
+        [sortable]="false" headerClass="table-header 2xl:ml-20" cellClass="2xl:ml-20 ">
+      </ngx-datatable-column>
+
+      <ngx-datatable-column prop="createdBy" headerClass="table-header" [resizeable]="false" [sortable]="false"
+        [name]="'campaignManagement.creator' | trans">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          <p>{{row?.createdBy?.name}}</p>
+        </ng-template>
+      </ngx-datatable-column>
+
+      <ngx-datatable-column prop="duration" headerClass="table-header" [resizeable]="false" [sortable]="false"
+        [name]="'campaignManagement.duration' | trans">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          <p>{{row?.duration | date: 'short'}}</p>
+        </ng-template>
+      </ngx-datatable-column>
+
+      <ngx-datatable-column [name]="'button.action' | trans" [resizeable]="false" [sortable]="false"
+        headerClass="table-header">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          <button mat-icon-button [matTooltip]="'button.detail' | trans" matTooltipPosition="above" color="primary"
+            aria-label="Detail" (click)="redirectDetail(row)">
+            <mat-icon>open_in_new</mat-icon>
+          </button>
+        </ng-template>
+      </ngx-datatable-column>
+    </ngx-datatable>
+  </div>
+
+</div>
