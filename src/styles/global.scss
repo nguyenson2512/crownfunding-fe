@@ -203,6 +203,10 @@ li {
   flex-direction: column;
 }
 
+.justify-end {
+  justify-content: end;
+}
+
 .flex-row-reverse{
   flex-direction: row-reverse;
 }
@@ -460,6 +464,7 @@ button[disabled] {
 @include applyMargin(2, 0.5rem);
 @include applyMargin(3, 0.75rem);
 @include applyMargin(4, 1rem);
+@include applyMargin(6, 1.5rem);
 @include applyMargin(8, 2rem);
 @include applyMargin(16, 4rem);
 

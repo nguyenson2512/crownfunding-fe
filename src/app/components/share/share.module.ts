@@ -12,6 +12,7 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatBadgeModule } from '@angular/material/badge';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
@@ -38,6 +39,8 @@ import { EscapeHtmlPipe } from '#pipes/keep-html.pipe';
 import { CampaignFormComponent } from './campaign-form/campaign-form.component';
 import { TruncateTextPipe } from '#pipes/truncate-text.pipe';
 import { ImageViewComponent } from './image-view/image-view.component';
+import { RewardCardComponent } from './reward-card/reward-card.component';
+import { RewardFormComponent } from './reward-form/reward-form.component';
 
 const MATERIAL_MODULES = [
   MatButtonModule,
@@ -58,6 +61,7 @@ const MATERIAL_MODULES = [
   MatDatepickerModule,
   MatNativeDateModule,
   MatBadgeModule,
+  MatAutocompleteModule,
 ];
 
 const SHARE_MODULES = [
@@ -86,10 +90,13 @@ const COMPONENTS = [
   CommentFormComponent,
   CopyPasteBlockDirective,
   CampaignFormComponent,
+  RewardCardComponent,
+  ImageViewComponent,
+  RewardFormComponent,
 ];
 
 @NgModule({
-  declarations: [...COMPONENTS, ImageViewComponent],
+  declarations: [...COMPONENTS],
   imports: [...SHARE_MODULES],
   exports: [...SHARE_MODULES, ...COMPONENTS],
 })

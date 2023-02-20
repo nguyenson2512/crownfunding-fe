@@ -31,6 +31,12 @@ export class ValidationErrorComponent implements OnInit {
       if (this.control.errors.pattern) {
         message = 'This field is invalid format';
       }
+      if (this.control.errors.max) {
+        message = 'This value is too large';
+      }
+      if (this.control.errors.min) {
+        message = 'This value should be larger';
+      }
     }
     return message;
   }

@@ -39,7 +39,16 @@
     "mainCategory": "Main Category",
     "subCategory": "Sub Category",
     "duration": "Duration",
-    "campaignImage": "Campaign's Image"
+    "campaignImage": "Campaign's Image",
+    "rewards": "Rewards",
+    "editReward": "Edit Reward",
+    "addReward": "Add Reward",
+    "description": "Description",
+    "amount": "Amount",
+    "itemOffering": "Item Offering",
+    "itemsOffering": "Items Offering",
+    "quantity": "Quantity",
+    "estimateDelivery": "Estimate Delivery"
   },
   "userManagement": {
     "searchPlaceholder": "Search with username",
@@ -62,6 +71,9 @@
     }
   },
   "button": {
+    "remove": "Remove",
+    "newReward": "New Reward",
+    "newItem": "New Item",
     "search": "Search",
     "edit": "Edit",
     "save": "Save",

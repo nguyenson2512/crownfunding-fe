@@ -3,11 +3,13 @@ import { Model } from './model';
 import { User } from './user.model';
 
 export interface IReward {
+  _id?: string;
   title: string;
-  amount: string;
+  amount: number;
   description: string;
   currency: string;
-  itemsOffering: string;
+  itemsOffering?: any;
+  estimatedDelivery: string;
 }
 
 //TODO: LINK MODEL
@@ -25,7 +27,7 @@ export class Campaign extends Model {
   createdBy: User;
   createdAt: Date;
   updatedAt: Date;
-  rewards: IReward[];
+  rewards: IReward[] | any;
   status: CampaignStatus;
   category: any;
   constructor(data) {

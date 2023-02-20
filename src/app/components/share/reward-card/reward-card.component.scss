@@ -1,0 +1,50 @@
+.card-container {
+  background-color: #e4e4df;
+  padding: 2rem;
+  color: black;
+  border-radius: 5px;
+  border: 0.1rem solid #E8E8E8;
+  box-shadow: 7px 7px 5px 0px rgba(204, 204, 204, 0.75);
+  -webkit-box-shadow: 7px 7px 5px 0px rgba(204, 204, 204, 0.75);
+  -moz-box-shadow: 7px 7px 5px 0px rgba(204, 204, 204, 0.75);
+  ul {
+    list-style-type: circle;
+    margin-left: 25px
+  }
+  .card-value {
+    font-size: 1.1rem
+  }
+  .card-title {
+    font-size: 1.3rem;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    text-overflow: ellipsis !important;
+    line-height: 25px !important;
+    height: 25px !important;
+    -webkit-line-clamp: 1 !important;
+    display: -webkit-box !important;
+    -webkit-box-orient: vertical !important;
+  }
+  .card-description {
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    text-overflow: ellipsis !important;
+    line-height: 25px !important;
+    height: 50px !important;
+    -webkit-line-clamp: 2 !important;
+    display: -webkit-box !important;
+    -webkit-box-orient: vertical !important;
+  }
+  .card-header {
+    padding-bottom: 5px;
+    font-size: 1.4rem
+  }
+  .card-label {
+    text-transform: uppercase;
+    color: #656969;
+    font-size: 0.8rem;
+    line-height: 1.2rem;
+    font-weight: 400
+  }
+}
+

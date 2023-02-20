@@ -1,6 +1,6 @@
 <app-page-header [title]="'screenName.detailCampaign' | trans">
 </app-page-header>
-<div class="flex flex-col" *ngIf="campaignInfo$ | async as campaignInfo">
+<div class="flex flex-col pb-4" *ngIf="campaignInfo$ | async as campaignInfo">
   <div class="title-container my-2 text-center mb-3">
     <p class="text-2xl font-semibold text-slate-900">{{campaignInfo?.title}}</p>
     <p class="text-base font-medium text-slate-700 mt-1">{{campaignInfo?.subTitle}}</p>

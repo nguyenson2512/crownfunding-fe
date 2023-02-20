@@ -1,0 +1,24 @@
+<div class="flex flex-col card-container">
+  <h5 class="card-header">Pledge {{reward?.amount}}{{reward?.currency}} or more</h5>
+  <p class="card-title">{{reward?.title}}</p>
+  <p class="card-description mb-2">{{reward?.description}}</p>
+  <div *ngIf="reward?.itemsOffering">
+    <p class="card-label">ITEMS OFFERING:</p>
+    <ul *ngIf="reward?.itemsOffering?.length > 0">
+      <li *ngFor="let item of reward?.itemsOffering">
+        {{item?.name}} <span *ngIf="showQuantityItem(item)"> x {{item?.quantity}}</span>
+      </li>
+    </ul>
+  </div>
+  <p class="card-label mt-2">ESTIMATED DELIVERY:</p>
+  <p class="card-value">February 2023</p>
+  <div class="flex flex-row-reverse" *ngIf="isCanEdit">
+
+    <button mat-stroked-button (click)="onRemove()" color="warn" type="button" class="ml-2" *ngIf="isNotDefaultReward">
+      {{ 'button.remove' | trans }}
+    </button>
+    <button mat-stroked-button (click)="onEdit()" color="primary" type="button" *ngIf="isNotDefaultReward">
+      {{ 'button.edit' | trans }}
+    </button>
+  </div>
+</div>

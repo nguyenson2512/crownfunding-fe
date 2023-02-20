@@ -1,0 +1,13 @@
+.rewards-list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  margin-top: 10px !important;
+  margin: 0 auto;
+  padding-bottom: 5px;
+  gap: 35px;
+  .item {
+    width: 30%;
+  }
+}

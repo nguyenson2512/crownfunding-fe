@@ -1,3 +1,4 @@
+import { IReward } from '#models/campaign.model';
 import { MenuNode } from '../interfaces/nav.interface';
 
 export enum HttpMethod {
@@ -109,4 +110,12 @@ export const NOTIFICATION_INFO_MAP = {
     title: 'notification.taskCreatorApplyTitle',
     content: 'notification.taskCreatorApplyContent',
   },
+};
+
+export const DEFAULT_REWARD: IReward = {
+  title: 'Pledge without a reward',
+  amount: 10,
+  description: 'No reward, I just want to support the project',
+  currency: 'USD',
+  estimatedDelivery: '03/2023',
 };

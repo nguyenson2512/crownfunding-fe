@@ -36,6 +36,7 @@ export class CampaignCreateComponent extends BaseComponent implements OnInit {
       duration,
       selectedFiles,
       selectedFileName,
+      rewards,
     } = data;
     const formData = new FormData();
     formData.append('title', title);
@@ -50,6 +51,7 @@ export class CampaignCreateComponent extends BaseComponent implements OnInit {
     );
     formData.append('story', story);
     formData.append('risk', risk);
+    formData.append('rewards', JSON.stringify(rewards));
     formData.append(
       'duration',
       moment(new Date(duration)).format(DATE_CAMPAIGN_FORMAT)

@@ -55,7 +55,6 @@ export class CommentItemComponent extends BaseComponent implements OnInit {
       ),
       (res) => {
         if (res) {
-          console.log({ res });
           let commentItemIndex;
           let newCommentList = [];
           let commentItem = this.campaignDetailService.commentsValue.filter(

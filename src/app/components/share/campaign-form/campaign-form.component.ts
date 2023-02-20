@@ -1,16 +1,20 @@
 import { BaseComponent } from '#components/core/base/base.component';
 import { initQuillConfig } from '#config/quill.config';
+import { IReward } from '#models/campaign.model';
 import { Category } from '#models/category.model';
+import { CampaignDetailService } from '#services/campaign-detail.service';
 import { ComponentService } from '#services/component.service';
 import { CampaignService } from '#services/http/campaign.service';
 import { CategoryService } from '#services/http/category.service';
+import { DEFAULT_REWARD } from '#utils/const';
 import { onlyNumberInput } from '#utils/helpers';
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { BehaviorSubject, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { notEmpty } from 'src/app/validators/not-empty.validator';
 import { ImageViewComponent } from '../image-view/image-view.component';
+import { RewardFormComponent } from '../reward-form/reward-form.component';
 
 @Component({
   selector: 'app-campaign-form',
@@ -23,6 +27,8 @@ export class CampaignFormComponent extends BaseComponent implements OnInit {
   quillConfig: any;
   quillStyles = { height: '250px' };
   selectedMainCategory: string;
+  defaultReward = DEFAULT_REWARD;
+  rewards$: BehaviorSubject<IReward[]> = new BehaviorSubject<IReward[]>([]);
 
   form = this.fb.group({
     title: ['', [Validators.required, notEmpty]],
@@ -31,7 +37,7 @@ export class CampaignFormComponent extends BaseComponent implements OnInit {
     categoryId: [''],
     location: ['', [Validators.required, notEmpty]],
     fundingGoal: ['', [Validators.required, notEmpty]],
-    currency: ['VND', [Validators.required, notEmpty]],
+    currency: ['USD', [Validators.required, notEmpty]],
     targetLaunchDate: ['', [Validators.required]],
     story: ['', [Validators.required, notEmpty]],
     risk: ['', [Validators.required, notEmpty]],
@@ -52,7 +58,8 @@ export class CampaignFormComponent extends BaseComponent implements OnInit {
     protected componentService: ComponentService,
     private fb: FormBuilder,
     private campaignService: CampaignService,
-    private categoryService: CategoryService
+    private categoryService: CategoryService,
+    private campaignDetailService: CampaignDetailService
   ) {
     super(componentService);
   }
@@ -63,12 +70,15 @@ export class CampaignFormComponent extends BaseComponent implements OnInit {
       this.isEdit = true;
       this.campaignId = id;
     }
+    this.campaignDetailService.setItemsOffering(new Set());
 
     this.initQuillConfig();
     this.subscribeOnce(this.categoryService.getParentCategories(), (res) => {
       this.mainCategories$.next(res);
       if (this.isEdit) {
         this.initCampaignDetails();
+      } else {
+        this.rewards$.next([this.defaultReward]);
       }
     });
   }
@@ -102,12 +112,15 @@ export class CampaignFormComponent extends BaseComponent implements OnInit {
     if (this.form.invalid) {
       return;
     }
+    const rewards = this.rewards$.getValue();
+    rewards.shift();
     this.formComplete.emit({
       ...this.form.value,
       selectedFileName: this.selectedFileName,
       selectedFiles: this.selectedFiles,
       id: this.campaignId,
       categoryId: this.form.value.categoryId || this.selectedMainCategory,
+      rewards,
     });
   }
 
@@ -148,7 +161,24 @@ export class CampaignFormComponent extends BaseComponent implements OnInit {
           if (data?.image) {
             this.hasImage = true;
           }
-          console.log(this.form.value);
+          const itemsSet = new Set();
+
+          const formatRewards = data.rewards.map((reward) => {
+            if (reward?.itemsOffering) {
+              const itemsOffering = JSON.parse(reward.itemsOffering);
+              itemsOffering.map((item) => {
+                itemsSet.add(item?.name);
+              });
+              return {
+                ...reward,
+                itemsOffering,
+              };
+            }
+            return reward;
+          });
+          itemsSet;
+          this.campaignDetailService.setItemsOffering(itemsSet);
+          this.rewards$.next(formatRewards);
         }
       }
     );
@@ -199,5 +229,73 @@ export class CampaignFormComponent extends BaseComponent implements OnInit {
           });
       });
     });
+  }
+
+  onRemove(reward, index) {
+    const rewards = this.rewards$.getValue();
+    rewards.splice(index, 1);
+    this.rewards$.next(rewards);
+  }
+
+  onEdit(reward, index) {
+    this.componentService.dialog
+      .showDialog(RewardFormComponent, {
+        data: { isEdit: true, reward },
+        maxHeight: '600px',
+        minHeight: '500px',
+        width: '600px',
+        autoFocus: false,
+        disableClose: true,
+      })
+      .afterClosed()
+      .subscribe((res) => {
+        if (!res) return;
+        const newReward: IReward = {
+          ...res,
+          amount: +res?.amount,
+          currency: 'USD',
+        };
+
+        const rewards = this.rewards$.getValue();
+        this.updateItems(newReward?.itemsOffering);
+        const updatedRewards = [
+          ...rewards.slice(0, index),
+          newReward,
+          ...rewards.slice(index + 1),
+        ];
+        this.rewards$.next(updatedRewards);
+      });
+  }
+
+  handleAddReward() {
+    this.componentService.dialog
+      .showDialog(RewardFormComponent, {
+        data: { isEdit: false },
+        maxHeight: '600px',
+        minHeight: '500px',
+        width: '600px',
+        autoFocus: false,
+        disableClose: true,
+      })
+      .afterClosed()
+      .subscribe((res) => {
+        if (!res) return;
+        const newReward: IReward = {
+          ...res,
+          amount: +res?.amount,
+          currency: 'USD',
+        };
+        this.updateItems(newReward?.itemsOffering);
+        this.rewards$.next([...this.rewards$.getValue(), newReward]);
+      });
+  }
+
+  private updateItems(itemsOffering) {
+    const itemNames = itemsOffering.map((item) => item?.name);
+    const updatedItems = new Set([
+      ...itemNames,
+      ...this.campaignDetailService.itemsOfferingValue,
+    ]);
+    this.campaignDetailService.setItemsOffering(updatedItems);
   }
 }

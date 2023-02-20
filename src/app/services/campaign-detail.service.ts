@@ -11,6 +11,9 @@ export class CampaignDetailService {
     null
   );
   comments$: BehaviorSubject<Comment[]> = new BehaviorSubject<Comment[]>([]);
+  itemsOffering$: BehaviorSubject<Set<string>> = new BehaviorSubject<
+    Set<string>
+  >(new Set());
 
   get campaignInfoValue() {
     return this.campaignInfo$.getValue();
@@ -18,5 +21,12 @@ export class CampaignDetailService {
   get commentsValue() {
     return this.comments$.getValue();
   }
+  get itemsOfferingValue() {
+    return Array.from(this.itemsOffering$.getValue());
+  }
   constructor() {}
+
+  setItemsOffering(value) {
+    this.itemsOffering$.next(value);
+  }
 }

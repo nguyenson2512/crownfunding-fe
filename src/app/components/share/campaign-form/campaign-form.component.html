@@ -3,128 +3,145 @@
     <div class="px-2">
       <h1 class="py-4">{{ (isEdit ? "screenName.editCampaign" : "screenName.createCampaign") | trans }}</h1>
     </div>
-    <div class="column col-sm-12 col-md-6 col-lg-5 col-xl-5 col-mx-auto">
-      <form class="" [formGroup]="form" (ngSubmit)="submit()">
-        <mat-form-field class="full-width mb-1" appearance="outline">
-          <mat-label>{{"campaignManagement.title" | trans}}</mat-label>
-          <input matInput [placeholder]="'campaignManagement.title' | trans" formControlName="title" type="text" />
-          <mat-error>
-            <app-validation-error [control]="form?.controls?.title">
-            </app-validation-error>
-          </mat-error>
-        </mat-form-field>
-        <div>
+
+    <div class="flex">
+      <div class="column col-sm-12 col-md-7 col-lg-7 col-xl-7 col-7 col-mx-auto">
+        <form class="" [formGroup]="form" (ngSubmit)="submit()">
           <mat-form-field class="full-width mb-1" appearance="outline">
-            <mat-label>{{"campaignManagement.subTitle" | trans}}</mat-label>
-            <textarea matInput [placeholder]="'campaignManagement.subTitle' | trans" formControlName="subTitle"
-              class="resize-y" rows="3"></textarea>
+            <mat-label>{{"campaignManagement.title" | trans}}</mat-label>
+            <input matInput [placeholder]="'campaignManagement.title' | trans" formControlName="title" type="text" />
             <mat-error>
-              <app-validation-error [control]="form?.controls?.subTitle">
+              <app-validation-error [control]="form?.controls?.title">
               </app-validation-error>
             </mat-error>
           </mat-form-field>
-        </div>
-        <div>
-          <mat-form-field class="full-width mb-1" appearance="outline">
-            <mat-label>{{"campaignManagement.location" | trans}}</mat-label>
-            <input matInput [placeholder]="'campaignManagement.location' | trans" formControlName="location"
-              type="text" />
-            <mat-error>
-              <app-validation-error [control]="form?.controls?.location">
-              </app-validation-error>
-            </mat-error>
-          </mat-form-field>
-        </div>
-        <div class="space-x-2 flex">
-          <mat-form-field class="flex-initial haft-width" appearance="outline">
-            <mat-label>{{
-              "campaignManagement.mainCategory" | trans
-              }}</mat-label>
-            <mat-select required formControlName="mainCategory"
-              (selectionChange)="handleChangeMainCategory($event.value)">
-              <mat-option *ngFor="let category of mainCategories$ | async" [value]="category">
-                {{ category?.name }}
-              </mat-option>
-            </mat-select>
-            <mat-error>
-              <app-validation-error [control]="form?.controls?.mainCategory"></app-validation-error>
-            </mat-error>
-          </mat-form-field>
-          <mat-form-field class="flex-initial haft-width" appearance="outline">
-            <mat-label>{{
-              "campaignManagement.subCategory" | trans
-              }}</mat-label>
-            <mat-select formControlName="categoryId">
-              <mat-option *ngFor="let category of form?.value?.mainCategory?.subCategories" [value]="category?._id">
-                {{ category?.name }}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
-        </div>
+          <div>
+            <mat-form-field class="full-width mb-1" appearance="outline">
+              <mat-label>{{"campaignManagement.subTitle" | trans}}</mat-label>
+              <textarea matInput [placeholder]="'campaignManagement.subTitle' | trans" formControlName="subTitle"
+                class="resize-y" rows="3"></textarea>
+              <mat-error>
+                <app-validation-error [control]="form?.controls?.subTitle">
+                </app-validation-error>
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div>
+            <mat-form-field class="full-width mb-1" appearance="outline">
+              <mat-label>{{"campaignManagement.location" | trans}}</mat-label>
+              <input matInput [placeholder]="'campaignManagement.location' | trans" formControlName="location"
+                type="text" />
+              <mat-error>
+                <app-validation-error [control]="form?.controls?.location">
+                </app-validation-error>
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="space-x-2 flex">
+            <mat-form-field class="flex-initial haft-width" appearance="outline">
+              <mat-label>{{
+                "campaignManagement.mainCategory" | trans
+                }}</mat-label>
+              <mat-select required formControlName="mainCategory"
+                (selectionChange)="handleChangeMainCategory($event.value)">
+                <mat-option *ngFor="let category of mainCategories$ | async" [value]="category">
+                  {{ category?.name }}
+                </mat-option>
+              </mat-select>
+              <mat-error>
+                <app-validation-error [control]="form?.controls?.mainCategory"></app-validation-error>
+              </mat-error>
+            </mat-form-field>
+            <mat-form-field class="flex-initial haft-width" appearance="outline">
+              <mat-label>{{
+                "campaignManagement.subCategory" | trans
+                }}</mat-label>
+              <mat-select formControlName="categoryId">
+                <mat-option *ngFor="let category of form?.value?.mainCategory?.subCategories" [value]="category?._id">
+                  {{ category?.name }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
 
-        <div class="flex space-x-2">
-          <mat-form-field appearance="outline" class="haft-width">
-            <mat-label>{{
-              "campaignManagement.fundingGoal" | trans
-              }}</mat-label>
-            <input matInput required maxlength="9" formControlName="fundingGoal" (keypress)="numberOnly($event)"
-              CopyPasteBlock autocomplete="off" />
-            <span matSuffix>VND</span>
-            <mat-error>
-              <app-validation-error [control]="form?.controls?.fundingGoal"></app-validation-error>
-            </mat-error>
-          </mat-form-field>
+          <div class="flex space-x-2">
+            <mat-form-field appearance="outline" class="haft-width">
+              <mat-label>{{
+                "campaignManagement.fundingGoal" | trans
+                }}</mat-label>
+              <input matInput required maxlength="9" formControlName="fundingGoal" (keypress)="numberOnly($event)"
+                CopyPasteBlock autocomplete="off" />
+              <span matSuffix>$</span>
+              <mat-error>
+                <app-validation-error [control]="form?.controls?.fundingGoal"></app-validation-error>
+              </mat-error>
+            </mat-form-field>
 
-          <div class="flex flex-col align-items-start mb-2 mt-1 haft-width">
-            <p class="font-normal">{{
-              "campaignManagement.campaignImage" | trans
-              }}</p>
-            <div *ngIf="!isEdit">
-              <input type="file" id="fileInput" name="fileInput" accept="image/*" (change)="selectFile($event)" />
-            </div>
-            <div *ngIf="isEdit" class="flex items-center">
-              <input type="file" accept="image/*" name="editFileInput" class="hidden" #file
-                (change)="upload(file.files)">
-              <button mat-button (click)="file.click()" color="primary">Upload Image</button>
-              <p (click)="showImage(form?.value?.image)"
-                class="cursor-pointer underline text-blue-500 hover:text-blue-700 ml-2">Show image</p>
+            <div class="flex flex-col align-items-start mb-2 mt-1 haft-width">
+              <p class="font-normal">{{
+                "campaignManagement.campaignImage" | trans
+                }}</p>
+              <div *ngIf="!isEdit">
+                <input type="file" id="fileInput" name="fileInput" accept="image/*" (change)="selectFile($event)" />
+              </div>
+              <div *ngIf="isEdit" class="flex items-center">
+                <input type="file" accept="image/*" name="editFileInput" class="hidden" #file
+                  (change)="upload(file.files)">
+                <button mat-button (click)="file.click()" color="primary">Upload Image</button>
+                <p (click)="showImage(form?.value?.image)" [matTooltip]="'Click to view campaign image'"
+                  matTooltipPosition="above" class="cursor-pointer underline text-blue-500 hover:text-blue-700 ml-2">
+                  Show
+                  image</p>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="flex space-x-2">
-          <mat-form-field appearance="outline" class="haft-width">
-            <mat-label>{{'campaignManagement.duration' | trans}}</mat-label>
-            <input matInput [matDatepicker]="picker" [placeholder]="'campaignManagement.duration' | trans"
-              formControlName="duration">
-            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-            <mat-datepicker #picker></mat-datepicker>
-          </mat-form-field>
-          <mat-form-field appearance="outline" class="haft-width">
-            <mat-label>{{'campaignManagement.targetLaunchDate' | trans}}</mat-label>
-            <input matInput [matDatepicker]="picker2" [placeholder]="'campaignManagement.targetLaunchDate' | trans"
-              formControlName="targetLaunchDate">
-            <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
-            <mat-datepicker #picker2></mat-datepicker>
-          </mat-form-field>
-        </div>
-        <div class="full-width quill-container" appearance="outline">
-          <quill-editor formControlName="story" [modules]="quillConfig"
-            [placeholder]="'campaignManagement.story' | trans" classes="basic-text-editor" class="ql-wrapper"
-            [styles]="quillStyles"></quill-editor>
-        </div>
+          <div class="flex space-x-2">
+            <mat-form-field appearance="outline" class="haft-width">
+              <mat-label>{{'campaignManagement.duration' | trans}}</mat-label>
+              <input matInput [matDatepicker]="picker" [placeholder]="'campaignManagement.duration' | trans"
+                formControlName="duration">
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="haft-width">
+              <mat-label>{{'campaignManagement.targetLaunchDate' | trans}}</mat-label>
+              <input matInput [matDatepicker]="picker2" [placeholder]="'campaignManagement.targetLaunchDate' | trans"
+                formControlName="targetLaunchDate">
+              <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+              <mat-datepicker #picker2></mat-datepicker>
+            </mat-form-field>
+          </div>
+          <div class="full-width quill-container" appearance="outline">
+            <quill-editor formControlName="story" [modules]="quillConfig"
+              [placeholder]="'campaignManagement.story' | trans" classes="basic-text-editor" class="ql-wrapper"
+              [styles]="quillStyles"></quill-editor>
+          </div>
+          <div class="full-width quill-container risk-container mt-3 mb-3" appearance="outline">
+            <quill-editor formControlName="risk" [modules]="quillConfig"
+              [placeholder]="'campaignManagement.risks' | trans" classes="basic-text-editor" class="ql-wrapper"
+              [styles]="quillStyles"></quill-editor>
+          </div>
+          <div>
+            <button class="w-1/3" color="primary" mat-raised-button type="submit" [disabled]="form?.invalid">
+              {{"button.submit" | trans}}
+            </button>
+          </div>
+        </form>
+      </div>
 
-        <div class="full-width quill-container risk-container mt-3 mb-3" appearance="outline">
-          <quill-editor formControlName="risk" [modules]="quillConfig"
-            [placeholder]="'campaignManagement.risks' | trans" classes="basic-text-editor" class="ql-wrapper"
-            [styles]="quillStyles"></quill-editor>
-        </div>
-
-        <div>
-          <button class="w-1/3" color="primary" mat-raised-button type="submit" [disabled]="form?.invalid">
-            {{"button.submit" | trans}}
+      <div class="ml-4 column col-5">
+        <div class="flex justify-end mb-6">
+          <button color="warn" mat-raised-button (click)="handleAddReward()">
+            {{"button.newReward" | trans}}
           </button>
         </div>
-      </form>
+
+        <div class="reward-list flex flex-col">
+          <app-reward-card *ngFor="let reward of rewards$ | async; let i = index" [reward]="reward" class="reward-item"
+            [isCanEdit]="true" (handleRemove)="onRemove($event, i)" (handleEdit)="onEdit($event, i)"></app-reward-card>
+        </div>
+      </div>
     </div>
+
   </div>
 </div>
