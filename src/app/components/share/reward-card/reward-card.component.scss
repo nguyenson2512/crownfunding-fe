@@ -7,6 +7,16 @@
   box-shadow: 7px 7px 5px 0px rgba(204, 204, 204, 0.75);
   -webkit-box-shadow: 7px 7px 5px 0px rgba(204, 204, 204, 0.75);
   -moz-box-shadow: 7px 7px 5px 0px rgba(204, 204, 204, 0.75);
+
+  &:hover {
+    cursor: pointer;
+
+    .reward-header {
+      color: #515989;
+      text-decoration: underline
+    }
+  }
+
   ul {
     list-style-type: circle;
     margin-left: 25px
@@ -35,7 +45,7 @@
     display: -webkit-box !important;
     -webkit-box-orient: vertical !important;
   }
-  .card-header {
+  .reward-header {
     padding-bottom: 5px;
     font-size: 1.4rem
   }

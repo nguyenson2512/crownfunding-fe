@@ -18,7 +18,9 @@ export class RewardCardComponent extends BaseComponent implements OnInit {
     super(componentService);
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    console.log(this.reward);
+  }
 
   showQuantityItem(item: { name: string; quantity: string }) {
     return +item.quantity !== 1;
@@ -26,6 +28,10 @@ export class RewardCardComponent extends BaseComponent implements OnInit {
 
   get isNotDefaultReward() {
     return this.reward?.title !== 'Pledge without a reward';
+  }
+
+  get itemsOffering() {
+    return JSON.parse(JSON.stringify(this.reward.itemsOffering));
   }
 
   onEdit() {

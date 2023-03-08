@@ -1,0 +1,32 @@
+<app-dialog [dialogTitle]="
+    (data?.isEdit
+      ? 'campaignManagement.editDocument'
+      : 'campaignManagement.addDocument'
+    ) | trans" [displayButton]="false">
+  <div dialog-body>
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+      <mat-form-field class="full-width" appearance="outline">
+        <mat-label>{{ "campaignManagement.description" | trans}}</mat-label>
+        <input matInput formControlName="description" type="text" required>
+        <mat-error>
+          <app-validation-error [control]="form.controls.description"></app-validation-error>
+        </mat-error>
+      </mat-form-field>
+      <div class="flex flex-col align-items-start mb-2">
+        <p class="font-normal">Upload document of campaign</p>
+        <div>
+          <input type="file" id="fileInput" name="fileInput" (change)="selectFile($event)" />
+        </div>
+      </div>
+      <div class="space-x-2 flex justify-center mt-4">
+        <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid && !url">
+          {{ (data?.isEdit ? "button.save" : "button.add") | trans }}
+        </button>
+        <button mat-stroked-button color="primary" type="button" (click)="handleClose()">
+          {{ "button.cancel" | trans }}
+        </button>
+      </div>
+    </form>
+  </div>
+</app-dialog>

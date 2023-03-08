@@ -35,7 +35,7 @@
         <p class="text-base">days to go</p>
       </div>
       <div class="mb-4 flex items-center">
-        <img [src]="campaignInfo?.createdBy?.avatar" alt="" class="avatar rounded-full mr-4">
+        <app-avatar [user]="campaignInfo?.createdBy" [isSmSize]="false"></app-avatar>
         <div>
           <div class="text-slate-900 font-semibold">{{campaignInfo?.createdBy?.name}}</div>
           <div class="mt-0.5 text-sm leading-6">{{campaignInfo?.createdBy?.email}}</div>

@@ -41,10 +41,9 @@ export class AuthComponent extends BaseComponent implements OnInit {
       return;
     }
 
-    this.subscribeOnce(
-      this.authService.signIn(this.loginForm?.value),
-      () => {}
-    );
+    this.subscribeOnce(this.authService.signIn(this.loginForm?.value), () => {
+      this.redirect(['/']);
+    });
   }
 
   navigateSignup() {

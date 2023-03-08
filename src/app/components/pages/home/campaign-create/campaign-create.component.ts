@@ -37,6 +37,7 @@ export class CampaignCreateComponent extends BaseComponent implements OnInit {
       selectedFiles,
       selectedFileName,
       rewards,
+      documents,
     } = data;
     const formData = new FormData();
     formData.append('title', title);
@@ -58,6 +59,7 @@ export class CampaignCreateComponent extends BaseComponent implements OnInit {
     );
     formData.append('rewards', JSON.stringify([]));
     formData.append('image', selectedFiles[0], selectedFileName);
+    formData.append('documents', documents);
     this.subscribeOnce(this.campaignService.create(formData), (res) => {
       if (res) {
         this.updateCreatorRole();

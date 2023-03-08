@@ -12,6 +12,12 @@ export interface IReward {
   estimatedDelivery: string;
 }
 
+export interface IDocument {
+  name: string;
+  description: string;
+  url: string;
+}
+
 //TODO: LINK MODEL
 export class Campaign extends Model {
   title: string;
@@ -30,6 +36,7 @@ export class Campaign extends Model {
   rewards: IReward[] | any;
   status: CampaignStatus;
   category: any;
+  documents?: IDocument[] | any[];
   constructor(data) {
     super();
     this.fill(data);

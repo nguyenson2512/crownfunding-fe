@@ -1,6 +1,6 @@
 import { BaseComponent } from '#components/core/base/base.component';
 import { initQuillConfig } from '#config/quill.config';
-import { IReward } from '#models/campaign.model';
+import { IDocument, IReward } from '#models/campaign.model';
 import { Category } from '#models/category.model';
 import { CampaignDetailService } from '#services/campaign-detail.service';
 import { ComponentService } from '#services/component.service';
@@ -13,6 +13,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { BehaviorSubject, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { notEmpty } from 'src/app/validators/not-empty.validator';
+import { DocumentFormComponent } from '../document-form/document-form.component';
 import { ImageViewComponent } from '../image-view/image-view.component';
 import { RewardFormComponent } from '../reward-form/reward-form.component';
 
@@ -29,6 +30,9 @@ export class CampaignFormComponent extends BaseComponent implements OnInit {
   selectedMainCategory: string;
   defaultReward = DEFAULT_REWARD;
   rewards$: BehaviorSubject<IReward[]> = new BehaviorSubject<IReward[]>([]);
+  documents$: BehaviorSubject<IDocument[]> = new BehaviorSubject<IDocument[]>(
+    []
+  );
 
   form = this.fb.group({
     title: ['', [Validators.required, notEmpty]],
@@ -121,6 +125,7 @@ export class CampaignFormComponent extends BaseComponent implements OnInit {
       id: this.campaignId,
       categoryId: this.form.value.categoryId || this.selectedMainCategory,
       rewards,
+      documents: this.documents$.getValue(),
     });
   }
 
@@ -179,6 +184,7 @@ export class CampaignFormComponent extends BaseComponent implements OnInit {
           itemsSet;
           this.campaignDetailService.setItemsOffering(itemsSet);
           this.rewards$.next(formatRewards);
+          this.documents$.next(data?.documents);
         }
       }
     );
@@ -267,6 +273,58 @@ export class CampaignFormComponent extends BaseComponent implements OnInit {
       });
   }
 
+  handleAddDocument() {
+    this.componentService.dialog
+      .showDialog(DocumentFormComponent, {
+        data: { isEdit: false },
+        maxHeight: '600px',
+        width: '600px',
+        autoFocus: false,
+        disableClose: true,
+      })
+      .afterClosed()
+      .subscribe((res) => {
+        if (!res) return;
+        const newDocument: IDocument = {
+          ...res,
+        };
+        this.documents$.next([...this.documents$.getValue(), newDocument]);
+      });
+  }
+
+  handleEditDocument(document, index) {
+    this.componentService.dialog
+      .showDialog(DocumentFormComponent, {
+        data: { isEdit: true, document },
+        maxHeight: '600px',
+        width: '600px',
+        autoFocus: false,
+        disableClose: true,
+      })
+      .afterClosed()
+      .subscribe((res) => {
+        if (!res) return;
+        console.log({ res });
+        const newDocument: IDocument = {
+          ...res,
+        };
+        const documents = this.documents$.getValue();
+
+        const updatedDocuments = [
+          ...documents.slice(0, index),
+          newDocument,
+          ...documents.slice(index + 1),
+        ];
+        this.documents$.next(updatedDocuments);
+      });
+  }
+
+  handleDeleteDocument(index) {
+    const documents = this.documents$.getValue();
+    documents.splice(index, 1);
+    this.documents$.next(documents);
+  }
+
   handleAddReward() {
     this.componentService.dialog
       .showDialog(RewardFormComponent, {
@@ -291,6 +349,8 @@ export class CampaignFormComponent extends BaseComponent implements OnInit {
   }
 
   private updateItems(itemsOffering) {
+    console.log({ itemsOffering });
+    console.log(this.campaignDetailService.itemsOfferingValue);
     const itemNames = itemsOffering.map((item) => item?.name);
     const updatedItems = new Set([
       ...itemNames,

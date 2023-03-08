@@ -1,0 +1,29 @@
+<app-dialog [dialogTitle]=" 'campaignManagement.reward' | trans" [displayButton]="false">
+  <div dialog-body>
+    <form [formGroup]="form">
+      <div class="flex justify-between items-center">
+        <mat-form-field class="amount-field" appearance="outline">
+          <mat-label>{{ "campaignManagement.amount" | trans}}</mat-label>
+          <input #amountInput matInput required maxlength="9" formControlName="amount" (keypress)="numberOnly($event)"
+            CopyPasteBlock autocomplete="off" />
+          <span matSuffix>$</span>
+          <mat-error>
+            <app-validation-error [control]="form.controls.amount"></app-validation-error>
+          </mat-error>
+        </mat-form-field>
+        <button class="submit-btn" [disabled]="form.invalid" mat-button color="warn" (click)="handleSubmitAmount()">{{
+          "button.submit" | trans
+          }}</button>
+      </div>
+      <div class="flex flex-col justify-center mt-4">
+        <div *ngIf="isSubmit && payPalConfig">
+          <app-paypal-payment [config]="payPalConfig"></app-paypal-payment>
+        </div>
+
+        <button mat-stroked-button color="primary" type="button" (click)="handleClose()">
+          {{ "button.cancel" | trans }}
+        </button>
+      </div>
+    </form>
+  </div>
+</app-dialog>

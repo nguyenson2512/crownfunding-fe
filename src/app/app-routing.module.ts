@@ -27,6 +27,13 @@ const routes: Routes = [
             (m) => m.WishlistModule
           ),
       },
+      {
+        path: 'chats',
+        loadChildren: () =>
+          import('#components/pages/home/chats/chats.module').then(
+            (m) => m.ChatsModule
+          ),
+      },
     ],
   },
   {

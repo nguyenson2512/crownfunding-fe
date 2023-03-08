@@ -43,12 +43,16 @@
     "rewards": "Rewards",
     "editReward": "Edit Reward",
     "addReward": "Add Reward",
+    "editDocument": "Edit Document",
+    "documents": "Documents",
+    "addDocument": "Add Document",
     "description": "Description",
     "amount": "Amount",
     "itemOffering": "Item Offering",
     "itemsOffering": "Items Offering",
     "quantity": "Quantity",
-    "estimateDelivery": "Estimate Delivery"
+    "estimateDelivery": "Estimate Delivery",
+    "reward": "Reward"
   },
   "userManagement": {
     "searchPlaceholder": "Search with username",
@@ -85,6 +89,7 @@
     "update": "Update",
     "back": "Back",
     "add": "Add",
+    "addDocument": "Add Document",
     "saveCampaign": "Save this campaign",
     "backCampaign": "Back this campaign",
     "addExpression": "Add Expression",

@@ -2,7 +2,7 @@
   <div class="w-8/12">
     <div class="pl-6">
       <div class="flex items-center">
-        <img class="avatar-sm" [src]="replyItem?.createdBy?.avatar" alt="">
+        <app-avatar [user]="replyItem?.createdBy" [isSmSize]="true"></app-avatar>
         <p><span class="font-medium pr-4 py-1">{{replyItem?.createdBy?.name}}</span></p>
       </div>
       <p class="pl-3 mt-3 whitespace-pre-line">{{replyItem?.content}}</p>

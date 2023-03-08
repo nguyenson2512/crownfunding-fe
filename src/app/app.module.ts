@@ -30,6 +30,7 @@ import { ClientHeaderComponent } from '#components/layout/client-layout/header/h
 import { FragmentComponent } from '#components/core/fragment/fragment.component';
 import { QuillModule } from 'ngx-quill';
 import { MatBadgeModule } from '@angular/material/badge';
+import { NgxPayPalModule } from 'ngx-paypal';
 
 @NgModule({
   declarations: [
@@ -61,6 +62,7 @@ import { MatBadgeModule } from '@angular/material/badge';
     HttpClientModule,
     NgxDatatableModule,
     MatBadgeModule,
+    NgxPayPalModule,
     QuillModule.forRoot(),
   ],
   providers: [],

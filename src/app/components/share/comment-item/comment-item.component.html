@@ -3,7 +3,8 @@
     <div>
       <div class="flex items-center justify-between">
         <div class="flex items-center">
-          <img class="avatar-sm" [src]="commentItem?.createdBy?.avatar" alt="">
+          <app-avatar [user]="commentItem?.createdBy" [isSmSize]="true"></app-avatar>
+
           <p><span class="font-medium pr-4 py-1">{{commentItem?.createdBy?.name}}</span></p>
         </div>
         <div *ngIf="authService.isAdminRole(); else creator">

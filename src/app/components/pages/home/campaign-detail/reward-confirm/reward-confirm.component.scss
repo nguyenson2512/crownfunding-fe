@@ -1,0 +1,14 @@
+.disable {
+  pointer-events: none !important;
+  opacity: 0.5;
+  cursor: default;
+}
+
+.amount-field {
+  width: 80%;
+}
+
+.submit-btn {
+  margin-top: -20px;
+  margin-left: 20px;
+}

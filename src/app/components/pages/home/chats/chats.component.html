@@ -1,0 +1,87 @@
+<div class="content" role="main">
+  <div class="container">
+    <div class="messaging">
+      <div class="inbox_msg">
+        <div class="inbox_people">
+          <div class="headind_srch">
+            <div class="channel_heading">
+              <input matInput type="text" [formControl]="searchCtrl" class="search_user" placeholder="Search user"
+                #autoCompleteInput matAutocompletePosition="below" [matAutocomplete]="auto" name="search" />
+              <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+                <mat-option *ngFor="let user of filteredUsers | async" [value]="user" (click)="handleChooseUser(user)">
+                  {{user?.name}}
+                </mat-option>
+              </mat-autocomplete>
+
+            </div>
+          </div>
+          <div class="inbox_chat">
+            <div class="channels clickable" *ngFor="let chatRoom of chatService.chatRooms$ | async"
+              (click)="selectChatroom(chatRoom)"
+              [ngClass]="chatService.selectedChatRoomValue?._id === chatRoom?._id ? 'selected-chat-room': ''">
+              <div class="chat_list">
+                <div class="chat_people">
+                  <div class="chat_ib">
+                    <div class="flex">
+                      <img [src]="getReceiver(chatRoom?.users)?.avatar" alt="" class="avatar rounded-full mr-4">
+                      <div class="mt-2">
+                        <h5>
+                          {{ getReceiver(chatRoom?.users)?.name }}
+                        </h5>
+                        <p>
+                          {{chatRoom?.lastMessage?.content || 'Start conversation with ' +
+                          getReceiver(chatRoom?.users)?.name}}
+                        </p>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="mesgs">
+          <div class="msg_history">
+            <li class="message" *ngFor="let chat of chats$ | async">
+              <div *ngIf="
+                  chat.user._id !== currentUser?._id;
+                  then incoming_msg;
+                  else outgoing_msg
+                "></div>
+              <ng-template #incoming_msg>
+                <div class="incoming_msg">
+                  <div class="incoming_msg_img">
+                    <img [src]="chat?.user?.avatar" alt="User avatar" class="avatar-sm rounded-full mr-1" />
+                  </div>
+                  <div class="received_msg">
+                    <div class="received_withd_msg">
+                      <p>{{ chat?.content }}</p>
+                    </div>
+                  </div>
+                </div>
+              </ng-template>
+              <ng-template #outgoing_msg>
+                <div class="outgoing_msg">
+                  <div class="sent_msg">
+                    <p>{{ chat.content }}</p>
+                  </div>
+                </div>
+              </ng-template>
+            </li>
+          </div>
+          <div class="type_msg">
+            <form class="input_msg_write">
+              <input autocomplete="off" [(ngModel)]="newMessage" matInput type="text" class="write_msg"
+                placeholder="Type a message" name="newMessage" />
+
+              <button class="msg_send_btn" color="primary" mat-icon-button
+                (click)="handleSendChat()"><mat-icon><mat-icon>send</mat-icon></mat-icon></button>
+
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

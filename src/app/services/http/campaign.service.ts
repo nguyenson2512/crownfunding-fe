@@ -70,6 +70,16 @@ export class CampaignService {
       .pipe(pluck('result', 'data'));
   }
 
+  uploadDocument(body: any) {
+    return this.dataClientService
+      .post(`/upload`, body, {
+        headers: {
+          'Content-Type': undefined,
+        },
+      })
+      .pipe(pluck('result', 'data'));
+  }
+
   createComment(
     campaignId: string,
     content: string,

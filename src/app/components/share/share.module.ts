@@ -35,12 +35,16 @@ import { ReplyItemComponent } from './reply-item/reply-item.component';
 import { CommentFormComponent } from './comment-form/comment-form.component';
 import { CopyPasteBlockDirective } from 'src/app/directives/copy-paste-block.directive';
 import { QuillModule } from 'ngx-quill';
+import { NgxPayPalModule } from 'ngx-paypal';
 import { EscapeHtmlPipe } from '#pipes/keep-html.pipe';
 import { CampaignFormComponent } from './campaign-form/campaign-form.component';
 import { TruncateTextPipe } from '#pipes/truncate-text.pipe';
 import { ImageViewComponent } from './image-view/image-view.component';
 import { RewardCardComponent } from './reward-card/reward-card.component';
 import { RewardFormComponent } from './reward-form/reward-form.component';
+import { PaypalPaymentComponent } from './paypal-payment/paypal-payment.component';
+import { AvatarComponent } from './avatar/avatar.component';
+import { DocumentFormComponent } from './document-form/document-form.component';
 
 const MATERIAL_MODULES = [
   MatButtonModule,
@@ -71,6 +75,7 @@ const SHARE_MODULES = [
   RouterModule,
   NgxDatatableModule,
   QuillModule,
+  NgxPayPalModule,
   ...MATERIAL_MODULES,
 ];
 
@@ -93,6 +98,9 @@ const COMPONENTS = [
   RewardCardComponent,
   ImageViewComponent,
   RewardFormComponent,
+  PaypalPaymentComponent,
+  AvatarComponent,
+  DocumentFormComponent,
 ];
 
 @NgModule({

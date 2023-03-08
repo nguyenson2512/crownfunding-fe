@@ -1,0 +1,3 @@
+<img [src]="user?.avatar" alt="" class="avatar rounded-full mr-4 clickable"
+  [ngClass]="isSmSize ? 'avatar-sm' : 'avatar'" matTooltipPosition="above" [matTooltip]="'Chat'"
+  (click)="navigateChat()">
