@@ -1,0 +1,70 @@
+<app-dialog [dialogTitle]="'Verify Account'" [displayButton]="false" [actionAlign]="'end'">
+  <div dialog-body class="full-width">
+    <form [formGroup]="form">
+      <div class="flex flex-col">
+        <div *ngIf="!data?.user?.isVerifyEmail">
+          <mat-chip-list>
+            <mat-chip color="primary">
+              Email
+            </mat-chip>
+          </mat-chip-list>
+        </div>
+        <div *ngIf="!data?.user?.isVerifyEmail" class="flex full-width justify-between items-center">
+          <p class="mr-4">{{data?.user?.email}}</p>
+          <button mat-stroked-button color="primary" (click)="sendEmailOtp()">
+            {{showEmailOtpInput ? "Resend verification code" :"Send verification code"}}
+          </button>
+        </div>
+        <div *ngIf="showEmailOtpInput && !data?.user?.isVerifyEmail">
+          <mat-form-field appearance="outline">
+            <mat-label>Enter Code</mat-label>
+            <input matInput formControlName="emailOtp" autocomplete="off" type="text" placeholder="Enter Code" />
+          </mat-form-field>
+          <div>
+            <button mat-raised-button color="primary" (click)="verifyEmail()">Submit Code</button>
+          </div>
+        </div>
+        <hr class="my-4" />
+        <div class="mb-1" *ngIf="!data?.user?.phone">
+          <mat-chip-list>
+            <mat-chip color="primary">
+              Phone
+            </mat-chip>
+          </mat-chip-list>
+        </div>
+        <div class="phone-container flex items-center full-width justify-between" *ngIf="!data?.user?.phone">
+          <mat-form-field appearance="outline">
+            <mat-label>Phone number</mat-label>
+            <input formControlName="phone" placeholder="Enter your phone number" matInput required maxlength="13"
+              (keypress)="numberOnly($event)" CopyPasteBlock autocomplete="off" />
+          </mat-form-field>
+          <div class="mb-4">
+            <button mat-stroked-button color="primary" (click)="sendPhoneOtp()">
+              {{showPhoneOtpInput ? "Resend verification code" :"Send verification code"}}
+            </button>
+          </div>
+
+        </div>
+        <div *ngIf="showPhoneOtpInput && !data?.user?.phone">
+          <mat-form-field appearance="outline">
+            <mat-label>Enter Code</mat-label>
+            <input matInput formControlName="phoneOtp" autocomplete="off" type="text" placeholder="Enter Code" />
+          </mat-form-field>
+          <div>
+            <button mat-raised-button color="primary" (click)="verifyPhone()">Submit Code</button>
+
+          </div>
+        </div>
+      </div>
+      <div class="space-x-2 flex justify-center mt-4">
+        <!-- <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">
+                {{ (data?.isEdit ? "button.save" : "button.add") | trans }}
+              </button> -->
+        <button mat-stroked-button color="primary" type="button" (click)="handleClose()">
+          {{ "button.cancel" | trans }}
+        </button>
+      </div>
+    </form>
+
+  </div>
+</app-dialog>

@@ -18,6 +18,13 @@ export interface IDocument {
   url: string;
 }
 
+export interface IMilestone {
+  title: string;
+  description: string;
+  amount: number;
+  estimateDeadline?: any;
+}
+
 //TODO: LINK MODEL
 export class Campaign extends Model {
   title: string;
@@ -37,6 +44,7 @@ export class Campaign extends Model {
   status: CampaignStatus;
   category: any;
   documents?: IDocument[] | any[];
+  milestones?: IMilestone[];
   constructor(data) {
     super();
     this.fill(data);

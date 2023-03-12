@@ -70,7 +70,7 @@
                 "campaignManagement.fundingGoal" | trans
                 }}</mat-label>
               <input matInput required maxlength="9" formControlName="fundingGoal" (keypress)="numberOnly($event)"
-                CopyPasteBlock autocomplete="off" />
+                CopyPasteBlock autocomplete="off" (input)="onChangeFundingGoal()" />
               <span matSuffix>$</span>
               <mat-error>
                 <app-validation-error [control]="form?.controls?.fundingGoal"></app-validation-error>
@@ -153,6 +153,34 @@
                 <mat-divider></mat-divider>
               </ng-container>
             </mat-list>
+          </div>
+          <div class="flex flex-col mb-2">
+            <div class="flex">
+              <button color="warn" mat-raised-button (click)="handleAddMilestone()" class="mb-2">
+                {{"button.addMilestone" | trans}}
+              </button>
+            </div>
+            <mat-vertical-stepper [linear]="true" #stepper>
+              <ng-template matStepperIcon="edit" let-index="index">
+                {{index + 1}}
+              </ng-template>
+              <mat-step *ngFor="let milestone of milestones$ | async; let i = index" [completed]="true">
+                <ng-template matStepLabel>
+                  <p (click)="handleEditMilestone(milestone, i)">{{milestone?.title}}</p>
+                </ng-template>
+                <div class="flex flex-col">
+                  <span class="milestone-label">Amount: <h5 class="milestone-value">{{milestone?.amount}}$</h5>
+                  </span>
+                  <div class="milestone-label">Description: <h5 class="milestone-value">{{milestone?.description}}</h5>
+                  </div>
+                  <div class="milestone-label">Estimate Deadline: <h5 class="milestone-value">
+                      {{milestone?.estimateDeadline | date:
+                      'mediumDate'}}</h5>
+                  </div>
+
+                </div>
+              </mat-step>
+            </mat-vertical-stepper>
           </div>
           <div>
             <button class="w-1/3" color="primary" mat-raised-button (click)="submit()" [disabled]="form?.invalid">

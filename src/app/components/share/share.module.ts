@@ -13,6 +13,8 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatStepperModule } from '@angular/material/stepper';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
@@ -45,6 +47,9 @@ import { RewardFormComponent } from './reward-form/reward-form.component';
 import { PaypalPaymentComponent } from './paypal-payment/paypal-payment.component';
 import { AvatarComponent } from './avatar/avatar.component';
 import { DocumentFormComponent } from './document-form/document-form.component';
+import { MilestoneFormComponent } from './milestone-form/milestone-form.component';
+import { VerifyAccountDialogComponent } from './verify-account-dialog/verify-account-dialog.component';
+import { LoaderComponent } from './loader/loader.component';
 
 const MATERIAL_MODULES = [
   MatButtonModule,
@@ -66,6 +71,8 @@ const MATERIAL_MODULES = [
   MatNativeDateModule,
   MatBadgeModule,
   MatAutocompleteModule,
+  MatStepperModule,
+  MatProgressSpinnerModule,
 ];
 
 const SHARE_MODULES = [
@@ -81,6 +88,7 @@ const SHARE_MODULES = [
 
 const COMPONENTS = [
   ConfirmDialogComponent,
+  VerifyAccountDialogComponent,
   WarningDialogComponent,
   ValidationErrorComponent,
   DialogComponent,
@@ -101,6 +109,8 @@ const COMPONENTS = [
   PaypalPaymentComponent,
   AvatarComponent,
   DocumentFormComponent,
+  MilestoneFormComponent,
+  LoaderComponent,
 ];
 
 @NgModule({

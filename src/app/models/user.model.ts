@@ -11,6 +11,8 @@ export class User extends Model {
   createdAt: Date;
   updatedAt: Date;
   roles: IRoleUser[];
+  phone?: string;
+  isVerifyEmail?: boolean;
   constructor(data) {
     super();
     this.fill(data);

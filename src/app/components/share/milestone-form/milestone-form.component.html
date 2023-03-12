@@ -1,0 +1,50 @@
+<app-dialog [dialogTitle]="
+    (data?.isEdit
+      ? 'campaignManagement.editMilestone'
+      : 'campaignManagement.addMilestone'
+    ) | trans" [displayButton]="false">
+  <div dialog-body>
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+      <mat-form-field class="full-width" appearance="outline">
+        <mat-label>{{ "campaignManagement.title" | trans}}</mat-label>
+        <input matInput formControlName="title" type="text" required>
+        <mat-error>
+          <app-validation-error [control]="form.controls.title"></app-validation-error>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="amount-field" appearance="outline">
+        <mat-label>{{ "campaignManagement.amount" | trans}}</mat-label>
+        <input #amountInput matInput required maxlength="9" formControlName="amount" (keypress)="numberOnly($event)"
+          CopyPasteBlock autocomplete="off" />
+        <span matSuffix>$</span>
+        <mat-error>
+          <app-validation-error [control]="form.controls.amount"></app-validation-error>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="full-width" appearance="outline">
+        <mat-label>{{ "campaignManagement.description" | trans}}</mat-label>
+        <input matInput formControlName="description" type="text" required>
+        <mat-error>
+          <app-validation-error [control]="form.controls.description"></app-validation-error>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="haft-width">
+        <mat-label>Estimate Deadline</mat-label>
+        <input matInput [matDatepicker]="picker" [placeholder]="'Estimate Deadline'" formControlName="estimateDeadline">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+
+      <div class="space-x-2 flex justify-center mt-4">
+        <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">
+          {{ (data?.isEdit ? "button.save" : "button.add") | trans }}
+        </button>
+        <button mat-stroked-button color="primary" type="button" (click)="handleClose()">
+          {{ "button.cancel" | trans }}
+        </button>
+      </div>
+    </form>
+  </div>
+</app-dialog>

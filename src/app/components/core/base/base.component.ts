@@ -76,9 +76,13 @@ export class BaseComponent implements OnInit {
 
   protected subscribeOnce<T>(
     observable$: Observable<T>,
-    callback: (data: T) => void
+    callback: (data: T) => void,
+    onComplete?: () => void
   ) {
-    return observable$.pipe(take(1)).subscribe((data) => callback(data));
+    return observable$.pipe(take(1)).subscribe({
+      next: (data) => callback(data),
+      complete: () => onComplete && onComplete(),
+    });
   }
 
   protected subscribeUntilDestroy<T>(

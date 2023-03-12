@@ -1,20 +1,22 @@
 import { BaseComponent } from '#components/core/base/base.component';
 import { initQuillConfig } from '#config/quill.config';
-import { IDocument, IReward } from '#models/campaign.model';
+import { IDocument, IMilestone, IReward } from '#models/campaign.model';
 import { Category } from '#models/category.model';
 import { CampaignDetailService } from '#services/campaign-detail.service';
 import { ComponentService } from '#services/component.service';
 import { CampaignService } from '#services/http/campaign.service';
 import { CategoryService } from '#services/http/category.service';
-import { DEFAULT_REWARD } from '#utils/const';
+import { DATE_CAMPAIGN_FORMAT, DEFAULT_REWARD } from '#utils/const';
 import { onlyNumberInput } from '#utils/helpers';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import * as moment from 'moment';
 import { BehaviorSubject, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { notEmpty } from 'src/app/validators/not-empty.validator';
 import { DocumentFormComponent } from '../document-form/document-form.component';
 import { ImageViewComponent } from '../image-view/image-view.component';
+import { MilestoneFormComponent } from '../milestone-form/milestone-form.component';
 import { RewardFormComponent } from '../reward-form/reward-form.component';
 
 @Component({
@@ -33,6 +35,9 @@ export class CampaignFormComponent extends BaseComponent implements OnInit {
   documents$: BehaviorSubject<IDocument[]> = new BehaviorSubject<IDocument[]>(
     []
   );
+  milestones$: BehaviorSubject<IMilestone[]> = new BehaviorSubject<
+    IMilestone[]
+  >([]);
 
   form = this.fb.group({
     title: ['', [Validators.required, notEmpty]],
@@ -40,13 +45,12 @@ export class CampaignFormComponent extends BaseComponent implements OnInit {
     mainCategory: ['', [Validators.required]],
     categoryId: [''],
     location: ['', [Validators.required, notEmpty]],
-    fundingGoal: ['', [Validators.required, notEmpty]],
+    fundingGoal: ['', [Validators.min(1), Validators.required, notEmpty]],
     currency: ['USD', [Validators.required, notEmpty]],
     targetLaunchDate: ['', [Validators.required]],
     story: ['', [Validators.required, notEmpty]],
     risk: ['', [Validators.required, notEmpty]],
     duration: ['', [Validators.required]],
-    // rewards: ['', [Validators.required, notEmpty]],
     image: [''],
   });
 
@@ -126,6 +130,7 @@ export class CampaignFormComponent extends BaseComponent implements OnInit {
       categoryId: this.form.value.categoryId || this.selectedMainCategory,
       rewards,
       documents: this.documents$.getValue(),
+      milestones: this.milestones$.getValue(),
     });
   }
 
@@ -185,6 +190,7 @@ export class CampaignFormComponent extends BaseComponent implements OnInit {
           this.campaignDetailService.setItemsOffering(itemsSet);
           this.rewards$.next(formatRewards);
           this.documents$.next(data?.documents);
+          this.milestones$.next(data?.milestones || []);
         }
       }
     );
@@ -292,6 +298,75 @@ export class CampaignFormComponent extends BaseComponent implements OnInit {
       });
   }
 
+  handleEditMilestone(milestone, index) {
+    const sum = this.milestones$
+      .getValue()
+      .reduce(
+        (accumulator, currentValue) => accumulator + currentValue?.amount,
+        0
+      );
+    this.componentService.dialog
+      .showDialog(MilestoneFormComponent, {
+        data: {
+          isEdit: true,
+          milestone,
+          maximumAmount: this.form.value.fundingGoal - sum,
+        },
+        maxHeight: '600px',
+        width: '600px',
+        autoFocus: false,
+        disableClose: true,
+      })
+      .afterClosed()
+      .subscribe((res) => {
+        if (!res) return;
+        const newMilestone: IMilestone = {
+          ...res,
+          estimateDeadline: moment(new Date(res?.estimateDeadline))?.format(
+            DATE_CAMPAIGN_FORMAT
+          ),
+        };
+        const milestones = this.milestones$.getValue();
+        const updatedMilestones = [
+          ...milestones.slice(0, index),
+          newMilestone,
+          ...milestones.slice(index + 1),
+        ];
+        this.milestones$.next(updatedMilestones);
+      });
+  }
+
+  handleAddMilestone() {
+    const sum = this.milestones$
+      .getValue()
+      .reduce(
+        (accumulator, currentValue) => accumulator + currentValue?.amount,
+        0
+      );
+    this.componentService.dialog
+      .showDialog(MilestoneFormComponent, {
+        data: {
+          isEdit: false,
+          maximumAmount: this.form.value.fundingGoal - sum,
+        },
+        maxHeight: '600px',
+        width: '600px',
+        autoFocus: false,
+        disableClose: true,
+      })
+      .afterClosed()
+      .subscribe((res) => {
+        if (!res) return;
+        const newMilestone: IMilestone = {
+          ...res,
+          estimateDeadline: moment(new Date(res?.estimateDeadline))?.format(
+            DATE_CAMPAIGN_FORMAT
+          ),
+        };
+        this.milestones$.next([...this.milestones$.getValue(), newMilestone]);
+      });
+  }
+
   handleEditDocument(document, index) {
     this.componentService.dialog
       .showDialog(DocumentFormComponent, {
@@ -357,5 +432,9 @@ export class CampaignFormComponent extends BaseComponent implements OnInit {
       ...this.campaignDetailService.itemsOfferingValue,
     ]);
     this.campaignDetailService.setItemsOffering(updatedItems);
+  }
+
+  onChangeFundingGoal() {
+    this.milestones$.next([]);
   }
 }

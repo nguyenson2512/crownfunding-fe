@@ -1,6 +1,8 @@
 import { BaseComponent } from '#components/core/base/base.component';
+import { VerifyAccountDialogComponent } from '#components/share/verify-account-dialog/verify-account-dialog.component';
 import { Campaign } from '#models/campaign.model';
 import { Category } from '#models/category.model';
+import { AuthService } from '#services/auth.service';
 import { ComponentService } from '#services/component.service';
 import { HomeService } from '#services/home.service';
 import { CampaignService } from '#services/http/campaign.service';
@@ -18,7 +20,8 @@ export class HomeComponent extends BaseComponent implements OnInit {
     private categoryService: CategoryService,
     componentService: ComponentService,
     private campaignService: CampaignService,
-    private homeService: HomeService
+    private homeService: HomeService,
+    private authService: AuthService
   ) {
     super(componentService);
   }
@@ -68,7 +71,33 @@ export class HomeComponent extends BaseComponent implements OnInit {
     });
   }
 
-  navigateCreateCampaign() {
+  async navigateCreateCampaign() {
+    const currentUser = this.authService.currentUser$.getValue();
+    if (!currentUser) {
+      this.service.message.showMessage('Login your account required');
+      this.redirect(['/login']);
+      return;
+    }
+    console.log(currentUser);
+    if (!currentUser?.phone || !currentUser?.isVerifyEmail) {
+      const isConfirm = await this.dialogService.confirm(
+        "You need to confirm your account before creating a campaign. Let's get started"
+      );
+      if (isConfirm) {
+        this.dialogService
+          .showDialog(VerifyAccountDialogComponent, {
+            data: { user: currentUser },
+            width: '600px',
+            autoFocus: false,
+            disableClose: true,
+          })
+          .afterClosed()
+          .subscribe((res) => {
+            if (!res) return;
+          });
+        return;
+      }
+    }
     this.redirect(['/campaigns/create']);
   }
 }

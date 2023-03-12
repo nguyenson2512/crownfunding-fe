@@ -6,3 +6,18 @@
 .reward-item {
   margin-bottom: 20px;
 }
+
+::ng-deep .mat-vertical-stepper-content {
+  visibility: visible !important;
+  height: 100% !important;
+}
+
+.milestone-label {
+  font-size: 1.1rem;
+  text-align: initial
+}
+
+.milestone-value {
+  font-size: 1.2rem;
+  display: inline;
+}

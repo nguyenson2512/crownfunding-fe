@@ -16,7 +16,8 @@ import { RewardConfirmComponent } from './reward-confirm/reward-confirm.componen
 })
 export class CampaignDetailComponent extends BaseComponent implements OnInit {
   campaignId: string;
-
+  selectedTab = 0;
+  tabsAmount = 3;
   campaignInfo$: BehaviorSubject<Campaign> = new BehaviorSubject<Campaign>(
     null
   );
@@ -64,5 +65,12 @@ export class CampaignDetailComponent extends BaseComponent implements OnInit {
         console.log(res);
         if (!res) return;
       });
+  }
+
+  backCampaign() {
+    this.selectedTab = 1;
+    setTimeout(() => {
+      window.scrollTo(0, document.body.scrollHeight);
+    }, 0);
   }
 }

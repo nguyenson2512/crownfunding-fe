@@ -52,7 +52,9 @@
     "itemsOffering": "Items Offering",
     "quantity": "Quantity",
     "estimateDelivery": "Estimate Delivery",
-    "reward": "Reward"
+    "reward": "Reward",
+    "editMilestone": "Edit Milestone",
+    "addMilestone": "Add Milestone"
   },
   "userManagement": {
     "searchPlaceholder": "Search with username",
@@ -86,6 +88,7 @@
     "delete": "Delete",
     "detail": "Detail",
     "login": "Login",
+    "addMilestone": "Add Milestone",
     "update": "Update",
     "back": "Back",
     "add": "Add",

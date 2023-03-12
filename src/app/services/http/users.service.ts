@@ -22,4 +22,28 @@ export class UserService {
       .get('/users', pagination)
       .pipe(pluck('result', 'data'), paginationMapper(User));
   }
+
+  sendOtpEmail(email: string) {
+    return this.dataClientService
+      .post('/send-otp-email', { email })
+      .pipe(pluck('result', 'data'));
+  }
+
+  sendOtpPhone(phoneNumber: string) {
+    return this.dataClientService
+      .post('/send-otp-phone', { phoneNumber })
+      .pipe(pluck('result', 'data'));
+  }
+
+  verifyOtpEmail(email: string, otp: string) {
+    return this.dataClientService
+      .post('/verify-otp-email', { email, otp })
+      .pipe(pluck('result', 'data'));
+  }
+
+  verifyOtpPhone(requestId: string, otp: string, phoneNumber) {
+    return this.dataClientService
+      .post('/verify-otp-phone', { requestId, otp, phoneNumber })
+      .pipe(pluck('result', 'data'));
+  }
 }
