@@ -16,11 +16,13 @@ import { AuthService } from '#services/auth.service';
 export class CommentItemComponent extends BaseComponent implements OnInit {
   @Input() commentItem: Comment;
   @Input() campaignId: string;
+  @Input() isPublic: boolean = false;
   textValue: string = '';
   mainCommentId: number;
   replyForm: FormGroup = this.fb.group({
     reply: ['', [Validators.maxLength(255)]],
   });
+
   constructor(
     private componentService: ComponentService,
     private campaignDetailService: CampaignDetailService,
@@ -50,7 +52,7 @@ export class CommentItemComponent extends BaseComponent implements OnInit {
       this.campaignService.createComment(
         this.campaignId,
         this.replyForm.controls['reply'].value,
-        CommentType.EVALUATE,
+        this.isPublic ? CommentType.PUBLIC : CommentType.EVALUATE,
         commentId
       ),
       (res) => {

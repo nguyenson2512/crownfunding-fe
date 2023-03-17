@@ -85,9 +85,9 @@
         <ng-template mat-tab-label>{{ "campaignManagement.comment" | trans }}</ng-template>
         <div>
           <app-comment-form (comment)="handleComment($event)"></app-comment-form>
-          <div *ngIf="(comments$| async)?.length > 0; else noComment">
-            <div *ngFor="let item of (comments$ | async)">
-              <app-comment-item [commentItem]="item"></app-comment-item>
+          <div *ngIf="(campaignDetailService.comments$| async)?.length > 0; else noComment">
+            <div *ngFor="let item of (campaignDetailService.comments$ | async)">
+              <app-comment-item [commentItem]="item" [isPublic]="true" [campaignId]="campaignId"></app-comment-item>
             </div>
           </div>
           <ng-template #noComment>

@@ -1,9 +1,11 @@
 import { BaseComponent } from '#components/core/base/base.component';
 import { Campaign, IReward } from '#models/campaign.model';
 import { Comment } from '#models/comment.model';
+import { CampaignDetailService } from '#services/campaign-detail.service';
 import { ComponentService } from '#services/component.service';
 import { CampaignService } from '#services/http/campaign.service';
 import { PaymentService } from '#services/http/payment.service';
+import { CommentType } from '#utils/const';
 import { Component, OnInit } from '@angular/core';
 import { IPayPalConfig } from 'ngx-paypal';
 import { BehaviorSubject, forkJoin } from 'rxjs';
@@ -21,13 +23,13 @@ export class CampaignDetailComponent extends BaseComponent implements OnInit {
   campaignInfo$: BehaviorSubject<Campaign> = new BehaviorSubject<Campaign>(
     null
   );
-  comments$: BehaviorSubject<Comment[]> = new BehaviorSubject<Comment[]>([]);
   public payPalConfig?: IPayPalConfig;
 
   constructor(
     componentService: ComponentService,
     private campaignService: CampaignService,
-    private paymentService: PaymentService
+    private paymentService: PaymentService,
+    public campaignDetailService: CampaignDetailService
   ) {
     super(componentService);
   }
@@ -37,19 +39,32 @@ export class CampaignDetailComponent extends BaseComponent implements OnInit {
 
     forkJoin([
       this.campaignService.getDetail(this.campaignId),
-      this.campaignService.getEvaluationComment(this.campaignId),
+      this.campaignService.getPublicComment(this.campaignId),
     ]).subscribe(([campaignInfo, comments]) => {
       this.campaignInfo$.next(campaignInfo);
-      this.comments$.next(comments);
+      this.campaignDetailService.comments$.next(comments);
     });
   }
 
   handleComment(newComment) {
-    // this.productStore.createBuyerComment(
-    //   +this.routeParams.id,
-    //   newComment.title,
-    //   newComment.commentId
-    // );
+    this.subscribeOnce(
+      this.campaignService.createComment(
+        this.campaignId,
+        newComment.content,
+        CommentType.PUBLIC
+      ),
+      (res) => {
+        if (res) {
+          this.campaignDetailService.comments$.next([
+            ...this.campaignDetailService.commentsValue,
+            res,
+          ]);
+          this.service.message.showMessage(
+            this.trans('successMessage.addComment')
+          );
+        }
+      }
+    );
   }
 
   handleChooseReward(reward: IReward) {

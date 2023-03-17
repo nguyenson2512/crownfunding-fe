@@ -60,6 +60,15 @@ export class CampaignService {
       );
   }
 
+  getPublicComment(campaignId: string) {
+    return this.dataClientService
+      .get(`/campaigns/${campaignId}/comment?type=PUBLIC`)
+      .pipe(
+        pluck('result', 'data'),
+        map((data: any) => data.map((item) => new Comment(item)))
+      );
+  }
+
   uploadImage(body: any) {
     return this.dataClientService
       .post(`/upload-image`, body, {
