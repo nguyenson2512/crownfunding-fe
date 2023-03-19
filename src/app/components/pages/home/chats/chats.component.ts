@@ -5,6 +5,7 @@ import { AuthService } from '#services/auth.service';
 import { ComponentService } from '#services/component.service';
 import { ChatService } from '#services/http/chat.service';
 import { UserService } from '#services/http/users.service';
+import { WebsocketService } from '#services/websocket.service';
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { BehaviorSubject, Observable } from 'rxjs';
@@ -25,10 +26,11 @@ export class ChatsComponent extends BaseComponent implements OnInit {
   filteredUsers: Observable<User[]>;
 
   constructor(
-    componentService: ComponentService,
+    private componentService: ComponentService,
     public chatService: ChatService,
     private authService: AuthService,
-    private userService: UserService
+    private userService: UserService,
+    private websocketService: WebsocketService
   ) {
     super(componentService);
   }
@@ -57,6 +59,37 @@ export class ChatsComponent extends BaseComponent implements OnInit {
         });
       }
     });
+
+    this.subscribeUntilDestroy(
+      this.websocketService.getMessage('NEW_MESSAGE'),
+      (res) => {
+        if (res) {
+          if (this.router.url.includes('chat')) {
+            if (
+              res?.chatRoomId === this.chatService.selectedChatRoomValue?._id
+            ) {
+              this.chats$.next([...this.chats$.getValue(), res]);
+            } else {
+              const idx = this.chatService.chatRoomsValue.findIndex(
+                (item) => item._id === res?.chatRoomId
+              );
+
+              this.chatService.chatRooms$.next([
+                ...this.chatService.chatRoomsValue.slice(0, idx),
+                {
+                  ...this.chatService.chatRoomsValue[idx],
+                  lastMessage: res,
+                } as ChatRoom,
+                ...this.chatService.chatRoomsValue.slice(
+                  idx + 1,
+                  this.chatService.chatRoomsValue.length
+                ),
+              ]);
+            }
+          }
+        }
+      }
+    );
   }
 
   displayFn(user: User): string {

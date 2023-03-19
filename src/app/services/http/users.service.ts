@@ -46,4 +46,8 @@ export class UserService {
       .post('/verify-otp-phone', { requestId, otp, phoneNumber })
       .pipe(pluck('result', 'data'));
   }
+
+  getUserInfo() {
+    return this.dataClientService.get('/account').pipe(pluck('result', 'data'));
+  }
 }

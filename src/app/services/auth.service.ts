@@ -10,6 +10,8 @@ import {
   DataSet,
   ResponseResult,
 } from './http-client.service';
+import { UnauthenticatedException } from './http-error-handler.service';
+import { UserService } from './http/users.service';
 import { LocalStorageService } from './storage.service';
 import { UserProfileService } from './user-profile.service';
 
@@ -28,7 +30,8 @@ export class AuthService {
     private storageService: LocalStorageService,
     private router: Router,
     private userProfileService: UserProfileService,
-    private dataClientService: DataClientService
+    private dataClientService: DataClientService,
+    private userService: UserService
   ) {}
 
   signIn(body: any) {
@@ -126,5 +129,30 @@ export class AuthService {
   isBanker() {
     const user = this.currentUser$.getValue();
     return user && user?.roles.length === 0;
+  }
+
+  async verifyToken() {
+    return new Promise((resolve, reject) => {
+      const token = this.storageService.get('access_token');
+      if (token) {
+        this.accessToken = token;
+        this.userService
+          .getUserInfo()
+          .toPromise()
+          .then((user: User) => {
+            this.userProfileService.current = user;
+            this.isLoggedIn;
+            resolve(true);
+          })
+          .catch((error: any) => {
+            if (error instanceof UnauthenticatedException) {
+              this.endSession();
+            }
+            resolve(false);
+          });
+      } else {
+        resolve(false);
+      }
+    });
   }
 }

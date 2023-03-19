@@ -1,5 +1,6 @@
 import { BaseComponent } from '#components/core/base/base.component';
 import { LoaderComponent } from '#components/share/loader/loader.component';
+import { AuthService } from '#services/auth.service';
 import { ComponentService } from '#services/component.service';
 import { HomeService } from '#services/home.service';
 import { LoaderService } from '#services/loader.service';
@@ -25,10 +26,11 @@ export class AppComponent extends BaseComponent implements OnInit {
   });
   constructor(
     private websocketService: WebsocketService,
-    componentService: ComponentService,
+    private componentService: ComponentService,
     private overlay: Overlay,
     private homeService: HomeService,
-    private loaderService: LoaderService
+    private loaderService: LoaderService,
+    private authService: AuthService
   ) {
     super(componentService);
   }
@@ -46,7 +48,21 @@ export class AppComponent extends BaseComponent implements OnInit {
         );
       }
     });
+    this.subscribeUntilDestroy(
+      this.websocketService.getMessage('NEW_MESSAGE'),
+      (res) => {
+        if (res) {
+          if (!this.router.url.includes('chat')) {
+            this.componentService.message.showMessage(
+              'You have a new message. Please check'
+            );
+          }
+        }
+      }
+    );
+
     this.addSpinner();
+    this.authService.verifyToken();
   }
   title = 'angular-web';
 
