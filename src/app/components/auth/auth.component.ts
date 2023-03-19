@@ -13,7 +13,7 @@ import { BaseComponent } from '../core/base/base.component';
 export class AuthComponent extends BaseComponent implements OnInit {
   loginForm = this.fb.group({
     email: ['', [Validators.required, Validators.email, notEmpty]],
-    password: ['', [Validators.required, notEmpty]],
+    password: ['', [Validators.required, notEmpty, Validators.minLength(4)]],
   });
   constructor(
     protected componentService: ComponentService,
