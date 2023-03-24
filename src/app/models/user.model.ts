@@ -13,6 +13,7 @@ export class User extends Model {
   roles: IRoleUser[];
   phone?: string;
   isVerifyEmail?: boolean;
+  avatar?: string;
   constructor(data) {
     super();
     this.fill(data);

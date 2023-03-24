@@ -50,6 +50,8 @@ import { DocumentFormComponent } from './document-form/document-form.component';
 import { MilestoneFormComponent } from './milestone-form/milestone-form.component';
 import { VerifyAccountDialogComponent } from './verify-account-dialog/verify-account-dialog.component';
 import { LoaderComponent } from './loader/loader.component';
+import { UserInfoComponent } from './user-info/user-info.component';
+import { UserDialogComponent } from './user-dialog/user-dialog.component';
 
 const MATERIAL_MODULES = [
   MatButtonModule,
@@ -111,6 +113,8 @@ const COMPONENTS = [
   DocumentFormComponent,
   MilestoneFormComponent,
   LoaderComponent,
+  UserInfoComponent,
+  UserDialogComponent,
 ];
 
 @NgModule({

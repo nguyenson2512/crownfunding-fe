@@ -10,6 +10,7 @@ import { Component, Input, OnInit } from '@angular/core';
 export class AvatarComponent extends BaseComponent implements OnInit {
   @Input() user = null;
   @Input() isSmSize: boolean = false;
+  @Input() disableNavigate = false;
 
   constructor(componentService: ComponentService) {
     super(componentService);
@@ -18,6 +19,9 @@ export class AvatarComponent extends BaseComponent implements OnInit {
   ngOnInit(): void {}
 
   navigateChat() {
+    if (this.disableNavigate) {
+      return;
+    }
     this.redirect(['/chats']);
   }
 }

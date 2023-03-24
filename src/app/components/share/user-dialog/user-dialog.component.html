@@ -1,0 +1,16 @@
+<app-dialog [dialogTitle]="'User Info'" [displayButton]="false" [actionAlign]="'end'">
+  <div dialog-body class="full-width">
+
+    <div class="info-container">
+      <app-user-info [user]="data"></app-user-info>
+    </div>
+    <div class="space-x-2 flex justify-center mt-4">
+
+      <button mat-stroked-button color="primary" type="button" (click)="handleClose()">
+        {{ "button.cancel" | trans }}
+      </button>
+    </div>
+
+
+  </div>
+</app-dialog>
