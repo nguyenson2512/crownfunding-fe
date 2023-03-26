@@ -7,21 +7,21 @@
 
           <p><span class="font-medium pr-4 py-1">{{commentItem?.createdBy?.name}}</span></p>
         </div>
-        <div *ngIf="authService.isAdminRole(); else creator">
+        <div *ngIf="authService.isAdminRole() && !isPublic; else creator">
           <button mat-raised-button color="primary" (click)="resolveComment(commentItem?._id)"
-            *ngIf="(!commentItem?.isResolved); else resolved">
+            *ngIf=" (!commentItem?.isResolved); else resolved">
             Resolve
           </button>
         </div>
         <ng-template #creator>
-          <div *ngIf="commentItem?.isResolved">
+          <div *ngIf="!isPublic && commentItem?.isResolved">
             <p class="resolved-comment">
               This comment is resolved
             </p>
           </div>
         </ng-template>
         <ng-template #resolved>
-          <p class="resolved-comment">
+          <p *ngIf="!isPublic" class="resolved-comment">
             This comment is resolved
           </p>
         </ng-template>

@@ -5,8 +5,9 @@
       <app-user-info [user]="data"></app-user-info>
     </div>
     <div class="space-x-2 flex justify-center mt-4">
-
-      <button mat-stroked-button color="primary" type="button" (click)="handleClose()">
+      <button mat-stroked-button color="primary" (click)="navigateChat(data._id)" *ngIf="!data?.myAccount">Start
+        Conversation</button>
+      <button mat-stroked-button color="warn" type="button" (click)="handleClose()">
         {{ "button.cancel" | trans }}
       </button>
     </div>

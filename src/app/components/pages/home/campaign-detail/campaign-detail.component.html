@@ -50,6 +50,9 @@
       <mat-tab>
         <ng-template mat-tab-label>{{ "campaignManagement.overview" | trans }}</ng-template>
         <div>
+          <div class="haft-width my-2">
+            <app-user-info [user]="campaignInfo?.createdBy"></app-user-info>
+          </div>
           <h3 class="mt-3">{{ "campaignManagement.story" | trans }}</h3>
           <div [innerHTML]="campaignInfo?.story | keepHtml"></div>
           <br />

@@ -70,9 +70,9 @@ export class HomeService {
 
   getNotificationList(): Observable<Notification[]> {
     this.notificationService.getList().subscribe((data) => {
-      this._notificationList.next(data);
+      this._notificationList.next(data || []);
       this._amountUnreadNotification.next(
-        getAmountCertainElement(data, 'isRead', false)
+        getAmountCertainElement(data || [], 'isRead', false)
       );
     });
     return this.notificationList$;

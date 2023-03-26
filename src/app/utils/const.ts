@@ -97,11 +97,15 @@ export const STATUS_CAMPAIGN_REVIEWING = 'REVIEWING';
 export const NOTIFICATION_TITLE = {
   REJECTED_CAMPAIGN: 'Rejected Campaign',
   APPROVED_CAMPAIGN: 'Approved Campaign',
+  CREATED_CAMPAIGN: 'Create Campaign Request',
+  UPDATED_CAMPAIGN: 'Updated Campaign Request',
 };
 
 export const NOTIFICATION_NAVIGATOR = {
   [NOTIFICATION_TITLE.REJECTED_CAMPAIGN]: '/admin/my-campaign',
   [NOTIFICATION_TITLE.APPROVED_CAMPAIGN]: '/admin/my-campaign',
+  [NOTIFICATION_TITLE.CREATED_CAMPAIGN]: '/admin/campaign',
+  [NOTIFICATION_TITLE.UPDATED_CAMPAIGN]: '/admin/campaign',
 };
 
 export const NOTIFICATION_INFO_MAP = {

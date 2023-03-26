@@ -68,6 +68,6 @@ export class ClientHeaderComponent extends BaseComponent implements OnInit {
     if (!redirectUrl) {
       redirectUrl = NOTIFICATION_NAVIGATOR[notification?.title];
     }
-    this.redirect([redirectUrl || '/']);
+    this.redirect([redirectUrl || '/admin']);
   }
 }

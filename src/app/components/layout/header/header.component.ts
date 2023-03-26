@@ -1,3 +1,4 @@
+import { UserDialogComponent } from '#components/share/user-dialog/user-dialog.component';
 import { AuthService } from '#services/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { ComponentService } from 'src/app/services/component.service';
@@ -28,6 +29,13 @@ export class HeaderComponent extends BaseComponent implements OnInit {
   }
 
   toMyAccount(): void {
-    // this.service.router.navigate(['/my-account']);
+    this.authService.isLogInUser();
+    const currentUser = this.authService.currentUser$.getValue();
+
+    this.dialogService.showDialog(UserDialogComponent, {
+      data: { ...currentUser, myAccount: true },
+      height: '450px',
+      width: '600px',
+    });
   }
 }

@@ -14,7 +14,7 @@ export class UserDialogComponent extends BaseComponent implements OnInit {
     componentService: ComponentService,
     public dialogRef: MatDialogRef<UserDialogComponent>,
     @Inject(MAT_DIALOG_DATA)
-    public data: User
+    public data: any
   ) {
     super(componentService);
   }
@@ -23,5 +23,10 @@ export class UserDialogComponent extends BaseComponent implements OnInit {
 
   handleClose() {
     this.dialogRef.close();
+  }
+
+  navigateChat(id) {
+    this.dialogRef.close();
+    this.redirect(['/chats']);
   }
 }
