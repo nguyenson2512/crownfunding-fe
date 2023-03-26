@@ -1,0 +1,19 @@
+<app-dialog [dialogTitle]="'Choose video of your campaign'" [displayButton]="false">
+  <div dialog-body>
+
+    <div class="flex flex-col align-items-start mb-2">
+      <p class="font-normal">Upload video of campaign</p>
+      <div>
+        <input type="file" accept="video/*" id="videoInput" name="videoInput" (change)="selectFile($event)" />
+      </div>
+    </div>
+    <div class="space-x-2 flex justify-center mt-4">
+      <button mat-raised-button color="primary" type="submit" [disabled]="!url" (click)="onSubmit()">
+        'Add'
+      </button>
+      <button mat-stroked-button color="primary" type="button" (click)="handleClose()">
+        {{ "button.cancel" | trans }}
+      </button>
+    </div>
+  </div>
+</app-dialog>

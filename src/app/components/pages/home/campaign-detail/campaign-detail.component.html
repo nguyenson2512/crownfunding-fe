@@ -55,6 +55,13 @@
           <br />
           <h3 class="mt-3">{{ "campaignManagement.risks" | trans }}</h3>
           <div [innerHTML]="campaignInfo?.risk | keepHtml"></div>
+          <div *ngIf="campaignInfo?.video">
+            <h3 class="mt-3 mb-2">Campaign Intro Video </h3>
+            <video width="600" height="300" controls>
+              <source [src]="campaignInfo?.video" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+          </div>
           <br />
           <h3 *ngIf="campaignInfo?.documents?.length > 0" class="mt-3">{{ "campaignManagement.documents" | trans }}</h3>
           <mat-list role="list">

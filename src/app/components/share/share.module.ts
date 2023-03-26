@@ -52,6 +52,7 @@ import { VerifyAccountDialogComponent } from './verify-account-dialog/verify-acc
 import { LoaderComponent } from './loader/loader.component';
 import { UserInfoComponent } from './user-info/user-info.component';
 import { UserDialogComponent } from './user-dialog/user-dialog.component';
+import { VideoUploadFormComponent } from './video-upload-form/video-upload-form.component';
 
 const MATERIAL_MODULES = [
   MatButtonModule,
@@ -118,7 +119,7 @@ const COMPONENTS = [
 ];
 
 @NgModule({
-  declarations: [...COMPONENTS],
+  declarations: [...COMPONENTS, VideoUploadFormComponent],
   imports: [...SHARE_MODULES],
   exports: [...SHARE_MODULES, ...COMPONENTS],
 })

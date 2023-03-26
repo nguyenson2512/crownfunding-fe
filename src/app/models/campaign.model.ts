@@ -45,6 +45,7 @@ export class Campaign extends Model {
   category: any;
   documents?: IDocument[] | any[];
   milestones?: IMilestone[];
+  video?: string;
   constructor(data) {
     super();
     this.fill(data);

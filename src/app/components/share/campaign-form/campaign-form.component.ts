@@ -18,6 +18,7 @@ import { DocumentFormComponent } from '../document-form/document-form.component'
 import { ImageViewComponent } from '../image-view/image-view.component';
 import { MilestoneFormComponent } from '../milestone-form/milestone-form.component';
 import { RewardFormComponent } from '../reward-form/reward-form.component';
+import { VideoUploadFormComponent } from '../video-upload-form/video-upload-form.component';
 
 @Component({
   selector: 'app-campaign-form',
@@ -60,6 +61,8 @@ export class CampaignFormComponent extends BaseComponent implements OnInit {
   mainCategories$: BehaviorSubject<Category[]> = new BehaviorSubject<
     Category[]
   >([]);
+
+  videoInfo;
 
   @Output() formComplete = new EventEmitter();
   constructor(
@@ -131,6 +134,7 @@ export class CampaignFormComponent extends BaseComponent implements OnInit {
       rewards,
       documents: this.documents$.getValue(),
       milestones: this.milestones$.getValue(),
+      video: this.videoInfo || null,
     });
   }
 
@@ -191,6 +195,7 @@ export class CampaignFormComponent extends BaseComponent implements OnInit {
           this.rewards$.next(formatRewards);
           this.documents$.next(data?.documents);
           this.milestones$.next(data?.milestones || []);
+          this.videoInfo = data?.video;
         }
       }
     );
@@ -295,6 +300,22 @@ export class CampaignFormComponent extends BaseComponent implements OnInit {
           ...res,
         };
         this.documents$.next([...this.documents$.getValue(), newDocument]);
+      });
+  }
+
+  handleAddVideo() {
+    this.componentService.dialog
+      .showDialog(VideoUploadFormComponent, {
+        data: { videoInfo: this.videoInfo },
+        maxHeight: '600px',
+        width: '600px',
+        autoFocus: false,
+        disableClose: true,
+      })
+      .afterClosed()
+      .subscribe((res) => {
+        if (!res) return;
+        this.videoInfo = res;
       });
   }
 

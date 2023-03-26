@@ -79,6 +79,16 @@ export class CampaignService {
       .pipe(pluck('result', 'data'));
   }
 
+  uploadVideo(body: any) {
+    return this.dataClientService
+      .post(`/upload-video`, body, {
+        headers: {
+          'Content-Type': undefined,
+        },
+      })
+      .pipe(pluck('result', 'data'));
+  }
+
   uploadDocument(body: any) {
     return this.dataClientService
       .post(`/upload`, body, {
